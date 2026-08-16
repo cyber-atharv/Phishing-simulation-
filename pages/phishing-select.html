@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Choose a phishing demo type — Normal phishing login pages or QR code quishing simulation.">
+  <title>Phishing Demo Pages — Phishing Awareness Lab</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .brand-card .brand-logo {
+      transition: transform var(--transition-base);
+    }
+    .brand-card:hover .brand-logo {
+      transform: scale(1.15) rotate(-3deg);
+    }
+    .type-section {
+      margin-bottom: 48px;
+    }
+    .type-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .type-header h2 {
+      font-size: 22px;
+    }
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+    .quishing-card {
+      background: var(--gradient-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    .quishing-card:hover {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
+      transform: translateY(-3px);
+    }
+    .quishing-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: var(--border-radius);
+      background: rgba(168, 85, 247, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+    <div class="content-header">
+      <div>
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Phishing Demo Pages</div>
+        <h1>🎯 Phishing Demo Pages</h1>
+      </div>
+    </div>
+
+    <div class="content-body">
+
+      <div class="alert alert-warning">
+        <span class="alert-icon">⚠️</span>
+        <div>
+          <strong>Educational Simulation Only:</strong> The pages below are fake login page demonstrations. They are designed to teach you what phishing pages look like. <strong>No data is ever collected or sent anywhere.</strong>
+        </div>
+      </div>
+
+      <!-- ===== SECTION 1: Normal Phishing (Fake Login Pages) ===== -->
+      <section class="type-section" data-animate>
+        <div class="type-header">
+          <div class="card-icon blue" style="width: 44px; height: 44px; font-size: 20px;">📧</div>
+          <div>
+            <h2>Normal Phishing — Fake Login Pages</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Click any brand below to see what a phishing login page looks like for that service.</p>
+          </div>
+        </div>
+
+        <div class="brand-grid" id="brand-grid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- ===== SECTION 2: Quishing (QR Code Phishing) ===== -->
+      <section class="type-section" data-animate>
+        <div class="type-header">
+          <div class="card-icon purple" style="width: 44px; height: 44px; font-size: 20px;">📷</div>
+          <div>
+            <h2>Quishing — QR Code Phishing</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Experience a QR code phishing attack simulation through a fake Gmail interface.</p>
+          </div>
+        </div>
+
+        <a href="quishing/gmail-inbox.html" class="quishing-card">
+          <div class="quishing-icon">📷</div>
+          <div>
+            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">QR Code Phishing Simulation</h3>
+            <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.7;">
+              Open a fake Gmail inbox, find an email with a QR code, and scan it to see how quishing attacks work. The QR code will redirect you to an educational reveal page.
+            </p>
+            <div style="margin-top: 14px;">
+              <span class="badge badge-purple">Interactive</span>
+              <span class="badge badge-blue" style="margin-left: 6px;">QR Scan Required</span>
+            </div>
+          </div>
+        </a>
+      </section>
+
+      <!-- ===== SECTION 3: Location Exposure ===== -->
+      <section class="type-section" data-animate>
+        <div class="type-header">
+          <div class="card-icon red" style="width: 44px; height: 44px; font-size: 20px;">📍</div>
+          <div>
+            <h2>Location & Data Exposure Demo</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">See how much personal data your browser reveals when you visit a malicious page.</p>
+          </div>
+        </div>
+
+        <a href="location-expose.html" class="quishing-card" style="border-color: rgba(255,71,87,0.2);">
+          <div class="quishing-icon" style="background: rgba(255,71,87,0.15);">📍</div>
+          <div>
+            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">Your Data Exposure</h3>
+            <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.7;">
+              See your IP address, approximate location, browser details, screen resolution, and more — all collected silently just by visiting this page.
+            </p>
+            <div style="margin-top: 14px;">
+              <span class="badge badge-red">Eye-Opening</span>
+            </div>
+          </div>
+        </a>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+  initSidebar('phishing-select');
+
+  const brands = [
+    { name: 'Microsoft', folder: 'microsoft', color: '#00A4EF', letter: 'M' },
+    { name: 'Adobe', folder: 'adobe', color: '#FF0000', letter: 'A' },
+    { name: 'Badoo', folder: 'badoo', color: '#783BF9', letter: 'B' },
+    { name: 'DeviantArt', folder: 'deviantart', color: '#05CC47', letter: 'D' },
+    { name: 'Discord', folder: 'discord', color: '#5865F2', letter: 'D' },
+    { name: 'Dropbox', folder: 'dropbox', color: '#0061FF', letter: 'D' },
+    { name: 'eBay', folder: 'ebay', color: '#E53238', letter: 'e' },
+    { name: 'Facebook', folder: 'facebook', color: '#1877F2', letter: 'f' },
+    { name: 'GitHub', folder: 'github', color: '#6e40c9', letter: 'G' },
+    { name: 'GitLab', folder: 'gitlab', color: '#FC6D26', letter: 'G' },
+    { name: 'Google', folder: 'google', color: '#4285F4', letter: 'G' },
+    { name: 'Instagram', folder: 'instagram', color: '#E4405F', letter: 'I' },
+    { name: 'LinkedIn', folder: 'linkedin', color: '#0A66C2', letter: 'L' },
+    { name: 'MediaFire', folder: 'mediafire', color: '#1299F3', letter: 'M' },
+    { name: 'Netflix', folder: 'netflix', color: '#E50914', letter: 'N' },
+    { name: 'Origin', folder: 'origin', color: '#F56C2D', letter: 'O' },
+    { name: 'PayPal', folder: 'paypal', color: '#003087', letter: 'P' },
+    { name: 'Pinterest', folder: 'pinterest', color: '#E60023', letter: 'P' },
+    { name: 'PlayStation', folder: 'playstation', color: '#003791', letter: 'P' },
+    { name: 'ProtonMail', folder: 'protonmail', color: '#6D4AFF', letter: 'P' },
+    { name: 'Quora', folder: 'quora', color: '#B92B27', letter: 'Q' },
+    { name: 'Reddit', folder: 'reddit', color: '#FF4500', letter: 'R' },
+    { name: 'Roblox', folder: 'roblox', color: '#E2231A', letter: 'R' },
+    { name: 'Snapchat', folder: 'snapchat', color: '#FFFC00', letter: 'S' },
+    { name: 'Spotify', folder: 'spotify', color: '#1DB954', letter: 'S' },
+    { name: 'Stack Overflow', folder: 'stackoverflow', color: '#F48024', letter: 'S' },
+    { name: 'Steam', folder: 'steam', color: '#1B2838', letter: 'S' },
+    { name: 'TikTok', folder: 'tiktok', color: '#010101', letter: 'T' },
+    { name: 'Twitch', folder: 'twitch', color: '#9146FF', letter: 'T' },
+    { name: 'Twitter (X)', folder: 'twitter', color: '#1DA1F2', letter: 'X' },
+    { name: 'VK', folder: 'vk', color: '#4680C2', letter: 'V' },
+    { name: 'WordPress', folder: 'wordpress', color: '#21759B', letter: 'W' },
+    { name: 'Xbox', folder: 'xbox', color: '#107C10', letter: 'X' },
+    { name: 'Yahoo', folder: 'yahoo', color: '#6001D2', letter: 'Y' },
+    { name: 'Yandex', folder: 'yandex', color: '#FF0000', letter: 'Y' },
+  ];
+
+  const grid = document.getElementById('brand-grid');
+  grid.innerHTML = brands.map(b => `
+    <a href="normal-phishing/${b.folder}/index.html" class="brand-card" title="${b.name} Phishing Demo">
+      <div class="brand-logo" style="background: ${b.color}; ${b.name === 'Snapchat' ? 'color: #333;' : ''}">${b.letter}</div>
+      <div class="brand-name">${b.name}</div>
+    </a>
+  `).join('');
+</script>
+</body>
+</html>

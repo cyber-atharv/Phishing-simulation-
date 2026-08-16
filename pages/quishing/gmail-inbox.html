@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quishing Simulation — Fake Gmail inbox with QR code phishing email demonstration.">
+  <title>QR Phishing Simulation — Phishing Awareness Lab</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <style>
+    .gmail-container {
+      max-width: 1000px;
+      background: #fff;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-elevated);
+    }
+    .gmail-header {
+      background: #f6f8fc;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .gmail-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 500;
+      color: #5f6368;
+    }
+    .gmail-logo span { color: #EA4335; }
+    .gmail-search {
+      flex: 1;
+      background: #eaf1fb;
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: #5f6368;
+      font-size: 14px;
+    }
+    .gmail-avatar-sm {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1a73e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .gmail-sidebar-mini {
+      width: 68px;
+      background: #f6f8fc;
+      border-right: 1px solid #e0e0e0;
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .gmail-sidebar-mini .gs-item {
+      width: 52px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .gmail-sidebar-mini .gs-item:hover { background: #dde3ea; }
+    .gmail-sidebar-mini .gs-item.active { background: #c2e7ff; }
+    .gmail-body { display: flex; min-height: 500px; }
+    .gmail-inbox { flex: 1; }
+    .gmail-inbox-header {
+      padding: 8px 16px;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .gmail-inbox-header .gih-cb {
+      width: 18px; height: 18px;
+      border: 2px solid #bbb;
+      border-radius: 2px;
+    }
+    .gmail-email-row {
+      display: flex;
+      align-items: center;
+      padding: 10px 16px;
+      border-bottom: 1px solid #f1f3f4;
+      cursor: pointer;
+      transition: background 0.15s;
+      gap: 12px;
+    }
+    .gmail-email-row:hover { background: #f6f8fc; }
+    .gmail-email-row.unread { font-weight: 600; }
+    .gmail-email-row .ge-star { color: #dadce0; font-size: 18px; }
+    .gmail-email-row .ge-sender {
+      width: 180px;
+      font-size: 14px;
+      color: #202124;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .gmail-email-row .ge-content {
+      flex: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      overflow: hidden;
+      min-width: 0;
+    }
+    .gmail-email-row .ge-subject {
+      font-size: 14px;
+      color: #202124;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .gmail-email-row .ge-snippet {
+      font-size: 13px;
+      color: #5f6368;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .gmail-email-row .ge-time {
+      font-size: 12px;
+      color: #5f6368;
+      white-space: nowrap;
+    }
+    .gmail-email-row .ge-attach { font-size: 16px; color: #5f6368; }
+
+    /* Email detail view inside gmail */
+    .gmail-detail {
+      display: none;
+      padding: 24px;
+    }
+    .gmail-detail.active { display: block; }
+    .gmail-detail h2 {
+      font-size: 22px;
+      color: #202124;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+    .gmail-detail-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .gmail-detail-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+      font-weight: 600;
+    }
+    .gmail-detail-sender { font-size: 14px; color: #202124; }
+    .gmail-detail-sender strong { font-weight: 600; }
+    .gmail-detail-sender .gds-email { font-size: 12px; color: #5f6368; }
+    .gmail-detail-body {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #3c4043;
+    }
+    .gmail-detail-body a { color: #1a73e8; }
+    #qr-code-container {
+      display: flex;
+      justify-content: center;
+      margin: 24px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+    }
+    .qr-instruction {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #5f6368;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .gmail-sidebar-mini { display: none; }
+      .gmail-email-row .ge-sender { width: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+    <div class="content-header">
+      <div>
+        <div class="breadcrumb"><a href="../../index.html">Home</a> / <a href="../phishing-select.html">Phishing Demo</a> / Quishing</div>
+        <h1>📷 QR Code Phishing (Quishing)</h1>
+      </div>
+    </div>
+
+    <div class="content-body">
+
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <div>
+          <strong>Simulation:</strong> Below is a fake Gmail inbox. One of the emails contains a QR code. Scan it with your phone to see what happens in a real quishing attack. <em>(Don't worry — it redirects to an educational page.)</em>
+        </div>
+      </div>
+
+      <!-- Gmail UI -->
+      <div class="gmail-container">
+        <div class="gmail-header">
+          <div class="gmail-logo">
+            <span style="font-size: 28px;">✉️</span>
+            Gmail
+          </div>
+          <div class="gmail-search">🔍 Search mail</div>
+          <div class="gmail-avatar-sm">U</div>
+        </div>
+
+        <div class="gmail-body">
+          <div class="gmail-sidebar-mini">
+            <div class="gs-item active">📥</div>
+            <div class="gs-item">⭐</div>
+            <div class="gs-item">⏰</div>
+            <div class="gs-item">📤</div>
+            <div class="gs-item">📁</div>
+          </div>
+
+          <div class="gmail-inbox" id="gmail-inbox">
+            <div class="gmail-inbox-header">
+              <div class="gih-cb"></div>
+              <span style="font-size: 13px; color: #5f6368;">Inbox</span>
+            </div>
+
+            <!-- Email 1 - Legitimate -->
+            <div class="gmail-email-row" onclick="openGmailEmail(1)">
+              <span class="ge-star">☆</span>
+              <span class="ge-sender">Google</span>
+              <div class="ge-content">
+                <span class="ge-subject">Security alert — </span>
+                <span class="ge-snippet">New sign-in from Chrome on Windows</span>
+              </div>
+              <span class="ge-time">10:32 AM</span>
+            </div>
+
+            <!-- Email 2 - THE QUISHING EMAIL -->
+            <div class="gmail-email-row unread" onclick="openGmailEmail(2)" style="background: #fcf3cf;">
+              <span class="ge-star">☆</span>
+              <span class="ge-sender" style="font-weight: 700;">IT HelpDesk</span>
+              <div class="ge-content">
+                <span class="ge-subject" style="font-weight: 700;">⚠️ Mandatory: Verify your account via QR Code — </span>
+                <span class="ge-snippet">Scan the QR code below to complete verification...</span>
+              </div>
+              <span class="ge-attach">📎</span>
+              <span class="ge-time" style="font-weight: 700; color: #202124;">9:14 AM</span>
+            </div>
+
+            <!-- Email 3 - Legitimate -->
+            <div class="gmail-email-row" onclick="openGmailEmail(3)">
+              <span class="ge-star">☆</span>
+              <span class="ge-sender">LinkedIn</span>
+              <div class="ge-content">
+                <span class="ge-subject">You appeared in 5 searches this week — </span>
+                <span class="ge-snippet">See who's looking at your profile</span>
+              </div>
+              <span class="ge-time">Yesterday</span>
+            </div>
+
+          </div>
+
+          <!-- Detail views -->
+          <div class="gmail-detail" id="gmail-detail-1">
+            <button class="btn btn-ghost btn-sm" onclick="backToGmailList()" style="margin-bottom: 16px; color: #1a73e8; border-color: #dadce0;">← Back</button>
+            <h2>Security alert</h2>
+            <div class="gmail-detail-meta">
+              <div class="gmail-detail-avatar" style="background: #4285F4;">G</div>
+              <div class="gmail-detail-sender">
+                <strong>Google</strong> <span class="gds-email">&lt;no-reply@accounts.google.com&gt;</span><br>
+                <span style="font-size: 12px; color: #5f6368;">to me</span>
+              </div>
+            </div>
+            <div class="gmail-detail-body">
+              <p>New sign-in to your Google Account on a Windows device. If this was you, you don't need to do anything.</p>
+              <p style="margin-top: 12px;"><strong>Device:</strong> Windows PC (Chrome)<br><strong>Location:</strong> New Delhi, India<br><strong>Time:</strong> Today, 10:28 AM</p>
+            </div>
+          </div>
+
+          <div class="gmail-detail" id="gmail-detail-2">
+            <button class="btn btn-ghost btn-sm" onclick="backToGmailList()" style="margin-bottom: 16px; color: #1a73e8; border-color: #dadce0;">← Back</button>
+            <h2>⚠️ Mandatory: Verify your account via QR Code</h2>
+            <div class="gmail-detail-meta">
+              <div class="gmail-detail-avatar" style="background: #D93025;">IT</div>
+              <div class="gmail-detail-sender">
+                <strong>IT HelpDesk</strong> <span class="gds-email">&lt;it-support@university-helpdesk-verify.com&gt;</span><br>
+                <span style="font-size: 12px; color: #5f6368;">to me</span>
+              </div>
+            </div>
+            <div class="gmail-detail-body">
+              <p>Dear Student,</p>
+              <p style="margin-top: 12px;">As part of our <strong>annual security compliance</strong>, all university accounts must be verified immediately. Failure to verify within <strong style="color: #D93025;">24 hours</strong> will result in account suspension.</p>
+              <p style="margin-top: 12px;">Please scan the QR code below with your phone camera to complete the verification process:</p>
+
+              <div id="qr-code-container">
+                <div id="qr-code"></div>
+              </div>
+              <p class="qr-instruction">📱 Scan this QR code with your phone camera to "verify" your account</p>
+
+              <p style="margin-top: 16px; padding: 12px; background: #fce8e6; border-radius: 8px; color: #D93025; font-size: 13px;">
+                ⚠️ <strong>This is mandatory.</strong> Non-compliance will result in immediate account deactivation and loss of all university services.
+              </p>
+              <p style="margin-top: 16px;">Regards,<br><strong>University IT Security Team</strong></p>
+            </div>
+          </div>
+
+          <div class="gmail-detail" id="gmail-detail-3">
+            <button class="btn btn-ghost btn-sm" onclick="backToGmailList()" style="margin-bottom: 16px; color: #1a73e8; border-color: #dadce0;">← Back</button>
+            <h2>You appeared in 5 searches this week</h2>
+            <div class="gmail-detail-meta">
+              <div class="gmail-detail-avatar" style="background: #0A66C2;">L</div>
+              <div class="gmail-detail-sender">
+                <strong>LinkedIn</strong> <span class="gds-email">&lt;notifications@linkedin.com&gt;</span><br>
+                <span style="font-size: 12px; color: #5f6368;">to me</span>
+              </div>
+            </div>
+            <div class="gmail-detail-body">
+              <p>Hi there, you appeared in 5 searches this week. Your profile is getting attention!</p>
+              <p style="margin-top: 12px;">Visit LinkedIn to see who's viewing your profile.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Red flags (shown after viewing QR email) -->
+      <div id="quishing-flags" style="display: none; margin-top: 28px;" data-animate>
+        <div class="card" style="border-left: 3px solid var(--accent-red);">
+          <h3 class="card-title" style="color: var(--accent-red); margin-bottom: 16px;">🔍 Red Flags in This Email</h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li style="font-size: 14px; color: var(--text-secondary);">🔴 Sender domain <code>university-helpdesk-verify.com</code> is NOT an official university domain</li>
+            <li style="font-size: 14px; color: var(--text-secondary);">🔴 Creates urgency with "24 hours" deadline and "account suspension" threat</li>
+            <li style="font-size: 14px; color: var(--text-secondary);">🔴 QR codes in emails are a major red flag — legitimate organizations rarely use them for "verification"</li>
+            <li style="font-size: 14px; color: var(--text-secondary);">🔴 Threatening language ("non-compliance", "immediate deactivation")</li>
+            <li style="font-size: 14px; color: var(--text-secondary);">🔴 No specific account details or student ID — generic "Dear Student"</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../js/main.js"></script>
+<script>
+  initSidebar('phishing-select');
+
+  // Generate QR code pointing to victim page
+  const victimURL = window.location.href.replace('gmail-inbox.html', 'victim.html');
+
+  window.addEventListener('DOMContentLoaded', () => {
+    new QRCode(document.getElementById('qr-code'), {
+      text: victimURL,
+      width: 200,
+      height: 200,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  });
+
+  function openGmailEmail(id) {
+    document.getElementById('gmail-inbox').style.display = 'none';
+    document.querySelectorAll('.gmail-detail').forEach(d => d.classList.remove('active'));
+    document.getElementById(`gmail-detail-${id}`).classList.add('active');
+
+    if (id === 2) {
+      setTimeout(() => {
+        document.getElementById('quishing-flags').style.display = 'block';
+      }, 1000);
+    }
+  }
+
+  function backToGmailList() {
+    document.getElementById('gmail-inbox').style.display = 'block';
+    document.querySelectorAll('.gmail-detail').forEach(d => d.classList.remove('active'));
+  }
+</script>
+</body>
+</html>

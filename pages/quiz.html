@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Knowledge Assessment Quiz — Test your phishing awareness with 10 questions.">
+  <title>Knowledge Quiz — Phishing Awareness Lab</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+    <div class="content-header">
+      <div>
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Knowledge Quiz</div>
+        <h1>❓ Knowledge Assessment Quiz</h1>
+      </div>
+      <span class="badge badge-blue" id="quiz-timer">⏱️ 00:00</span>
+    </div>
+
+    <div class="content-body">
+
+      <!-- Quiz intro -->
+      <div id="quiz-intro">
+        <div class="section-header">
+          <h2>📝 Test Your Phishing Awareness</h2>
+          <p>Answer 10 multiple-choice questions to measure what you've learned. You'll receive instant feedback on each answer.</p>
+        </div>
+
+        <div class="card" style="max-width: 600px;">
+          <div class="card-header">
+            <div class="card-icon blue">📋</div>
+            <h3 class="card-title">Quiz Rules</h3>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+            <p class="card-desc">📌 10 multiple-choice questions</p>
+            <p class="card-desc">📌 Select the best answer for each question</p>
+            <p class="card-desc">📌 Instant feedback after each answer</p>
+            <p class="card-desc">📌 Timer tracks your total time</p>
+            <p class="card-desc">📌 Score of 70%+ earns you a certificate</p>
+          </div>
+          <button class="btn btn-primary btn-lg" style="margin-top: 24px;" onclick="startQuiz()">🚀 Start Quiz</button>
+        </div>
+      </div>
+
+      <!-- Quiz questions -->
+      <div id="quiz-body" style="display: none;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+          <span id="q-counter" style="font-size: 14px; color: var(--text-muted);">Question 1 of 10</span>
+          <span id="q-score" class="badge badge-green">Score: 0/10</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="q-progress" style="width: 10%;"></div>
+        </div>
+
+        <div class="card" style="margin-top: 24px;" id="question-card">
+          <h3 id="q-text" style="font-size: 18px; margin-bottom: 24px; line-height: 1.6;"></h3>
+          <div id="q-options"></div>
+          <div id="q-feedback" style="display: none; margin-top: 20px;"></div>
+          <button class="btn btn-primary" id="q-next" style="display: none; margin-top: 20px;" onclick="nextQuestion()">Next Question →</button>
+        </div>
+      </div>
+
+      <!-- Quiz results -->
+      <div id="quiz-results" style="display: none;">
+        <div class="section-header" style="text-align: center;">
+          <div style="font-size: 64px; margin-bottom: 16px;" id="qr-icon"></div>
+          <h2 id="qr-title"></h2>
+          <p id="qr-desc" style="max-width: 500px; margin: 0 auto;"></p>
+        </div>
+
+        <div class="stats-row" style="max-width: 600px; margin: 32px auto;">
+          <div class="stat-card">
+            <div class="stat-value" id="qr-score">0</div>
+            <div class="stat-label">Score</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="qr-time">0:00</div>
+            <div class="stat-label">Time Taken</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="qr-pct">0%</div>
+            <div class="stat-label">Accuracy</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 28px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="certificate.html" class="btn btn-success btn-lg" id="cert-btn" style="display: none;">📜 Get Your Certificate</a>
+          <button class="btn btn-outline btn-lg" onclick="resetQuiz()">🔄 Retry Quiz</button>
+          <a href="results.html" class="btn btn-ghost btn-lg">📊 View Dashboard</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/quiz.js"></script>
+<script>initSidebar('quiz');</script>
+</body>
+</html>

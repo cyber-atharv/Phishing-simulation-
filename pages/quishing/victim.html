@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="You have been quished! Educational reveal about QR code phishing attacks.">
+  <title>⚠️ You Are a Victim! — Phishing Awareness Lab</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <style>
+    .victim-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: var(--bg-primary);
+      position: relative;
+      overflow: hidden;
+    }
+    .victim-container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,71,87,0.08) 0%, transparent 70%);
+      animation: victimPulse 3s ease-in-out infinite;
+    }
+    @keyframes victimPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    .victim-card {
+      background: var(--bg-secondary);
+      border: 2px solid var(--accent-red);
+      border-radius: var(--border-radius-xl);
+      padding: 50px 40px;
+      max-width: 650px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 60px rgba(255, 71, 87, 0.2);
+      animation: slideUp 0.6s ease;
+    }
+    .victim-icon {
+      font-size: 80px;
+      margin-bottom: 16px;
+      animation: glitch 0.3s ease infinite;
+    }
+    .victim-title {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--accent-red);
+      margin-bottom: 12px;
+      text-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
+    }
+    .victim-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    .victim-timeline {
+      text-align: left;
+      margin: 28px 0;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: -20px;
+      width: 2px;
+      background: var(--border-subtle);
+    }
+    .timeline-item:last-child::before { display: none; }
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      border: 2px solid;
+    }
+    .timeline-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .timeline-content p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+      text-align: left;
+    }
+    .tip-item {
+      padding: 16px;
+      background: rgba(0, 255, 136, 0.06);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      border-radius: var(--border-radius-sm);
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .tip-item strong {
+      color: var(--accent-green);
+      display: block;
+      margin-bottom: 4px;
+    }
+    @media (max-width: 600px) {
+      .victim-card { padding: 30px 20px; }
+      .victim-title { font-size: 26px; }
+      .tips-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div class="victim-container">
+  <div class="victim-card">
+
+    <div class="victim-icon">🚨</div>
+    <h1 class="victim-title">You've Been Quished!</h1>
+    <p class="victim-subtitle">
+      You just scanned a QR code from an untrusted email and landed on this page.
+      In a real attack, this page could have been a <strong>fake login form</strong>, a <strong>malware download</strong>, or a <strong>data harvesting page</strong>.
+    </p>
+
+    <div class="alert alert-success" style="text-align: left;">
+      <span class="alert-icon">✅</span>
+      <div>
+        <strong>Don't worry!</strong> This is a safe educational simulation. No data was collected. But in the real world, this could have been devastating.
+      </div>
+    </div>
+
+    <!-- What happened timeline -->
+    <div class="victim-timeline">
+      <h3 style="font-size: 18px; margin-bottom: 20px; color: var(--text-primary);">📋 What Just Happened:</h3>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background: rgba(255,140,66,0.15); border-color: var(--accent-orange); color: var(--accent-orange);">1</div>
+        <div class="timeline-content">
+          <h4 style="color: var(--accent-orange);">You received a suspicious email</h4>
+          <p>A fake "IT HelpDesk" email with urgency language and a QR code for "mandatory verification."</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background: rgba(255,71,87,0.15); border-color: var(--accent-red); color: var(--accent-red);">2</div>
+        <div class="timeline-content">
+          <h4 style="color: var(--accent-red);">You scanned the QR code</h4>
+          <p>Instead of verifying the sender or the URL, you trusted the QR code and scanned it.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background: rgba(255,71,87,0.15); border-color: var(--accent-red); color: var(--accent-red);">3</div>
+        <div class="timeline-content">
+          <h4 style="color: var(--accent-red);">You were redirected to a malicious page</h4>
+          <p>In a real scenario, this page could steal your credentials, install malware, or harvest personal data.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background: rgba(0,255,136,0.15); border-color: var(--accent-green); color: var(--accent-green);">✓</div>
+        <div class="timeline-content">
+          <h4 style="color: var(--accent-green);">But this time, you're safe!</h4>
+          <p>This is an educational simulation. Now you know how quishing works and can protect yourself.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <h3 style="font-size: 18px; margin-bottom: 4px; color: var(--text-primary);">🛡️ How to Protect Against Quishing:</h3>
+    <div class="tips-grid">
+      <div class="tip-item">
+        <strong>🔍 Inspect Before Scanning</strong>
+        Never scan QR codes from unknown emails or messages. If it claims to be from your IT dept, call them directly.
+      </div>
+      <div class="tip-item">
+        <strong>🔗 Preview the URL</strong>
+        Use your phone's QR scanner to preview the URL before opening. Check if the domain looks legitimate.
+      </div>
+      <div class="tip-item">
+        <strong>🚫 Don't Trust Urgency</strong>
+        Legitimate organizations don't threaten account deletion via QR codes. Urgency = red flag.
+      </div>
+      <div class="tip-item">
+        <strong>📞 Verify Independently</strong>
+        If an email asks you to take immediate action, contact the sender through official channels first.
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+      <a href="../phishing-select.html" class="btn btn-primary btn-lg">← Back to Demos</a>
+      <a href="../quiz.html" class="btn btn-outline btn-lg">📝 Take the Quiz</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>
