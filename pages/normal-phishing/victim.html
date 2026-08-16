@@ -1,0 +1,461 @@
+﻿<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Phishing Attack Victim Simulation â€” Detailed educational breakdown of harvested credentials and exposed browser fingerprint.">
+  <title>ðŸš¨ Phishing Attack Alert â€” Victim Demonstration</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <style>
+    .victim-hero {
+      background: radial-gradient(ellipse at top, rgba(255, 71, 87, 0.18) 0%, rgba(10, 14, 26, 0.95) 75%);
+      border-bottom: 1px solid rgba(255, 71, 87, 0.3);
+      padding: 50px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .glitch-header {
+      font-size: 38px;
+      font-weight: 900;
+      color: #ff4757;
+      text-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+      margin-bottom: 12px;
+    }
+    .leaked-box {
+      background: rgba(20, 10, 15, 0.85);
+      border: 2px solid var(--accent-red);
+      border-radius: var(--border-radius-lg);
+      padding: 28px;
+      box-shadow: 0 0 35px rgba(255, 71, 87, 0.25);
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .leaked-box::before {
+      content: 'CONFIDENTIAL DATA EXFILTRATED';
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #ff4757;
+      background: rgba(255, 71, 87, 0.15);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+    .cred-table {
+      width: 100%;
+      margin-top: 18px;
+      border-collapse: collapse;
+    }
+    .cred-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 71, 87, 0.15);
+      font-size: 14px;
+    }
+    .cred-table tr:last-child td {
+      border-bottom: none;
+    }
+    .cred-label {
+      color: var(--text-muted);
+      width: 35%;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+    .cred-val {
+      font-family: 'JetBrains Mono', monospace;
+      color: #00d4ff;
+      font-size: 15px;
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .cred-val.danger {
+      color: #ff4757;
+    }
+    .pass-toggle-btn {
+      background: rgba(255, 71, 87, 0.15);
+      border: 1px solid rgba(255, 71, 87, 0.3);
+      color: #ff4757;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+      margin-left: 10px;
+      font-family: 'Inter', sans-serif;
+    }
+    .pass-toggle-btn:hover {
+      background: rgba(255, 71, 87, 0.3);
+    }
+    .flow-step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--border-radius-sm);
+      border-left: 3px solid var(--accent-blue);
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .badge-exfiltrated {
+      display: inline-block;
+      background: #ff4757;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      vertical-align: middle;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+
+    <!-- Hero banner -->
+    <section class="victim-hero">
+      <div style="font-size: 56px; margin-bottom: 12px; animation: glitch 0.4s infinite;">ðŸš¨</div>
+      <h1 class="glitch-header">YOU FELL FOR A PHISHING ATTACK!</h1>
+      <p style="font-size: 16px; color: var(--text-secondary); max-width: 720px; margin: 0 auto 16px; line-height: 1.7;">
+        You just submitted your login credentials on a cloned <span id="brand-victim-name" style="color: #00d4ff; font-weight: 700;">Simulated Brand</span> page.
+        In a real-world cyber attack, your account would now be compromised.
+      </p>
+      <span class="badge badge-red">âš ï¸ Live Interception Demonstration â€” Safe Academic Lab</span>
+    </section>
+
+    <div class="content-body">
+
+      <!-- Leaked Credentials Box -->
+      <div class="leaked-box">
+        <h2 style="font-size: 20px; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
+          <span>ðŸ’€</span> Harvested Account Credentials
+        </h2>
+        <p style="font-size: 13px; color: var(--text-muted);">The table below shows the exact data that was intercepted from your simulated submission.</p>
+
+        <table class="cred-table">
+          <tbody>
+            <tr>
+              <td class="cred-label">Target Service</td>
+              <td class="cred-val" id="disp-brand">Google Account</td>
+            </tr>
+            <tr>
+              <td class="cred-label">Username / Email</td>
+              <td class="cred-val danger">
+                <span id="disp-user">victim_user@example.com</span>
+                <span class="badge-exfiltrated">CAPTURED</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="cred-label">Plaintext Password</td>
+              <td class="cred-val danger">
+                <span id="disp-pass">â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢</span>
+                <button class="pass-toggle-btn" id="toggle-pass-btn" onclick="togglePasswordVisibility()">ðŸ‘ï¸ Show Password</button>
+                <span class="badge-exfiltrated">STOLEN</span>
+              </td>
+            </tr>
+            <tr id="extra-row" style="display: none;">
+              <td class="cred-label">Additional Form Data</td>
+              <td class="cred-val" id="disp-extra">â€”</td>
+            </tr>
+            <tr>
+              <td class="cred-label">Capture Timestamp</td>
+              <td class="cred-val" style="color: var(--text-secondary);" id="disp-time">â€”</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Leaked Metadata & Geolocation Grid -->
+      <div class="section-header">
+        <h2>ðŸ“ Exposed Environment & Browser Fingerprint</h2>
+        <p>In addition to your credentials, the malicious server silently recorded the following device and network telemetry.</p>
+      </div>
+
+      <div class="location-grid" style="margin-bottom: 32px;" id="victim-loc-grid">
+        <div class="data-item">
+          <div class="data-icon">ðŸŒ</div>
+          <div>
+            <div class="data-label">IP Address</div>
+            <div class="data-value" id="v-ip">Scanning...</div>
+          </div>
+        </div>
+        <div class="data-item">
+          <div class="data-icon">ðŸ™ï¸</div>
+          <div>
+            <div class="data-label">Location (GeoIP)</div>
+            <div class="data-value" id="v-loc">Detecting...</div>
+          </div>
+        </div>
+        <div class="data-item">
+          <div class="data-icon">ðŸ“¡</div>
+          <div>
+            <div class="data-label">Network / ISP</div>
+            <div class="data-value" id="v-isp">Detecting...</div>
+          </div>
+        </div>
+        <div class="data-item">
+          <div class="data-icon">ðŸ–¥ï¸</div>
+          <div>
+            <div class="data-label">Operating System</div>
+            <div class="data-value" id="v-os">Detecting...</div>
+          </div>
+        </div>
+        <div class="data-item">
+          <div class="data-icon">ðŸŒ</div>
+          <div>
+            <div class="data-label">Browser & Engine</div>
+            <div class="data-value" id="v-browser">Detecting...</div>
+          </div>
+        </div>
+        <div class="data-item">
+          <div class="data-icon">ðŸ“</div>
+          <div>
+            <div class="data-label">Screen Resolution</div>
+            <div class="data-value" id="v-res">Detecting...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- How Attackers Weaponize Stolen Credentials -->
+      <section class="section-header">
+        <h2>ðŸ§  What Happens Next in a Real Cyber Attack?</h2>
+        <p>Here is the automated killchain cybercriminals execute immediately after harvesting credentials:</p>
+      </section>
+
+      <div class="grid-2" style="margin-bottom: 32px;">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <div>
+            <h4 style="font-size: 15px; color: var(--text-primary); margin-bottom: 4px;">Credential Stuffing (Botnets)</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+              Because 65% of people reuse passwords, automated bots immediately test your username/password across 500+ top services (banks, PayPal, Amazon, Netflix, corporate VPNs).
+            </p>
+          </div>
+        </div>
+
+        <div class="flow-step" style="border-left-color: var(--accent-purple);">
+          <div class="step-num" style="background: rgba(168,85,247,0.15); color: var(--accent-purple);">2</div>
+          <div>
+            <h4 style="font-size: 15px; color: var(--text-primary); margin-bottom: 4px;">Dark Web Monetization</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+              Your credentials and session telemetry are bundled and sold on illicit brokerages (like Genesis Market or Russian Market) for as little as $2 to $15.
+            </p>
+          </div>
+        </div>
+
+        <div class="flow-step" style="border-left-color: var(--accent-orange);">
+          <div class="step-num" style="background: rgba(255,140,66,0.15); color: var(--accent-orange);">3</div>
+          <div>
+            <h4 style="font-size: 15px; color: var(--text-primary); margin-bottom: 4px;">Account Takeover (ATO) & Session Hijacking</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+              Attackers log in, change the recovery email, reset backup phone numbers, generate new 2FA codes, and lock you out permanently.
+            </p>
+          </div>
+        </div>
+
+        <div class="flow-step" style="border-left-color: var(--accent-red);">
+          <div class="step-num" style="background: rgba(255,71,87,0.15); color: var(--accent-red);">4</div>
+          <div>
+            <h4 style="font-size: 15px; color: var(--text-primary); margin-bottom: 4px;">Lateral Spear-Phishing</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+              Your compromised account is used to email all your friends, family, and coworkers with urgent malicious links, exploiting existing interpersonal trust.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Emergency Remediation Protocol -->
+      <section class="card" style="border-left: 3px solid var(--accent-green); margin-bottom: 36px;">
+        <div class="card-header">
+          <div class="card-icon green">ðŸ›¡ï¸</div>
+          <h3 class="card-title">Emergency Incident Response Checklist</h3>
+        </div>
+        <p class="card-desc" style="margin-bottom: 16px;">If you ever enter credentials into a suspicious website in real life, perform these steps immediately:</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="padding: 14px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.15); border-radius: 8px;">
+            <strong style="color: var(--accent-green); font-size: 14px;">1. Change Password Immediately</strong>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Change the password on the legitimate website first, and on ANY other site where you used that same password.</p>
+          </div>
+
+          <div style="padding: 14px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.15); border-radius: 8px;">
+            <strong style="color: var(--accent-green); font-size: 14px;">2. Revoke Active Sessions</strong>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Go to Security Settings and click "Log out of all other devices / active sessions" to kick out attackers.</p>
+          </div>
+
+          <div style="padding: 14px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.15); border-radius: 8px;">
+            <strong style="color: var(--accent-green); font-size: 14px;">3. Enable Hardware/App MFA (2FA)</strong>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Use Authenticator apps (Google Authenticator, Aegis) or FIDO2 YubiKeys rather than SMS verification.</p>
+          </div>
+
+          <div style="padding: 14px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.15); border-radius: 8px;">
+            <strong style="color: var(--accent-green); font-size: 14px;">4. Inspect Account Settings</strong>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Check for unauthorized email forwarding rules, linked third-party apps, or changed recovery phone numbers.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Navigation Buttons -->
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 36px;">
+        <a href="../phishing-select.html" class="btn btn-primary btn-lg">ðŸŽ¯ Test Another Brand Page</a>
+        <a href="../simulation.html" class="btn btn-outline btn-lg">ðŸ“§ Try Email Simulation</a>
+        <a href="../quiz.html" class="btn btn-outline btn-lg">â“ Test Your Knowledge (Quiz)</a>
+        <a href="../location-expose.html" class="btn btn-ghost btn-lg">ðŸ“ Full Data Exposure Demo</a>
+        <a href="../../index.html" class="btn btn-ghost btn-lg">ðŸ  Back to Lab Home</a>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../js/main.js"></script>
+<script>
+  initSidebar('phishing-select');
+
+  let rawPassword = '';
+  let isPasswordMasked = true;
+
+  // Retrieve captured victim data
+  function loadVictimData() {
+    let data = null;
+    try {
+      const stored = sessionStorage.getItem('phishlab_victim_data');
+      if (stored) data = JSON.parse(stored);
+    } catch(e) {}
+
+    // Fallback: URL search params
+    const params = new URLSearchParams(window.location.search);
+    const brand = (data && data.brand) || params.get('brand') || 'Demonstration Brand';
+    const user = (data && data.username) || params.get('user') || 'test_victim@domain.com';
+    rawPassword = (data && data.password) || params.get('pass') || 'Password123!';
+    const time = (data && data.timestamp) || params.get('time') || new Date().toLocaleString();
+
+    document.getElementById('brand-victim-name').textContent = brand;
+    document.getElementById('disp-brand').textContent = brand + ' Login Portal';
+    document.getElementById('disp-user').textContent = user;
+    document.getElementById('disp-time').textContent = time;
+    
+    updatePasswordDisplay();
+
+    if (data && data.extra && Object.keys(data.extra).length > 0) {
+      const extraRow = document.getElementById('extra-row');
+      extraRow.style.display = 'table-row';
+      const pairs = Object.entries(data.extra).map(([k, v]) => `${k}: ${v}`).join(' | ');
+      document.getElementById('disp-extra').textContent = pairs;
+    }
+  }
+
+  function updatePasswordDisplay() {
+    const disp = document.getElementById('disp-pass');
+    const btn = document.getElementById('toggle-pass-btn');
+    if (isPasswordMasked) {
+      disp.textContent = 'â€¢'.repeat(Math.max(rawPassword.length, 8));
+      btn.textContent = 'ðŸ‘ï¸ Show Password';
+    } else {
+      disp.textContent = rawPassword;
+      btn.textContent = 'ðŸ™ˆ Hide Password';
+    }
+  }
+
+  function togglePasswordVisibility() {
+    isPasswordMasked = !isPasswordMasked;
+    updatePasswordDisplay();
+  }
+
+  // Load live device / IP info
+  async function loadEnvironmentTelemetry() {
+    // OS & Browser detection
+    const ua = navigator.userAgent;
+    let browser = 'Unknown Browser';
+    let os = 'Unknown OS';
+
+    if (ua.includes('Firefox')) browser = 'Mozilla Firefox';
+    else if (ua.includes('Edg')) browser = 'Microsoft Edge';
+    else if (ua.includes('Chrome')) browser = 'Google Chrome';
+    else if (ua.includes('Safari')) browser = 'Safari';
+
+    if (ua.includes('Windows NT 10')) os = 'Windows 10 / 11';
+    else if (ua.includes('Windows')) os = 'Windows';
+    else if (ua.includes('Mac OS')) os = 'macOS';
+    else if (ua.includes('Linux')) os = 'Linux';
+    else if (ua.includes('Android')) os = 'Android';
+    else if (ua.includes('iPhone')) os = 'iOS';
+
+    document.getElementById('v-os').textContent = os;
+    document.getElementById('v-browser').textContent = browser;
+    document.getElementById('v-res').textContent = `${window.screen.width} Ã— ${window.screen.height} (${window.screen.colorDepth}-bit)`;
+
+    // Fetch IP and Geo location with multi-provider fallback
+    const endpoints = [
+      'https://ipwho.is/',
+      'https://ipapi.co/json/',
+      'https://ipinfo.io/json?token='
+    ];
+
+    let found = false;
+    for (let url of endpoints) {
+      try {
+        const res = await fetch(url, { cache: 'no-cache' });
+        if (res.ok) {
+          const ipInfo = await res.json();
+          const ip = ipInfo.ip || (ipInfo.connection ? ipInfo.connection.ip : '192.168.1.104');
+          const city = ipInfo.city || ipInfo.region || 'Detected City';
+          const region = ipInfo.region || ipInfo.region_name || '';
+          const country = ipInfo.country || ipInfo.country_name || 'India';
+          const isp = ipInfo.connection ? ipInfo.connection.isp : (ipInfo.org || ipInfo.isp || 'Broadband ISP');
+
+          document.getElementById('v-ip').textContent = ip;
+          document.getElementById('v-loc').textContent = `${city}, ${region} (${country})`.replace(',  (', ' (');
+          document.getElementById('v-isp').textContent = isp;
+          found = true;
+          break;
+        }
+      } catch (err) {
+        console.warn(`GeoIP endpoint ${url} failed, trying next...`);
+      }
+    }
+
+    if (!found) {
+      document.getElementById('v-ip').textContent = '223.187.112.45 (Detected IP)';
+      document.getElementById('v-loc').textContent = 'New Delhi, Delhi (India)';
+      document.getElementById('v-isp').textContent = 'Airtel / Jio Broadband Network';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadVictimData();
+    loadEnvironmentTelemetry();
+  });
+</script>
+</body>
+</html>
+

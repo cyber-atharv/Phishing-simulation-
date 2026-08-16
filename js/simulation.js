@@ -1,5 +1,6 @@
+﻿/* This simulation is created by Atharv Hogade. Do not misuse it. */
 /* ============================================================
-   EMAIL INBOX SIMULATION — Logic & Data
+   EMAIL INBOX SIMULATION â€” Logic & Data
    ============================================================ */
 
 const emails = [
@@ -34,7 +35,7 @@ const emails = [
     sender: 'Micr0soft Support',
     senderEmail: 'security@micr0soft-verify.com',
     to: 'you@outlook.com',
-    subject: '⚠️ URGENT: Your account has been compromised!',
+    subject: 'âš ï¸ URGENT: Your account has been compromised!',
     time: '09:15 AM',
     avatar: '#FF4757',
     avatarLetter: 'M',
@@ -49,13 +50,13 @@ const emails = [
       <p>Sincerely,<br>Microsoft Security Team</p>
     `,
     flags: [
-      '🔴 Sender email uses "micr0soft" (zero instead of "o") — a common phishing trick',
-      '🔴 Domain is "micr0soft-verify.com" — NOT an official Microsoft domain',
-      '🔴 Creates extreme urgency ("PERMANENTLY LOCKED in 24 hours")',
-      '🔴 Threatens data deletion to cause panic',
-      '🔴 Uses generic greeting "Dear Valued Customer" instead of your name'
+      'ðŸ”´ Sender email uses "micr0soft" (zero instead of "o") â€” a common phishing trick',
+      'ðŸ”´ Domain is "micr0soft-verify.com" â€” NOT an official Microsoft domain',
+      'ðŸ”´ Creates extreme urgency ("PERMANENTLY LOCKED in 24 hours")',
+      'ðŸ”´ Threatens data deletion to cause panic',
+      'ðŸ”´ Uses generic greeting "Dear Valued Customer" instead of your name'
     ],
-    explanation: 'This is a <strong>phishing email</strong>! Notice the misspelled sender domain, urgency tactics, and threatening language — classic phishing red flags.'
+    explanation: 'This is a <strong>phishing email</strong>! Notice the misspelled sender domain, urgency tactics, and threatening language â€” classic phishing red flags.'
   },
   {
     id: 3,
@@ -111,11 +112,11 @@ const emails = [
       <p>PayPaI Security Team</p>
     `,
     flags: [
-      '🔴 Sender name is "PayPaI" (capital I instead of lowercase L) — visual spoofing',
-      '🔴 Domain "paypal-secure-verify.net" is NOT paypal.com',
-      '🔴 Asks for credit card number and SSN — PayPal never does this via email',
-      '🔴 Creates urgency with "12 hours" deadline',
-      '🔴 Uses a suspicious non-PayPal URL'
+      'ðŸ”´ Sender name is "PayPaI" (capital I instead of lowercase L) â€” visual spoofing',
+      'ðŸ”´ Domain "paypal-secure-verify.net" is NOT paypal.com',
+      'ðŸ”´ Asks for credit card number and SSN â€” PayPal never does this via email',
+      'ðŸ”´ Creates urgency with "12 hours" deadline',
+      'ðŸ”´ Uses a suspicious non-PayPal URL'
     ],
     explanation: 'This is a <strong>phishing email</strong>! The sender uses "PayPaI" (capital I), asks for credit card and SSN via email, and uses a fake domain. PayPal NEVER requests sensitive data via email.'
   },
@@ -134,9 +135,9 @@ const emails = [
       <p>Hi there,</p>
       <p>You have 3 new connection requests waiting for you on LinkedIn:</p>
       <ul style="margin: 12px 0; padding-left: 20px; list-style: disc;">
-        <li><strong>Priya Sharma</strong> — Software Engineer at Google</li>
-        <li><strong>Rahul Verma</strong> — Data Scientist at Microsoft</li>
-        <li><strong>Sarah Chen</strong> — Product Manager at Meta</li>
+        <li><strong>Priya Sharma</strong> â€” Software Engineer at Google</li>
+        <li><strong>Rahul Verma</strong> â€” Data Scientist at Microsoft</li>
+        <li><strong>Sarah Chen</strong> â€” Product Manager at Meta</li>
       </ul>
       <p>Visit your <a href="#">LinkedIn profile</a> to accept or decline these requests.</p>
       <p>Thanks,<br>The LinkedIn Team</p>
@@ -149,7 +150,7 @@ const emails = [
     sender: 'Netflix Support',
     senderEmail: 'billing@netflix-payment-update.com',
     to: 'you@gmail.com',
-    subject: 'Your payment method has expired — Update now to avoid suspension',
+    subject: 'Your payment method has expired â€” Update now to avoid suspension',
     time: 'Yesterday',
     avatar: '#E50914',
     avatarLetter: 'N',
@@ -164,11 +165,11 @@ const emails = [
       <p>Thank you,<br>Netflix Billing Department</p>
     `,
     flags: [
-      '🔴 Domain "netflix-payment-update.com" is NOT netflix.com',
-      '🔴 Creates urgency ("48 hours" or suspension)',
-      '🔴 Threatens loss of profiles and watch history',
-      '🔴 Official Netflix billing emails come from info@mailer.netflix.com',
-      '🔴 Does not address you by your account name'
+      'ðŸ”´ Domain "netflix-payment-update.com" is NOT netflix.com',
+      'ðŸ”´ Creates urgency ("48 hours" or suspension)',
+      'ðŸ”´ Threatens loss of profiles and watch history',
+      'ðŸ”´ Official Netflix billing emails come from info@mailer.netflix.com',
+      'ðŸ”´ Does not address you by your account name'
     ],
     explanation: 'This is a <strong>phishing email</strong>! Netflix sends billing emails from @mailer.netflix.com, not random domains. The urgency and threat of data loss are classic phishing tactics.'
   }
@@ -201,8 +202,8 @@ function renderEmailList() {
     if (answered) {
       const isCorrect = (answered === 'phishing' && email.isPhishing) || (answered === 'safe' && !email.isPhishing);
       statusBadge = isCorrect
-        ? '<span class="badge badge-green" style="margin-left: auto;">✅ Correct</span>'
-        : '<span class="badge badge-red" style="margin-left: auto;">❌ Wrong</span>';
+        ? '<span class="badge badge-green" style="margin-left: auto;">âœ… Correct</span>'
+        : '<span class="badge badge-red" style="margin-left: auto;">âŒ Wrong</span>';
     }
     return `
       <div class="email-item ${email.unread && !answered ? 'unread' : ''}" onclick="openEmail(${email.id})" style="opacity: ${answered ? '0.7' : '1'};">
@@ -266,11 +267,11 @@ function markEmail(choice) {
   const flags = document.getElementById('feedback-flags');
 
   if (isCorrect) {
-    icon.textContent = '✅';
+    icon.textContent = 'âœ…';
     title.textContent = 'Correct!';
     title.style.color = 'var(--accent-green)';
   } else {
-    icon.textContent = '❌';
+    icon.textContent = 'âŒ';
     title.textContent = 'Incorrect!';
     title.style.color = 'var(--accent-red)';
   }
@@ -280,7 +281,7 @@ function markEmail(choice) {
   if (email.flags.length > 0) {
     flags.innerHTML = `
       <div style="margin-top: 16px; padding: 16px; background: rgba(255,71,87,0.08); border-radius: 8px; border: 1px solid rgba(255,71,87,0.2);">
-        <strong style="color: var(--accent-red); font-size: 13px;">🔍 Red Flags:</strong>
+        <strong style="color: var(--accent-red); font-size: 13px;">ðŸ” Red Flags:</strong>
         <ul style="margin-top: 8px; padding-left: 6px; list-style: none;">
           ${email.flags.map(f => `<li style="font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">${f}</li>`).join('')}
         </ul>
@@ -341,7 +342,7 @@ function showResults() {
         </div>
         <p style="font-size: 13px; color: var(--text-muted);">
           Type: <strong style="color: ${email.isPhishing ? 'var(--accent-red)' : 'var(--accent-green)'};">${email.isPhishing ? 'Phishing' : 'Legitimate'}</strong>
-          — You chose: <strong>${choice === 'phishing' ? 'Phishing' : 'Safe'}</strong>
+          â€” You chose: <strong>${choice === 'phishing' ? 'Phishing' : 'Safe'}</strong>
         </p>
       </div>
     `;
@@ -358,3 +359,4 @@ function showResults() {
 
   simResults.scrollIntoView({ behavior: 'smooth' });
 }
+

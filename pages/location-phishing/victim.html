@@ -1,0 +1,449 @@
+﻿<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Location Phishing Attack Simulation â€” Educational breakdown of harvested GPS coordinates, IP geolocation, and browser telemetry.">
+  <title>ðŸ“ Location Phishing Alert â€” Victim Demonstration</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <style>
+    .victim-hero {
+      background: radial-gradient(ellipse at top, rgba(255, 71, 87, 0.18) 0%, rgba(10, 14, 26, 0.95) 75%);
+      border-bottom: 1px solid rgba(255, 71, 87, 0.3);
+      padding: 50px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .glitch-header {
+      font-size: 38px;
+      font-weight: 900;
+      color: #ff4757;
+      text-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+      margin-bottom: 12px;
+    }
+    .leaked-box {
+      background: rgba(20, 10, 15, 0.85);
+      border: 2px solid var(--accent-red);
+      border-radius: var(--border-radius-lg);
+      padding: 28px;
+      box-shadow: 0 0 35px rgba(255, 71, 87, 0.25);
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .leaked-box::before {
+      content: 'PRECISE LOCATION EXFILTRATED';
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #ff4757;
+      background: rgba(255, 71, 87, 0.15);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+    .cred-table {
+      width: 100%;
+      margin-top: 18px;
+      border-collapse: collapse;
+    }
+    .cred-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 71, 87, 0.15);
+      font-size: 14px;
+    }
+    .cred-table tr:last-child td {
+      border-bottom: none;
+    }
+    .cred-label {
+      color: var(--text-muted);
+      width: 35%;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+    .cred-val {
+      font-family: 'JetBrains Mono', monospace;
+      color: #00d4ff;
+      font-size: 15px;
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .cred-val.danger {
+      color: #ff4757;
+    }
+    .map-preview-container {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--border-radius);
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .map-preview-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .flow-step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--border-radius-sm);
+      border-left: 3px solid var(--accent-red);
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 71, 87, 0.15);
+      color: var(--accent-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .rescan-btn {
+      background: rgba(0, 212, 255, 0.15);
+      border: 1px solid rgba(0, 212, 255, 0.35);
+      color: #00d4ff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 10px;
+      transition: all 0.2s;
+    }
+    .rescan-btn:hover {
+      background: rgba(0, 212, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+
+    <!-- Hero Header -->
+    <section class="victim-hero">
+      <div style="font-size: 56px; margin-bottom: 12px; animation: glitch 0.4s infinite;">ðŸ“</div>
+      <h1 class="glitch-header">PHYSICAL LOCATION EXPOSED!</h1>
+      <p style="font-size: 16px; color: var(--text-secondary); max-width: 720px; margin: 0 auto 16px; line-height: 1.7;">
+        You just interacted with a <strong>Location Phishing (Geo-Phishing)</strong> page.
+        In real-world cyber espionage and stalking attacks, attackers use these pretexts to pin down your exact physical coordinates.
+      </p>
+      <span class="badge badge-red">âš ï¸ Live Geolocation Interception Demo â€” Educational Simulation</span>
+    </section>
+
+    <div class="content-body">
+
+      <!-- Leaked Location Box -->
+      <div class="leaked-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h2 style="font-size: 20px; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
+              <span>ðŸŽ¯</span> Intercepted GPS & Network Coordinates
+            </h2>
+            <p style="font-size: 13px; color: var(--text-muted);">The table below highlights the physical and network telemetry gathered by the simulation:</p>
+          </div>
+          <button class="rescan-btn" onclick="forceGPSScan()">ðŸ“ Request Live GPS</button>
+        </div>
+
+        <table class="cred-table">
+          <tbody>
+            <tr>
+              <td class="cred-label">Attack Type</td>
+              <td class="cred-val">HTML5 Geolocation Pretexting (Seeker Technique)</td>
+            </tr>
+            <tr>
+              <td class="cred-label">GPS Latitude & Longitude</td>
+              <td class="cred-val danger">
+                <span id="disp-coords">Detecting coordinates...</span>
+                <a id="gmaps-link" href="#" target="_blank" style="display: none; margin-left: 10px; font-size: 11px; color: #00d4ff; text-decoration: underline;">Open in Maps â†—</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="cred-label">Estimated City / Region</td>
+              <td class="cred-val danger" id="disp-city">Locating city...</td>
+            </tr>
+            <tr>
+              <td class="cred-label">Public IP Address</td>
+              <td class="cred-val" id="disp-ip">Scanning IP...</td>
+            </tr>
+            <tr>
+              <td class="cred-label">Internet Service Provider</td>
+              <td class="cred-val" id="disp-isp">Detecting network...</td>
+            </tr>
+            <tr>
+              <td class="cred-label">Accuracy Status</td>
+              <td class="cred-val" id="disp-accuracy">Evaluating accuracy...</td>
+            </tr>
+            <tr>
+              <td class="cred-label">Timestamp</td>
+              <td class="cred-val" style="color: var(--text-secondary);" id="disp-time">â€”</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Live Map Embed -->
+        <div class="map-preview-container" id="map-container">
+          <div id="map-placeholder" style="color: var(--text-muted); font-size: 14px; text-align: center; padding: 20px;">
+            <div style="font-size: 32px; margin-bottom: 8px;">ðŸ—ºï¸</div>
+            Loading interactive satellite pinpoint map...
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- How Location Phishing Works -->
+      <section class="section-header">
+        <h2>ðŸ” How Attackers Exploit Location Phishing</h2>
+        <p>Tools like <em>Seeker</em>, <em>TrackUrl</em>, and <em>Storm-Breaker</em> use psychological lures to harvest exact coordinates:</p>
+      </section>
+
+      <div class="grid-2" style="margin-bottom: 32px;">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <div>
+            <h4 style="font-size: 15px; color: var(--text-primary); margin-bottom: 4px;">Plausible Lure & Pretext</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+              Attackers create fake pages offering "Nearby Friends", "Live Courier Package Tracking", "Find Free Wi-Fi", or "Google Drive Shared Folder", prompting for location permission.
+            </p>
+          </div>
+        </div>
+
+        <div class="flow-step" style="border-left-color: var(--accent-orange);">
+          <div class="step-num" style="background: rgba(255,140,66,0.15); color: var(--accent-orange);">2</div>
+          <div>
+            <h4 style="font-size: 15px; color: var(--text-primary); margin-bottom: 4px;">HTML5 High-Accuracy GPS API</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+              When the user clicks "Allow", the browser accesses device GPS, Wi-Fi BSSID triangulation, and cell towers to obtain coordinates with pinpoint accuracy (down to a few meters).
+            </p>
+          </div>
+        </div>
+
+        <div class="flow-step" style="border-left-color: var(--accent-purple);">
+          <div class="step-num" style="background: rgba(168,85,247,0.15); color: var(--accent-purple);">3</div>
+          <div>
+            <h4 style="font-size: 15px; color: var(--text-primary); margin-bottom: 4px;">Silent Exfiltration to C2</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+              The exact latitude, longitude, altitude, speed, device model, and IP are transmitted directly to the attacker's Command & Control (C2) server or Telegram bot.
+            </p>
+          </div>
+        </div>
+
+        <div class="flow-step" style="border-left-color: var(--accent-blue);">
+          <div class="step-num" style="background: rgba(0,212,255,0.15); color: var(--accent-blue);">4</div>
+          <div>
+            <h4 style="font-size: 15px; color: var(--text-primary); margin-bottom: 4px;">Real-World Threat Risks</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+              Used for targeted surveillance, physical stalking, doxxing, identifying military/executive locations, and cross-referencing with other leaked personal records.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Countermeasures -->
+      <section class="card" style="border-left: 3px solid var(--accent-green); margin-bottom: 36px;">
+        <div class="card-header">
+          <div class="card-icon green">ðŸ›¡ï¸</div>
+          <h3 class="card-title">How to Prevent Location Leaks</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="padding: 14px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.15); border-radius: 8px;">
+            <strong style="color: var(--accent-green); font-size: 14px;">1. Never Allow Location on Untrusted Links</strong>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Legitimate Google Drive or cloud links never require device GPS location to view documents.</p>
+          </div>
+
+          <div style="padding: 14px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.15); border-radius: 8px;">
+            <strong style="color: var(--accent-green); font-size: 14px;">2. Set Browser to "Always Ask" or "Block"</strong>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">In Chrome/Firefox settings, disable automatic location sharing and review site permissions regularly.</p>
+          </div>
+
+          <div style="padding: 14px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.15); border-radius: 8px;">
+            <strong style="color: var(--accent-green); font-size: 14px;">3. Use a Trustworthy VPN</strong>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">A VPN masks your real public IP address and ISP-level GeoIP coordinates.</p>
+          </div>
+
+          <div style="padding: 14px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.15); border-radius: 8px;">
+            <strong style="color: var(--accent-green); font-size: 14px;">4. Inspect Domain Names Carefully</strong>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Attackers use domain spoofing (e.g. <code>drive-g00gle.com</code>) to make the permission prompt look official.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Navigation -->
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 36px;">
+        <a href="../phishing-select.html" class="btn btn-primary btn-lg">ðŸŽ¯ Phishing Demo Hub</a>
+        <a href="../location-expose.html" class="btn btn-outline btn-lg">ðŸ“ Browser Data Exposure</a>
+        <a href="../quiz.html" class="btn btn-outline btn-lg">â“ Test Knowledge (Quiz)</a>
+        <a href="../../index.html" class="btn btn-ghost btn-lg">ðŸ  Back to Lab Home</a>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../js/main.js"></script>
+<script>
+  initSidebar('phishing-select');
+
+  document.getElementById('disp-time').textContent = new Date().toLocaleString();
+
+  let activeLat = null;
+  let activeLon = null;
+
+  async function fetchGeoIPFallback() {
+    const endpoints = [
+      'https://ipwho.is/',
+      'https://ipapi.co/json/',
+      'https://ipinfo.io/json?token='
+    ];
+
+    for (let url of endpoints) {
+      try {
+        const res = await fetch(url, { cache: 'no-cache' });
+        if (res.ok) {
+          const data = await res.json();
+          const ip = data.ip || (data.connection ? data.connection.ip : '192.168.1.100');
+          const city = data.city || data.region || 'Detected City';
+          const region = data.region || data.region_name || '';
+          const country = data.country || data.country_name || 'India';
+          const isp = data.connection ? data.connection.isp : (data.org || data.isp || 'Broadband ISP');
+          const lat = data.latitude || (data.loc ? parseFloat(data.loc.split(',')[0]) : null);
+          const lon = data.longitude || (data.loc ? parseFloat(data.loc.split(',')[1]) : null);
+
+          document.getElementById('disp-ip').textContent = ip;
+          document.getElementById('disp-city').textContent = `${city}, ${region} (${country})`.replace(',  (', ' (');
+          document.getElementById('disp-isp').textContent = isp;
+
+          if (!activeLat && lat && lon) {
+            activeLat = lat;
+            activeLon = lon;
+            document.getElementById('disp-coords').textContent = `${lat.toFixed(4)}, ${lon.toFixed(4)} (GeoIP Network Estimated)`;
+            document.getElementById('disp-accuracy').textContent = `Regional ISP Accuracy (~5km - 25km radius)`;
+            updateMap(lat, lon);
+          }
+          return;
+        }
+      } catch (err) {
+        console.warn(`Endpoint ${url} failed, trying next...`, err);
+      }
+    }
+
+    // Final static fallback if network blocked
+    document.getElementById('disp-ip').textContent = '223.187.112.45 (Simulated Public IP)';
+    document.getElementById('disp-city').textContent = 'New Delhi, Delhi (India)';
+    document.getElementById('disp-isp').textContent = 'Bharti Airtel / Jio Broadband';
+    if (!activeLat) {
+      activeLat = 28.6139;
+      activeLon = 77.2090;
+      document.getElementById('disp-coords').textContent = `28.6139, 77.2090 (Simulated Regional Target)`;
+      document.getElementById('disp-accuracy').textContent = `Demo Simulation Accuracy`;
+      updateMap(activeLat, activeLon);
+    }
+  }
+
+  function updateMap(lat, lon) {
+    const container = document.getElementById('map-container');
+    const gmapsLink = document.getElementById('gmaps-link');
+    
+    gmapsLink.href = `https://www.google.com/maps?q=${lat},${lon}`;
+    gmapsLink.style.display = 'inline-block';
+
+    container.innerHTML = `
+      <iframe 
+        title="Location Pinpoint"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=${lon - 0.04}%2C${lat - 0.04}%2C${lon + 0.04}%2C${lat + 0.04}&layer=mapnik&marker=${lat}%2C${lon}"
+        loading="lazy"
+      ></iframe>
+    `;
+  }
+
+  function applyGPSCoordinates(lat, lon, accuracy) {
+    activeLat = lat;
+    activeLon = lon;
+    document.getElementById('disp-coords').textContent = `${lat.toFixed(5)}, ${lon.toFixed(5)} (Live GPS Pinpoint)`;
+    document.getElementById('disp-accuracy').textContent = `High Precision GPS (~${Math.round(accuracy || 15)} meters radius)`;
+    updateMap(lat, lon);
+  }
+
+  function forceGPSScan() {
+    if (navigator.geolocation) {
+      document.getElementById('disp-coords').textContent = 'Scanning GPS satellite sensors...';
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          applyGPSCoordinates(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
+        },
+        (err) => {
+          alert('GPS permission was blocked or unavailable in this browser. Showing GeoIP network location.');
+          fetchGeoIPFallback();
+        },
+        { enableHighAccuracy: true, timeout: 6000 }
+      );
+    } else {
+      alert('Geolocation API is not supported by your browser.');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Check URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const paramLat = parseFloat(params.get('lat'));
+    const paramLon = parseFloat(params.get('lon'));
+
+    if (!isNaN(paramLat) && !isNaN(paramLon)) {
+      applyGPSCoordinates(paramLat, paramLon, 15);
+    } else {
+      // 2. Check SessionStorage
+      try {
+        const stored = sessionStorage.getItem('phishlab_victim_location');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed && parsed.lat && parsed.lon) {
+            applyGPSCoordinates(parseFloat(parsed.lat), parseFloat(parsed.lon), parsed.accuracy);
+          }
+        }
+      } catch(e) {}
+    }
+
+    // 3. Always fetch IP / ISP details and fallback coordinates
+    await fetchGeoIPFallback();
+
+    // 4. Try background GPS if not already loaded
+    if (!activeLat && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          applyGPSCoordinates(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
+        },
+        () => {},
+        { enableHighAccuracy: true, timeout: 4000 }
+      );
+    }
+  });
+</script>
+</body>
+</html>
+

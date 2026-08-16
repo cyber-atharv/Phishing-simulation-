@@ -1,5 +1,6 @@
+﻿/* This simulation is created by Atharv Hogade. Do not misuse it. */
 /* ============================================================
-   PHISHING AWARENESS VIRTUAL LAB — GLOBAL DESIGN SYSTEM
+   PHISHING AWARENESS VIRTUAL LAB â€” GLOBAL DESIGN SYSTEM
    IIT Virtual Labs Style | Dark Cybersecurity Theme
    ============================================================ */
 
@@ -144,7 +145,7 @@ ul, ol {
 }
 
 /* ============================================================
-   LAYOUT — IIT Virtual Labs Sidebar + Content
+   LAYOUT â€” IIT Virtual Labs Sidebar + Content
    ============================================================ */
 
 .app-layout {
@@ -1540,3 +1541,4 @@ ul, ol {
     border: 2px solid #333;
   }
 }
+

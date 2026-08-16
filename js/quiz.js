@@ -1,5 +1,6 @@
+﻿/* This simulation is created by Atharv Hogade. Do not misuse it. */
 /* ============================================================
-   KNOWLEDGE QUIZ — Questions, Logic & Scoring
+   KNOWLEDGE QUIZ â€” Questions, Logic & Scoring
    ============================================================ */
 
 const questions = [
@@ -45,7 +46,7 @@ const questions = [
       'Forward the email to all your contacts as a warning'
     ],
     correct: 2,
-    explanation: 'Always verify suspicious communications by contacting the organization directly through official channels — never click links or reply with sensitive data.'
+    explanation: 'Always verify suspicious communications by contacting the organization directly through official channels â€” never click links or reply with sensitive data.'
   },
   {
     q: 'Which type of phishing targets high-level executives like CEOs?',
@@ -138,7 +139,7 @@ function updateTimer() {
   quizTime = Math.floor((Date.now() - startTime) / 1000);
   const mins = Math.floor(quizTime / 60);
   const secs = quizTime % 60;
-  document.getElementById('quiz-timer').textContent = `⏱️ ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  document.getElementById('quiz-timer').textContent = `â±ï¸ ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
 function renderQuestion() {
@@ -184,7 +185,7 @@ function selectAnswer(index) {
   feedback.style.display = 'block';
   feedback.innerHTML = `
     <div class="alert ${isCorrect ? 'alert-success' : 'alert-danger'}">
-      <span class="alert-icon">${isCorrect ? '✅' : '❌'}</span>
+      <span class="alert-icon">${isCorrect ? 'âœ…' : 'âŒ'}</span>
       <div>
         <strong>${isCorrect ? 'Correct!' : 'Incorrect!'}</strong>
         <p style="margin-top: 6px; font-size: 13px;">${q.explanation}</p>
@@ -196,7 +197,7 @@ function selectAnswer(index) {
 
   const nextBtn = document.getElementById('q-next');
   nextBtn.style.display = 'inline-flex';
-  nextBtn.textContent = currentQuestion === questions.length - 1 ? '🏁 Finish Quiz' : 'Next Question →';
+  nextBtn.textContent = currentQuestion === questions.length - 1 ? 'ðŸ Finish Quiz' : 'Next Question â†’';
 }
 
 function nextQuestion() {
@@ -225,19 +226,19 @@ function finishQuiz() {
 
   let icon, title, desc;
   if (pct >= 80) {
-    icon = '🏆';
+    icon = 'ðŸ†';
     title = 'Excellent! You\'re Phishing-Proof!';
     desc = 'Outstanding performance! You have a strong understanding of phishing threats and how to defend against them.';
   } else if (pct >= 70) {
-    icon = '🎯';
+    icon = 'ðŸŽ¯';
     title = 'Good Job! You Passed!';
     desc = 'You have a solid understanding of phishing. Review the questions you missed to strengthen your knowledge.';
   } else if (pct >= 50) {
-    icon = '📚';
+    icon = 'ðŸ“š';
     title = 'Keep Learning!';
     desc = 'You have some understanding but need more practice. Review the theory section and try again.';
   } else {
-    icon = '⚠️';
+    icon = 'âš ï¸';
     title = 'Needs Improvement';
     desc = 'Your phishing awareness needs significant improvement. Please review all the educational materials and try the simulation again.';
   }
@@ -259,8 +260,9 @@ function resetQuiz() {
   sessionStorage.removeItem('phishlab_quizScore');
   document.getElementById('quiz-results').style.display = 'none';
   document.getElementById('quiz-intro').style.display = 'block';
-  document.getElementById('quiz-timer').textContent = '⏱️ 00:00';
+  document.getElementById('quiz-timer').textContent = 'â±ï¸ 00:00';
   currentQuestion = 0;
   score = 0;
   quizTime = 0;
 }
+

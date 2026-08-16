@@ -1,0 +1,164 @@
+<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Certificate of Completion â€” Download your phishing awareness lab certificate as PDF.">
+  <title>Certificate â€” Phishing Awareness Lab</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+    <div class="content-header">
+      <div>
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Certificate</div>
+        <h1>ðŸ“œ Certificate of Completion</h1>
+      </div>
+    </div>
+
+    <div class="content-body">
+
+      <!-- No quiz state -->
+      <div id="no-cert" style="display: none; text-align: center; padding: 60px 20px;">
+        <div style="font-size: 64px; margin-bottom: 16px;">ðŸ“</div>
+        <h2 style="font-size: 24px; margin-bottom: 12px;">Complete the Quiz First</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 12px;">You need to score 70% or higher on the knowledge quiz to earn your certificate.</p>
+        <a href="quiz.html" class="btn btn-primary btn-lg">ðŸ“ Take the Quiz</a>
+      </div>
+
+      <!-- Certificate content -->
+      <div id="cert-content" style="display: none;">
+
+        <div class="alert alert-success" style="margin-bottom: 28px;">
+          <span class="alert-icon">ðŸŽ‰</span>
+          <div>
+            <strong>Congratulations!</strong> You've earned your Phishing Awareness Lab certificate. Click the button below to download it as a PDF.
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 28px;">
+          <button class="btn btn-primary btn-lg" onclick="downloadPDF()">ðŸ“¥ Download Certificate as PDF</button>
+        </div>
+
+        <!-- Certificate -->
+        <div id="certificate" class="certificate-container">
+          <div class="certificate-border">
+
+            <div style="text-align: center; margin-bottom: 8px;">
+              <span style="font-size: 48px;">ðŸ›¡ï¸</span>
+            </div>
+
+            <h1 class="certificate-title">Certificate of Completion</h1>
+            <p class="certificate-subtitle">Phishing Awareness Virtual Laboratory</p>
+
+            <div class="certificate-body">
+              <p style="font-size: 15px; color: #666; margin-bottom: 16px;">This is to certify that</p>
+
+              <div class="certificate-name" id="cert-name">Student Name</div>
+
+              <p style="margin-top: 16px; font-size: 15px; color: #555;">
+                has successfully completed the <strong>Phishing Awareness Simulation Lab</strong><br>
+                and demonstrated proficiency in identifying and defending against<br>
+                phishing attacks and social engineering techniques.
+              </p>
+
+              <div style="display: flex; justify-content: center; gap: 40px; margin-top: 28px;">
+                <div style="text-align: center;">
+                  <div style="font-size: 28px; font-weight: 700; color: #0066cc;" id="cert-score">â€”</div>
+                  <div style="font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px;">Quiz Score</div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 28px; font-weight: 700; color: #0066cc;" id="cert-pct">â€”</div>
+                  <div style="font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px;">Accuracy</div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 28px; font-weight: 700; color: #0066cc;" id="cert-time">â€”</div>
+                  <div style="font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px;">Time</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="certificate-footer">
+              <div style="text-align: center;">
+                <div style="width: 180px; border-top: 2px solid #c4a35a; padding-top: 8px;">
+                  <div style="font-size: 14px; font-weight: 700; color: #1a1a2e;">Atharv Hogade</div>
+                  <div style="font-size: 12px; color: #888;">Lab Creator & Instructor</div>
+                </div>
+              </div>
+              <div class="certificate-seal">ðŸ†</div>
+              <div style="text-align: center;">
+                <div style="width: 180px; border-top: 2px solid #c4a35a; padding-top: 8px;">
+                  <div style="font-size: 14px; font-weight: 600; color: #333;" id="cert-date">Date</div>
+                  <div style="font-size: 12px; color: #888;">Date of Completion</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 24px;">
+              <p style="font-size: 11px; color: #aaa;">This certificate was generated as part of an educational phishing awareness simulation.</p>
+              <p style="font-size: 11px; color: #aaa;">Certificate ID: <span id="cert-id" style="font-family: monospace;">â€”</span></p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+  initSidebar('certificate');
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const quizScore = getSession('quizScore');
+
+    if (!quizScore || quizScore.pct < 70) {
+      document.getElementById('no-cert').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('cert-content').style.display = 'block';
+
+    // Fill certificate data
+    const name = getUserName();
+    const date = new Date().toLocaleDateString('en-IN', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    });
+    const certId = 'PHL-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+
+    document.getElementById('cert-name').textContent = name;
+    document.getElementById('cert-score').textContent = `${quizScore.score}/${quizScore.total}`;
+    document.getElementById('cert-pct').textContent = quizScore.pct + '%';
+    document.getElementById('cert-time').textContent = quizScore.time;
+    document.getElementById('cert-date').textContent = date;
+    document.getElementById('cert-id').textContent = certId;
+  });
+
+  function downloadPDF() {
+    const cert = document.getElementById('certificate');
+    const opt = {
+      margin: 10,
+      filename: 'Phishing_Awareness_Certificate.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+    };
+
+    html2pdf().set(opt).from(cert).save();
+  }
+</script>
+</body>
+</html>
+

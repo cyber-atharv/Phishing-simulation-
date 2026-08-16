@@ -1,10 +1,11 @@
+﻿<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Results Dashboard — View your phishing simulation performance and analysis.">
-  <title>Results Dashboard — Phishing Awareness Lab</title>
+  <meta name="description" content="Results Dashboard â€” View your phishing simulation performance and analysis.">
+  <title>Results Dashboard â€” Phishing Awareness Lab</title>
   <link rel="stylesheet" href="../css/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -21,7 +22,7 @@
     <div class="content-header">
       <div>
         <div class="breadcrumb"><a href="../index.html">Home</a> / Results</div>
-        <h1>📊 Results Dashboard</h1>
+        <h1>ðŸ“Š Results Dashboard</h1>
       </div>
     </div>
 
@@ -29,10 +30,10 @@
 
       <!-- No results state -->
       <div id="no-results" style="display: none; text-align: center; padding: 60px 20px;">
-        <div style="font-size: 64px; margin-bottom: 16px;">📭</div>
+        <div style="font-size: 64px; margin-bottom: 16px;">ðŸ“­</div>
         <h2 style="font-size: 24px; margin-bottom: 12px;">No Results Yet</h2>
         <p style="color: var(--text-secondary); margin-bottom: 28px;">Complete the email simulation first to see your results here.</p>
-        <a href="simulation.html" class="btn btn-primary btn-lg">📧 Start Email Simulation</a>
+        <a href="simulation.html" class="btn btn-primary btn-lg">ðŸ“§ Start Email Simulation</a>
       </div>
 
       <!-- Results content -->
@@ -52,7 +53,7 @@
             <div class="stat-label">Accuracy</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value" id="r-risk">—</div>
+            <div class="stat-value" id="r-risk">â€”</div>
             <div class="stat-label">Risk Level</div>
           </div>
         </div>
@@ -60,13 +61,13 @@
         <!-- Charts -->
         <div class="grid-2" data-animate>
           <div class="card">
-            <h3 class="card-title" style="font-size: 16px; margin-bottom: 20px;">📊 Performance Overview</h3>
+            <h3 class="card-title" style="font-size: 16px; margin-bottom: 20px;">ðŸ“Š Performance Overview</h3>
             <div style="max-width: 280px; margin: 0 auto;">
               <canvas id="pie-chart"></canvas>
             </div>
           </div>
           <div class="card">
-            <h3 class="card-title" style="font-size: 16px; margin-bottom: 20px;">📈 Per-Email Results</h3>
+            <h3 class="card-title" style="font-size: 16px; margin-bottom: 20px;">ðŸ“ˆ Per-Email Results</h3>
             <canvas id="bar-chart"></canvas>
           </div>
         </div>
@@ -76,7 +77,7 @@
         <!-- Risk Assessment -->
         <div data-animate>
           <div class="section-header">
-            <h2>🎯 Your Risk Assessment</h2>
+            <h2>ðŸŽ¯ Your Risk Assessment</h2>
           </div>
           <div class="card" id="risk-card">
             <div style="display: flex; align-items: center; gap: 20px;">
@@ -94,14 +95,14 @@
         <!-- Breakdown -->
         <div data-animate>
           <div class="section-header">
-            <h2>📋 Detailed Breakdown</h2>
+            <h2>ðŸ“‹ Detailed Breakdown</h2>
           </div>
           <div id="breakdown-grid" class="grid-2"></div>
         </div>
 
         <div style="display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap;">
-          <a href="quiz.html" class="btn btn-primary btn-lg">📝 Take the Knowledge Quiz</a>
-          <a href="simulation.html" class="btn btn-outline btn-lg">🔄 Retry Simulation</a>
+          <a href="quiz.html" class="btn btn-primary btn-lg">ðŸ“ Take the Knowledge Quiz</a>
+          <a href="simulation.html" class="btn btn-outline btn-lg">ðŸ”„ Retry Simulation</a>
         </div>
       </div>
     </div>
@@ -113,3 +114,4 @@
 <script>initSidebar('results');</script>
 </body>
 </html>
+
