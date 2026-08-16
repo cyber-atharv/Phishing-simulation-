@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Informed Consent — Agree to participate in the Phishing Awareness Lab simulation.">
+  <title>Informed Consent — Phishing Awareness Lab</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+    <div class="content-header">
+      <div>
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Informed Consent</div>
+        <h1>✅ Informed Consent</h1>
+      </div>
+    </div>
+
+    <div class="content-body">
+
+      <div class="section-header">
+        <h2>Before You Enter the Lab</h2>
+        <p>This is a controlled educational simulation. Please read the following information carefully and provide your consent before proceeding.</p>
+      </div>
+
+      <div class="alert alert-warning">
+        <span class="alert-icon">⚠️</span>
+        <div>
+          <strong>Educational Purpose Only:</strong> This lab simulates phishing scenarios for learning purposes. No real credentials are collected, and no real attacks are performed. All interactions stay within your browser.
+        </div>
+      </div>
+
+      <!-- Consent Form -->
+      <div class="card" style="max-width: 750px;">
+        <h3 class="card-title" style="margin-bottom: 8px;">📋 Participant Consent Form</h3>
+        <p class="card-desc" style="margin-bottom: 24px;">Please read and agree to each statement below to continue.</p>
+
+        <form id="consent-form" onsubmit="handleConsent(event)">
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent1" required>
+            <label for="consent1">I understand that this is an <strong>educational simulation</strong> and not a real phishing attack. The purpose is to raise awareness about cybersecurity threats.</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent2" required>
+            <label for="consent2">I understand that <strong>no real personal data</strong> will be collected, stored, or transmitted to any external server. All data stays in my browser's session storage.</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent3" required>
+            <label for="consent3">I understand that this lab may show <strong>fake login pages</strong> for educational demonstration. These are designed to teach me how to identify phishing — not to deceive me.</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent4" required>
+            <label for="consent4">I agree to participate voluntarily and understand I can <strong>exit the lab at any time</strong> by closing the browser tab.</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent5" required>
+            <label for="consent5">I will <strong>not use</strong> any techniques learned in this lab for malicious purposes. I understand that unauthorized phishing is a <strong>criminal offense</strong> under the IT Act 2000 (India) and equivalent laws worldwide.</label>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <div class="form-group">
+            <label class="form-label" for="user-name">Your Full Name</label>
+            <input type="text" class="form-input" id="user-name" placeholder="Enter your full name" required minlength="2" autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="user-institution">Institution / College (Optional)</label>
+            <input type="text" class="form-input" id="user-institution" placeholder="e.g., IIT Delhi, NIT Trichy">
+          </div>
+
+          <div style="display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-success btn-lg" id="consent-btn" disabled>
+              🔓 I Agree — Enter the Lab
+            </button>
+            <a href="../index.html" class="btn btn-ghost btn-lg">← Go Back</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Ethics Note -->
+      <div style="margin-top: 32px;" data-animate>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon purple">⚖️</div>
+            <h3 class="card-title">Cyber Ethics & Legal Notice</h3>
+          </div>
+          <p class="card-desc">
+            Phishing attacks in the real world are <strong>illegal</strong> and can result in severe penalties including imprisonment.
+            Under the <strong>Information Technology Act, 2000 (India)</strong>, Section 66C (Identity Theft) and Section 66D (Cheating by Personation using Computer Resource) carry
+            imprisonment up to 3 years and fines up to ₹1,00,000.
+          </p>
+          <p class="card-desc" style="margin-top: 12px;">
+            This lab exists <strong>only for educational purposes</strong> — to help you recognize and defend against phishing. Always practice cybersecurity ethically and responsibly.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+  initSidebar('consent');
+
+  // Enable button only when all checkboxes are checked
+  const checkboxes = document.querySelectorAll('#consent-form input[type="checkbox"]');
+  const consentBtn = document.getElementById('consent-btn');
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const allChecked = Array.from(checkboxes).every(c => c.checked);
+      consentBtn.disabled = !allChecked;
+      if (allChecked) {
+        consentBtn.style.opacity = '1';
+      } else {
+        consentBtn.style.opacity = '0.5';
+      }
+    });
+  });
+
+  consentBtn.style.opacity = '0.5';
+
+  function handleConsent(e) {
+    e.preventDefault();
+    const name = document.getElementById('user-name').value.trim();
+    const institution = document.getElementById('user-institution').value.trim();
+
+    if (!name) {
+      alert('Please enter your name.');
+      return;
+    }
+
+    setSession('consent', true);
+    setSession('userName', name);
+    setSession('institution', institution);
+    setSession('consentTime', new Date().toISOString());
+
+    window.location.href = 'simulation.html';
+  }
+</script>
+</body>
+</html>

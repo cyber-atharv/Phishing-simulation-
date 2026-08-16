@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Phishing Awareness Virtual Lab — Learn about phishing attacks, social engineering techniques, and how to protect yourself. Interactive simulation for cybersecurity education.">
+  <title>Phishing Awareness Lab — Introduction</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="badge badge-blue">🛡️ Cybersecurity Virtual Lab</span>
+        <h1>Phishing Awareness Simulation</h1>
+        <p>An interactive virtual laboratory designed to educate users about phishing attacks, social engineering techniques, and how to recognize and prevent cyber threats in the real world.</p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="pages/consent.html" class="btn btn-primary btn-lg">🚀 Enter the Lab</a>
+          <a href="#phishing-types" class="btn btn-outline btn-lg">📖 Learn First</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <div class="content-body">
+
+      <!-- Stats -->
+      <div class="stats-row" data-animate>
+        <div class="stat-card">
+          <div class="stat-value">3.4B+</div>
+          <div class="stat-label">Phishing Emails / Day</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">83%</div>
+          <div class="stat-label">Organizations Attacked</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">$17,700</div>
+          <div class="stat-label">Lost Every Minute</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">36%</div>
+          <div class="stat-label">Breaches via Phishing</div>
+        </div>
+      </div>
+
+      <!-- What is Phishing -->
+      <section data-animate>
+        <div class="section-header">
+          <h2>🎣 What is Phishing?</h2>
+          <p>Phishing is a type of social engineering attack where cybercriminals disguise themselves as trustworthy entities to trick people into revealing sensitive information such as passwords, credit card numbers, or personal data.</p>
+        </div>
+
+        <div class="alert alert-warning">
+          <span class="alert-icon">⚠️</span>
+          <div>
+            <strong>Important:</strong> This virtual lab is designed purely for educational purposes. All simulations are conducted in a controlled environment with informed consent. No real data is ever collected or transmitted.
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Types of Phishing -->
+      <section id="phishing-types" data-animate>
+        <div class="section-header">
+          <h2>🔍 Types of Phishing Attacks</h2>
+          <p>Phishing comes in many forms. Understanding each type is the first step to defending yourself.</p>
+        </div>
+
+        <div class="grid-3">
+          <!-- Email Phishing -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon blue">📧</div>
+              <h3 class="card-title">Email Phishing</h3>
+            </div>
+            <p class="card-desc">The most common type. Attackers send mass emails impersonating banks, tech companies, or government agencies, urging victims to click malicious links or download attachments.</p>
+            <div style="margin-top: 14px;">
+              <span class="badge badge-red">High Frequency</span>
+            </div>
+          </div>
+
+          <!-- Spear Phishing -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon purple">🎯</div>
+              <h3 class="card-title">Spear Phishing</h3>
+            </div>
+            <p class="card-desc">Targeted attacks aimed at specific individuals or organizations. Attackers research their victims to craft highly personalized and convincing messages.</p>
+            <div style="margin-top: 14px;">
+              <span class="badge badge-purple">Targeted</span>
+            </div>
+          </div>
+
+          <!-- Whaling -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon orange">🐋</div>
+              <h3 class="card-title">Whaling</h3>
+            </div>
+            <p class="card-desc">A form of spear phishing targeting C-level executives (CEO, CFO). These attacks often involve fake legal subpoenas, tax notifications, or high-priority business requests.</p>
+            <div style="margin-top: 14px;">
+              <span class="badge badge-orange">Executive Target</span>
+            </div>
+          </div>
+
+          <!-- Smishing -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon green">📱</div>
+              <h3 class="card-title">Smishing (SMS Phishing)</h3>
+            </div>
+            <p class="card-desc">Phishing via SMS text messages. Victims receive texts claiming to be from banks, delivery services, or government agencies with links to fake websites.</p>
+            <div style="margin-top: 14px;">
+              <span class="badge badge-green">Mobile Threat</span>
+            </div>
+          </div>
+
+          <!-- Vishing -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon red">📞</div>
+              <h3 class="card-title">Vishing (Voice Phishing)</h3>
+            </div>
+            <p class="card-desc">Phone-based phishing where attackers call victims pretending to be tech support, bank officials, or law enforcement to extract sensitive information verbally.</p>
+            <div style="margin-top: 14px;">
+              <span class="badge badge-red">Voice-Based</span>
+            </div>
+          </div>
+
+          <!-- Quishing -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon pink" style="background: rgba(255, 107, 157, 0.15);">📷</div>
+              <h3 class="card-title">Quishing (QR Phishing)</h3>
+            </div>
+            <p class="card-desc">A newer technique where attackers embed malicious URLs in QR codes. When scanned, victims are redirected to fake login pages or malware download sites.</p>
+            <div style="margin-top: 14px;">
+              <span class="badge badge-blue">Emerging Threat</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- How Phishing Works -->
+      <section data-animate>
+        <div class="section-header">
+          <h2>⚙️ How Does Phishing Work?</h2>
+          <p>Understanding the attacker's methodology helps you recognize and avoid falling victim.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="card-title" style="margin-bottom: 20px; font-size: 16px;">The Phishing Attack Lifecycle</h3>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; align-items: flex-start; gap: 14px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(0,212,255,0.2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent-blue); flex-shrink: 0; font-size: 14px;">1</div>
+                <div>
+                  <strong style="color: var(--text-primary);">Reconnaissance</strong>
+                  <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Attacker researches the target — gathering emails, job titles, interests from social media and public sources.</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 14px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(168,85,247,0.2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent-purple); flex-shrink: 0; font-size: 14px;">2</div>
+                <div>
+                  <strong style="color: var(--text-primary);">Weaponization</strong>
+                  <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Crafts a convincing email, fake website, or message with urgency triggers and trust indicators.</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 14px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,140,66,0.2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent-orange); flex-shrink: 0; font-size: 14px;">3</div>
+                <div>
+                  <strong style="color: var(--text-primary);">Delivery</strong>
+                  <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Sends the phishing email/SMS/QR code to the victim via email, social media, or messaging apps.</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 14px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,71,87,0.2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent-red); flex-shrink: 0; font-size: 14px;">4</div>
+                <div>
+                  <strong style="color: var(--text-primary);">Exploitation</strong>
+                  <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Victim clicks the link, enters credentials, or downloads malware — data is harvested instantly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" style="margin-bottom: 20px; font-size: 16px;">🧠 Psychology Behind Phishing</h3>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <div style="padding: 14px 18px; background: rgba(255,71,87,0.06); border-radius: 8px; border-left: 3px solid var(--accent-red);">
+                <strong style="color: var(--accent-red);">Urgency & Fear</strong>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">"Your account will be locked in 24 hours!" — Creating panic to bypass rational thinking.</p>
+              </div>
+              <div style="padding: 14px 18px; background: rgba(0,212,255,0.06); border-radius: 8px; border-left: 3px solid var(--accent-blue);">
+                <strong style="color: var(--accent-blue);">Authority</strong>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">"This is from your bank/IT department" — Impersonating trusted authority figures.</p>
+              </div>
+              <div style="padding: 14px 18px; background: rgba(0,255,136,0.06); border-radius: 8px; border-left: 3px solid var(--accent-green);">
+                <strong style="color: var(--accent-green);">Curiosity</strong>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">"You've won a prize!" or "See who viewed your profile" — Exploiting natural curiosity.</p>
+              </div>
+              <div style="padding: 14px 18px; background: rgba(168,85,247,0.06); border-radius: 8px; border-left: 3px solid var(--accent-purple);">
+                <strong style="color: var(--accent-purple);">Social Proof</strong>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">"5 of your colleagues have already updated" — Leveraging herd mentality.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- How to Protect Yourself -->
+      <section data-animate>
+        <div class="section-header">
+          <h2>🛡️ How to Protect Yourself</h2>
+          <p>Follow these countermeasures to stay safe from phishing attacks.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon green">🔗</div>
+              <h3 class="card-title">Check URLs Carefully</h3>
+            </div>
+            <p class="card-desc">Always hover over links before clicking. Look for misspellings (e.g., <code>g00gle.com</code>, <code>faceb00k.com</code>). Verify the domain matches the official website.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon blue">🔒</div>
+              <h3 class="card-title">Enable 2FA / MFA</h3>
+            </div>
+            <p class="card-desc">Two-Factor Authentication adds an extra layer of security. Even if your password is compromised, attackers can't access your account without the second factor.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon purple">🧐</div>
+              <h3 class="card-title">Verify the Sender</h3>
+            </div>
+            <p class="card-desc">Check the sender's email address carefully. Official emails come from official domains — not <code>support@micr0soft-security.com</code>.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon red">🚫</div>
+              <h3 class="card-title">Never Share Credentials</h3>
+            </div>
+            <p class="card-desc">Legitimate organizations will NEVER ask for your password via email, phone, or SMS. If in doubt, contact the organization directly through official channels.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Lab Objectives -->
+      <section data-animate>
+        <div class="section-header">
+          <h2>🎯 Lab Objectives</h2>
+          <p>What you will learn and accomplish in this virtual laboratory.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card" style="text-align: center;">
+            <div style="font-size: 40px; margin-bottom: 14px;">🧪</div>
+            <h3 class="card-title" style="font-size: 16px; margin-bottom: 8px;">Simulate</h3>
+            <p class="card-desc">Experience a realistic phishing scenario in a safe, controlled environment to understand how attacks operate.</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div style="font-size: 40px; margin-bottom: 14px;">📊</div>
+            <h3 class="card-title" style="font-size: 16px; margin-bottom: 8px;">Analyze</h3>
+            <p class="card-desc">Measure your own awareness level and identify behavioral patterns that make people vulnerable to phishing.</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div style="font-size: 40px; margin-bottom: 14px;">🛡️</div>
+            <h3 class="card-title" style="font-size: 16px; margin-bottom: 8px;">Defend</h3>
+            <p class="card-desc">Learn practical countermeasures and best practices to protect yourself and your organization from future attacks.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- CTA -->
+      <section data-animate style="text-align: center; padding: 40px 0;">
+        <h2 style="font-size: 28px; margin-bottom: 12px;">Ready to Begin?</h2>
+        <p style="color: var(--text-secondary); font-size: 16px; margin-bottom: 28px;">Enter the virtual lab and test your phishing awareness skills.</p>
+        <a href="pages/consent.html" class="btn btn-primary btn-lg">🚀 Start the Lab Simulation</a>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/main.js"></script>
+<script>initSidebar('intro');</script>
+</body>
+</html>

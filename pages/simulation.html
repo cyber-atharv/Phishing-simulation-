@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Email Inbox Simulation — Identify phishing emails in a realistic inbox environment.">
+  <title>Email Simulation — Phishing Awareness Lab</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+    <div class="content-header">
+      <div>
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Email Simulation</div>
+        <h1>📧 Email Inbox Simulation</h1>
+      </div>
+      <span class="badge badge-green" id="score-badge">Score: 0/6</span>
+    </div>
+
+    <div class="content-body">
+
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <div>
+          <strong>Your Mission:</strong> You have 6 emails in your inbox. Some are legitimate and some are phishing attempts. Click on each email, read it carefully, and decide whether to <strong>Report as Phishing</strong> or <strong>Mark as Safe</strong>.
+        </div>
+      </div>
+
+      <div class="email-client" id="email-client">
+        <div class="email-toolbar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span style="margin-left: 14px; font-size: 13px; color: var(--text-muted);">📥 Inbox — <span id="email-count">6 messages</span></span>
+        </div>
+
+        <!-- Email List -->
+        <div class="email-list" id="email-list">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Email Detail View -->
+        <div class="email-detail" id="email-detail">
+          <button class="btn btn-ghost btn-sm" onclick="backToList()" style="margin-bottom: 20px;">← Back to Inbox</button>
+
+          <div class="email-detail-header">
+            <h2 class="email-detail-subject" id="detail-subject"></h2>
+            <div class="email-detail-meta">
+              <span id="detail-from"></span>
+              <span>•</span>
+              <span id="detail-to"></span>
+              <span>•</span>
+              <span id="detail-time"></span>
+            </div>
+          </div>
+
+          <div class="email-detail-body" id="detail-body"></div>
+
+          <div class="email-actions" id="email-actions">
+            <button class="btn btn-danger" onclick="markEmail('phishing')">🚨 Report as Phishing</button>
+            <button class="btn btn-success" onclick="markEmail('safe')">✅ Mark as Safe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results summary (hidden initially) -->
+      <div id="sim-results" style="display: none; margin-top: 32px;">
+        <div class="section-header">
+          <h2>📊 Simulation Complete!</h2>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-value" id="result-correct">0</div>
+            <div class="stat-label">Correct</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="background: var(--gradient-danger); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="result-wrong">0</div>
+            <div class="stat-label">Incorrect</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="result-score">0%</div>
+            <div class="stat-label">Accuracy</div>
+          </div>
+        </div>
+
+        <div id="result-breakdown"></div>
+
+        <div style="display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap;">
+          <a href="phishing-select.html" class="btn btn-primary btn-lg">🎯 Try Phishing Demo Pages</a>
+          <a href="results.html" class="btn btn-outline btn-lg">📊 Full Results Dashboard</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Feedback overlay -->
+<div class="feedback-overlay" id="feedback-overlay">
+  <div class="feedback-card">
+    <div class="feedback-icon" id="feedback-icon"></div>
+    <h2 id="feedback-title"></h2>
+    <p id="feedback-text"></p>
+    <div id="feedback-flags" style="text-align: left; margin-bottom: 20px;"></div>
+    <button class="btn btn-primary" onclick="closeFeedback()">Continue</button>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/simulation.js"></script>
+<script>
+  initSidebar('simulation');
+  if (requireConsent()) {
+    initSimulation();
+  }
+</script>
+</body>
+</html>
