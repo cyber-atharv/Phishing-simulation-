@@ -1,11 +1,12 @@
-﻿<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
+<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Location Phishing Attack Simulation â€” Educational breakdown of harvested GPS coordinates, IP geolocation, and browser telemetry.">
-  <title>ðŸ“ Location Phishing Alert â€” Victim Demonstration</title>
+  <meta name="description" content="Location Phishing Attack Simulation — Educational breakdown of harvested GPS coordinates, IP geolocation, and browser telemetry.">
+  <title>📍 Location Phishing Alert — Victim Demonstration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../../css/styles.css">
   <style>
     .victim-hero {
@@ -78,16 +79,15 @@
       color: #ff4757;
     }
     .map-preview-container {
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border-subtle);
+      margin-top: 20px;
       border-radius: var(--border-radius);
-      height: 320px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+      height: 280px;
+      background: #111;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 20px;
-      position: relative;
-      overflow: hidden;
     }
     .map-preview-container iframe {
       width: 100%;
@@ -101,14 +101,14 @@
       padding: 16px;
       background: rgba(255, 255, 255, 0.03);
       border-radius: var(--border-radius-sm);
-      border-left: 3px solid var(--accent-red);
+      border-left: 3px solid var(--accent-blue);
     }
     .step-num {
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: rgba(255, 71, 87, 0.15);
-      color: var(--accent-red);
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--accent-blue);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -145,13 +145,13 @@
 
     <!-- Hero Header -->
     <section class="victim-hero">
-      <div style="font-size: 56px; margin-bottom: 12px; animation: glitch 0.4s infinite;">ðŸ“</div>
+      <div style="font-size: 56px; margin-bottom: 12px; animation: glitch 0.4s infinite; color: #ff4757;"><i class="fa-solid fa-location-crosshairs"></i></div>
       <h1 class="glitch-header">PHYSICAL LOCATION EXPOSED!</h1>
       <p style="font-size: 16px; color: var(--text-secondary); max-width: 720px; margin: 0 auto 16px; line-height: 1.7;">
         You just interacted with a <strong>Location Phishing (Geo-Phishing)</strong> page.
         In real-world cyber espionage and stalking attacks, attackers use these pretexts to pin down your exact physical coordinates.
       </p>
-      <span class="badge badge-red">âš ï¸ Live Geolocation Interception Demo â€” Educational Simulation</span>
+      <span class="badge badge-red"><i class="fa-solid fa-satellite-dish" style="margin-right: 4px;"></i> Live Geolocation Interception Demo — Educational Simulation</span>
     </section>
 
     <div class="content-body">
@@ -161,11 +161,11 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
           <div>
             <h2 style="font-size: 20px; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
-              <span>ðŸŽ¯</span> Intercepted GPS & Network Coordinates
+              <i class="fa-solid fa-bullseye" style="color: var(--accent-red);"></i> Intercepted GPS & Network Coordinates
             </h2>
             <p style="font-size: 13px; color: var(--text-muted);">The table below highlights the physical and network telemetry gathered by the simulation:</p>
           </div>
-          <button class="rescan-btn" onclick="forceGPSScan()">ðŸ“ Request Live GPS</button>
+          <button class="rescan-btn" onclick="forceGPSScan()"><i class="fa-solid fa-location-arrow" style="margin-right: 6px;"></i> Request Live GPS</button>
         </div>
 
         <table class="cred-table">
@@ -178,7 +178,7 @@
               <td class="cred-label">GPS Latitude & Longitude</td>
               <td class="cred-val danger">
                 <span id="disp-coords">Detecting coordinates...</span>
-                <a id="gmaps-link" href="#" target="_blank" style="display: none; margin-left: 10px; font-size: 11px; color: #00d4ff; text-decoration: underline;">Open in Maps â†—</a>
+                <a id="gmaps-link" href="#" target="_blank" style="display: none; margin-left: 10px; font-size: 11px; color: #00d4ff; text-decoration: underline;">Open in Maps <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 9px; margin-left: 2px;"></i></a>
               </td>
             </tr>
             <tr>
@@ -199,7 +199,7 @@
             </tr>
             <tr>
               <td class="cred-label">Timestamp</td>
-              <td class="cred-val" style="color: var(--text-secondary);" id="disp-time">â€”</td>
+              <td class="cred-val" style="color: var(--text-secondary);" id="disp-time">—</td>
             </tr>
           </tbody>
         </table>
@@ -207,7 +207,7 @@
         <!-- Live Map Embed -->
         <div class="map-preview-container" id="map-container">
           <div id="map-placeholder" style="color: var(--text-muted); font-size: 14px; text-align: center; padding: 20px;">
-            <div style="font-size: 32px; margin-bottom: 8px;">ðŸ—ºï¸</div>
+            <div style="font-size: 32px; margin-bottom: 8px; color: var(--accent-blue);"><i class="fa-solid fa-map-location-dot"></i></div>
             Loading interactive satellite pinpoint map...
           </div>
         </div>
@@ -217,7 +217,7 @@
 
       <!-- How Location Phishing Works -->
       <section class="section-header">
-        <h2>ðŸ” How Attackers Exploit Location Phishing</h2>
+        <h2><i class="fa-solid fa-magnifying-glass" style="color: var(--accent-purple); margin-right: 8px;"></i> How Attackers Exploit Location Phishing</h2>
         <p>Tools like <em>Seeker</em>, <em>TrackUrl</em>, and <em>Storm-Breaker</em> use psychological lures to harvest exact coordinates:</p>
       </section>
 
@@ -268,7 +268,7 @@
       <!-- Countermeasures -->
       <section class="card" style="border-left: 3px solid var(--accent-green); margin-bottom: 36px;">
         <div class="card-header">
-          <div class="card-icon green">ðŸ›¡ï¸</div>
+          <div class="card-icon green"><i class="fa-solid fa-shield-halved"></i></div>
           <h3 class="card-title">How to Prevent Location Leaks</h3>
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
@@ -296,10 +296,10 @@
 
       <!-- Action Navigation -->
       <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 36px;">
-        <a href="../phishing-select.html" class="btn btn-primary btn-lg">ðŸŽ¯ Phishing Demo Hub</a>
-        <a href="../location-expose.html" class="btn btn-outline btn-lg">ðŸ“ Browser Data Exposure</a>
-        <a href="../quiz.html" class="btn btn-outline btn-lg">â“ Test Knowledge (Quiz)</a>
-        <a href="../../index.html" class="btn btn-ghost btn-lg">ðŸ  Back to Lab Home</a>
+        <a href="../phishing-select.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-crosshairs" style="margin-right: 6px;"></i> Phishing Demo Hub</a>
+        <a href="../location-expose.html" class="btn btn-outline btn-lg"><i class="fa-solid fa-location-dot" style="margin-right: 6px;"></i> Browser Data Exposure</a>
+        <a href="../quiz.html" class="btn btn-outline btn-lg"><i class="fa-solid fa-circle-question" style="margin-right: 6px;"></i> Test Knowledge (Quiz)</a>
+        <a href="../../index.html" class="btn btn-ghost btn-lg"><i class="fa-solid fa-house" style="margin-right: 6px;"></i> Back to Lab Home</a>
       </div>
 
     </div>
@@ -446,4 +446,3 @@
 </script>
 </body>
 </html>
-

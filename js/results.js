@@ -1,6 +1,6 @@
-﻿/* This simulation is created by Atharv Hogade. Do not misuse it. */
+/* This simulation is created by Atharv Hogade. Do not misuse it. */
 /* ============================================================
-   RESULTS DASHBOARD â€” Logic & Charts
+   RESULTS DASHBOARD — Logic & Charts
    ============================================================ */
 
 const emailData = [
@@ -43,21 +43,21 @@ document.addEventListener('DOMContentLoaded', () => {
   let riskLevel, riskIcon, riskColor, riskTitle, riskDesc;
   if (accuracy >= 80) {
     riskLevel = 'Low';
-    riskIcon = 'ðŸ›¡ï¸';
+    riskIcon = '<i class="fa-solid fa-shield-halved" style="color: var(--accent-green);"></i>';
     riskColor = 'var(--accent-green)';
-    riskTitle = 'Low Risk â€” Great Awareness!';
+    riskTitle = 'Low Risk — Great Awareness!';
     riskDesc = 'You correctly identified most phishing emails. You have strong awareness of phishing techniques. Keep staying vigilant and keep learning!';
   } else if (accuracy >= 50) {
     riskLevel = 'Medium';
-    riskIcon = 'âš ï¸';
+    riskIcon = '<i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-orange);"></i>';
     riskColor = 'var(--accent-orange)';
-    riskTitle = 'Medium Risk â€” Room for Improvement';
+    riskTitle = 'Medium Risk — Room for Improvement';
     riskDesc = 'You missed some phishing emails. Review the red flags and take the knowledge quiz to strengthen your defenses.';
   } else {
     riskLevel = 'High';
-    riskIcon = 'ðŸš¨';
+    riskIcon = '<i class="fa-solid fa-radiation" style="color: var(--accent-red);"></i>';
     riskColor = 'var(--accent-red)';
-    riskTitle = 'High Risk â€” Vulnerable to Attacks';
+    riskTitle = 'High Risk — Vulnerable to Attacks';
     riskDesc = 'You fell for most phishing emails. This means you would be highly vulnerable in a real attack. Please review the theory section and retake the simulation.';
   }
 
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   riskEl.style.backgroundClip = 'text';
 
   // Risk card
-  document.getElementById('risk-icon').textContent = riskIcon;
+  document.getElementById('risk-icon').innerHTML = riskIcon;
   const rTitle = document.getElementById('risk-title');
   rTitle.textContent = riskTitle;
   rTitle.style.color = riskColor;
@@ -87,11 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="card" style="border-left: 3px solid ${e.isCorrect ? 'var(--accent-green)' : 'var(--accent-red)'};">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
         <strong style="font-size: 14px;">${e.subject}</strong>
-        <span class="badge ${e.isCorrect ? 'badge-green' : 'badge-red'}">${e.isCorrect ? 'âœ… Correct' : 'âŒ Wrong'}</span>
+        <span class="badge ${e.isCorrect ? 'badge-green' : 'badge-red'}"><i class="fa-solid ${e.isCorrect ? 'fa-check' : 'fa-xmark'}" style="margin-right: 4px;"></i> ${e.isCorrect ? 'Correct' : 'Wrong'}</span>
       </div>
       <p style="font-size: 13px; color: var(--text-muted);">
-        From: <strong>${e.sender}</strong> â€”
-        Type: <strong style="color: ${e.isPhishing ? 'var(--accent-red)' : 'var(--accent-green)'};">${e.isPhishing ? 'Phishing' : 'Legitimate'}</strong> â€”
+        From: <strong>${e.sender}</strong> —
+        Type: <strong style="color: ${e.isPhishing ? 'var(--accent-red)' : 'var(--accent-green)'};">${e.isPhishing ? 'Phishing' : 'Legitimate'}</strong> —
         You chose: <strong>${e.choice === 'phishing' ? 'Phishing' : 'Safe'}</strong>
       </p>
     </div>
@@ -167,4 +167,3 @@ function renderCharts(correct, wrong, perEmail) {
     }
   });
 }
-

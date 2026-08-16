@@ -1,11 +1,12 @@
-﻿<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
+<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Location & Data Exposure Demo â€” See how much information your browser reveals to any website you visit.">
-  <title>Location Exposure â€” Phishing Awareness Lab</title>
+  <meta name="description" content="Location & Data Exposure Demo — See how much information your browser reveals to any website you visit.">
+  <title>Location Exposure — Phishing Awareness Lab</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -21,28 +22,28 @@
     <div class="content-header">
       <div>
         <div class="breadcrumb"><a href="../index.html">Home</a> / Location Exposure</div>
-        <h1>ðŸ“ Your Data Is Exposed</h1>
+        <h1><i class="fa-solid fa-location-dot" style="color: var(--accent-red); margin-right: 8px;"></i> Your Data Is Exposed</h1>
       </div>
-      <span class="badge badge-red">âš ï¸ Live Demo</span>
+      <span class="badge badge-red"><i class="fa-solid fa-triangle-exclamation" style="margin-right: 4px;"></i> Live Demo</span>
     </div>
 
     <div class="content-body">
 
       <div class="alert alert-danger">
-        <span class="alert-icon">ðŸš¨</span>
+        <span class="alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
         <div>
-          <strong>This is what an attacker sees when you click a malicious link.</strong> All the information below was collected automatically just by you visiting this page â€” without asking for permission.
+          <strong>This is what an attacker sees when you click a malicious link.</strong> All the information below was collected automatically just by you visiting this page — without asking for permission.
         </div>
       </div>
 
       <div class="section-header">
-        <h2>ðŸ”“ Data Your Browser Just Leaked</h2>
+        <h2><i class="fa-solid fa-lock-open" style="color: var(--accent-orange); margin-right: 8px;"></i> Data Your Browser Just Leaked</h2>
         <p>An attacker who tricks you into visiting a phishing page can silently collect all of this information.</p>
       </div>
 
       <!-- Loading state -->
       <div id="loading-state" style="text-align: center; padding: 40px;">
-        <div style="font-size: 48px; animation: pulse 1.5s infinite;">ðŸ”</div>
+        <div style="font-size: 48px; animation: pulse 1.5s infinite; color: var(--accent-blue);"><i class="fa-solid fa-magnifying-glass-location"></i></div>
         <p style="color: var(--text-muted); margin-top: 12px; font-size: 14px;">Scanning your browser data...</p>
         <div class="progress-bar" style="max-width: 300px; margin: 16px auto;">
           <div class="progress-fill" id="scan-progress" style="width: 0%;"></div>
@@ -59,7 +60,7 @@
 
         <!-- Browser Details Table -->
         <div class="section-header">
-          <h2>ðŸ–¥ï¸ Technical Details Exposed</h2>
+          <h2><i class="fa-solid fa-desktop" style="color: var(--accent-purple); margin-right: 8px;"></i> Technical Details Exposed</h2>
         </div>
 
         <table class="data-table" id="tech-table">
@@ -80,7 +81,7 @@
         <!-- Educational takeaway -->
         <div class="card" style="border-left: 3px solid var(--accent-red);">
           <div class="card-header">
-            <div class="card-icon red">âš ï¸</div>
+            <div class="card-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
             <h3 class="card-title">Why This Matters</h3>
           </div>
           <p class="card-desc" style="margin-bottom: 16px;">
@@ -89,19 +90,19 @@
           </p>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
             <div style="padding: 12px 16px; background: rgba(255,71,87,0.06); border-radius: 8px; font-size: 13px; color: var(--text-secondary);">
-              <strong style="color: var(--accent-red);">ðŸŽ¯ Targeted Attacks</strong><br>
+              <strong style="color: var(--accent-red);"><i class="fa-solid fa-crosshairs" style="margin-right: 4px;"></i> Targeted Attacks</strong><br>
               Using your location and device info to craft personalized spear-phishing messages.
             </div>
             <div style="padding: 12px 16px; background: rgba(255,71,87,0.06); border-radius: 8px; font-size: 13px; color: var(--text-secondary);">
-              <strong style="color: var(--accent-red);">ðŸ”“ Session Hijacking</strong><br>
+              <strong style="color: var(--accent-red);"><i class="fa-solid fa-key" style="margin-right: 4px;"></i> Session Hijacking</strong><br>
               Stealing browser fingerprints to impersonate your device on other services.
             </div>
             <div style="padding: 12px 16px; background: rgba(255,71,87,0.06); border-radius: 8px; font-size: 13px; color: var(--text-secondary);">
-              <strong style="color: var(--accent-red);">ðŸ“ Physical Stalking</strong><br>
+              <strong style="color: var(--accent-red);"><i class="fa-solid fa-location-dot" style="margin-right: 4px;"></i> Physical Stalking</strong><br>
               Knowing your approximate location can put your physical safety at risk.
             </div>
             <div style="padding: 12px 16px; background: rgba(255,71,87,0.06); border-radius: 8px; font-size: 13px; color: var(--text-secondary);">
-              <strong style="color: var(--accent-red);">ðŸ›’ Identity Fraud</strong><br>
+              <strong style="color: var(--accent-red);"><i class="fa-solid fa-id-card-clip" style="margin-right: 4px;"></i> Identity Fraud</strong><br>
               Combining leaked data with stolen credentials for identity theft and financial fraud.
             </div>
           </div>
@@ -110,16 +111,16 @@
         <div style="margin-top: 28px;">
           <div class="card" style="border-left: 3px solid var(--accent-green);">
             <div class="card-header">
-              <div class="card-icon green">ðŸ›¡ï¸</div>
+              <div class="card-icon green"><i class="fa-solid fa-shield-halved"></i></div>
               <h3 class="card-title">How to Protect Yourself</h3>
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
-              <div style="font-size: 14px; color: var(--text-secondary);">âœ… Use a <strong>VPN</strong> to mask your real IP address and location</div>
-              <div style="font-size: 14px; color: var(--text-secondary);">âœ… Use <strong>privacy-focused browsers</strong> (Brave, Firefox with hardened settings)</div>
-              <div style="font-size: 14px; color: var(--text-secondary);">âœ… <strong>Never click</strong> suspicious links â€” always verify URLs before visiting</div>
-              <div style="font-size: 14px; color: var(--text-secondary);">âœ… Disable <strong>location services</strong> for your browser when not needed</div>
-              <div style="font-size: 14px; color: var(--text-secondary);">âœ… Use browser extensions like <strong>uBlock Origin</strong> and <strong>Privacy Badger</strong></div>
-              <div style="font-size: 14px; color: var(--text-secondary);">âœ… Keep your <strong>browser updated</strong> to patch known vulnerabilities</div>
+              <div style="font-size: 14px; color: var(--text-secondary);"><i class="fa-solid fa-check" style="color: var(--accent-green); margin-right: 8px;"></i> Use a <strong>VPN</strong> to mask your real IP address and location</div>
+              <div style="font-size: 14px; color: var(--text-secondary);"><i class="fa-solid fa-check" style="color: var(--accent-green); margin-right: 8px;"></i> Use <strong>privacy-focused browsers</strong> (Brave, Firefox with hardened settings)</div>
+              <div style="font-size: 14px; color: var(--text-secondary);"><i class="fa-solid fa-check" style="color: var(--accent-green); margin-right: 8px;"></i> <strong>Never click</strong> suspicious links — always verify URLs before visiting</div>
+              <div style="font-size: 14px; color: var(--text-secondary);"><i class="fa-solid fa-check" style="color: var(--accent-green); margin-right: 8px;"></i> Disable <strong>location services</strong> for your browser when not needed</div>
+              <div style="font-size: 14px; color: var(--text-secondary);"><i class="fa-solid fa-check" style="color: var(--accent-green); margin-right: 8px;"></i> Use browser extensions like <strong>uBlock Origin</strong> and <strong>Privacy Badger</strong></div>
+              <div style="font-size: 14px; color: var(--text-secondary);"><i class="fa-solid fa-check" style="color: var(--accent-green); margin-right: 8px;"></i> Keep your <strong>browser updated</strong> to patch known vulnerabilities</div>
             </div>
           </div>
         </div>
@@ -134,4 +135,3 @@
 <script>initSidebar('location');</script>
 </body>
 </html>
-

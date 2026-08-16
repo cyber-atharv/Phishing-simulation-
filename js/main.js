@@ -1,6 +1,6 @@
 /* This simulation is created by Atharv Hogade. Do not misuse it. */
 /* ============================================================
-   PHISHING LAB â€” Shared Utilities (Navigation, Session, Matrix)
+   PHISHING LAB — Shared Utilities (Navigation, Session, Matrix)
    ============================================================ */
 
 // ---- Determine base path based on current page depth ----
@@ -19,24 +19,24 @@ const BASE = getBasePath();
 // ---- Sidebar HTML Generator ----
 function generateSidebar(activePage) {
   const navItems = [
-    { id: 'intro', icon: 'ðŸ ', label: 'Lab Introduction', href: `${BASE}index.html` },
-    { id: 'consent', icon: 'âœ…', label: 'Informed Consent', href: `${BASE}pages/consent.html` },
-    { id: 'simulation', icon: 'ðŸ“§', label: 'Email Simulation', href: `${BASE}pages/simulation.html` },
-    { id: 'phishing-select', icon: 'ðŸŽ¯', label: 'Phishing Demo Pages', href: `${BASE}pages/phishing-select.html` },
-    { id: 'location', icon: 'ðŸ“', label: 'Location Exposure', href: `${BASE}pages/location-expose.html` },
-    { id: 'results', icon: 'ðŸ“Š', label: 'Results Dashboard', href: `${BASE}pages/results.html` },
-    { id: 'quiz', icon: 'â“', label: 'Knowledge Quiz', href: `${BASE}pages/quiz.html` },
-    { id: 'certificate', icon: 'ðŸ“œ', label: 'Certificate', href: `${BASE}pages/certificate.html` },
-    { id: 'videos', icon: 'ðŸŽ¬', label: 'Awareness Videos', href: `${BASE}pages/videos.html` },
-    { id: 'references', icon: 'ðŸ“š', label: 'Research Papers', href: `${BASE}pages/references.html` },
+    { id: 'intro', icon: '<i class="fa-solid fa-house"></i>', label: 'Lab Introduction', href: `${BASE}index.html` },
+    { id: 'consent', icon: '<i class="fa-solid fa-clipboard-check"></i>', label: 'Informed Consent', href: `${BASE}pages/consent.html` },
+    { id: 'simulation', icon: '<i class="fa-solid fa-envelope"></i>', label: 'Email Simulation', href: `${BASE}pages/simulation.html` },
+    { id: 'phishing-select', icon: '<i class="fa-solid fa-crosshairs"></i>', label: 'Phishing Demo Pages', href: `${BASE}pages/phishing-select.html` },
+    { id: 'location', icon: '<i class="fa-solid fa-location-dot"></i>', label: 'Location Exposure', href: `${BASE}pages/location-expose.html` },
+    { id: 'results', icon: '<i class="fa-solid fa-chart-column"></i>', label: 'Results Dashboard', href: `${BASE}pages/results.html` },
+    { id: 'quiz', icon: '<i class="fa-solid fa-circle-question"></i>', label: 'Knowledge Quiz', href: `${BASE}pages/quiz.html` },
+    { id: 'certificate', icon: '<i class="fa-solid fa-award"></i>', label: 'Certificate', href: `${BASE}pages/certificate.html` },
+    { id: 'videos', icon: '<i class="fa-solid fa-clapperboard"></i>', label: 'Awareness Videos', href: `${BASE}pages/videos.html` },
+    { id: 'references', icon: '<i class="fa-solid fa-book-bookmark"></i>', label: 'Research Papers', href: `${BASE}pages/references.html` },
   ];
 
   return `
-    <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">â˜°</button>
+    <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <div class="sidebar-logo">ðŸ›¡ï¸</div>
+        <div class="sidebar-logo"><i class="fa-solid fa-shield-halved"></i></div>
         <div class="sidebar-title">
           Phishing Awareness Lab
           <span>Virtual Laboratory</span>

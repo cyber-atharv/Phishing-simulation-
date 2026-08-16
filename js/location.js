@@ -1,6 +1,6 @@
-﻿/* This simulation is created by Atharv Hogade. Do not misuse it. */
+/* This simulation is created by Atharv Hogade. Do not misuse it. */
 /* ============================================================
-   LOCATION EXPOSURE DEMO â€” JS Logic
+   LOCATION EXPOSURE DEMO — JS Logic
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -88,8 +88,8 @@ function collectBrowserData() {
   else if (ua.includes('Android')) os = 'Android';
   else if (ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS';
 
-  const screenRes = `${window.screen.width} Ã— ${window.screen.height}`;
-  const viewport = `${window.innerWidth} Ã— ${window.innerHeight}`;
+  const screenRes = `${window.screen.width} × ${window.screen.height}`;
+  const viewport = `${window.innerWidth} × ${window.innerHeight}`;
   const colorDepth = window.screen.colorDepth + '-bit';
   const language = navigator.language || navigator.userLanguage || 'Unknown';
   const languages = navigator.languages ? navigator.languages.join(', ') : language;
@@ -121,18 +121,18 @@ function renderData(browser, ip) {
   // Main location grid cards
   const grid = document.getElementById('location-grid');
   const mainItems = [
-    { icon: 'ðŸŒ', label: 'IP Address', value: ip.ip || 'N/A' },
-    { icon: 'ðŸ™ï¸', label: 'City', value: ip.city || 'N/A' },
-    { icon: 'ðŸ—ºï¸', label: 'Region', value: ip.region || 'N/A' },
-    { icon: 'ðŸŒ', label: 'Country', value: ip.country_name || 'N/A' },
-    { icon: 'ðŸ“¡', label: 'ISP / Organization', value: ip.org || 'N/A' },
-    { icon: 'ðŸ“', label: 'Coordinates', value: `${ip.latitude || 'N/A'}, ${ip.longitude || 'N/A'}` },
-    { icon: 'ðŸ–¥ï¸', label: 'Operating System', value: browser.os },
-    { icon: 'ðŸŒ', label: 'Browser', value: browser.browser },
-    { icon: 'ðŸ“', label: 'Screen Resolution', value: browser.screenRes },
-    { icon: 'ðŸ•', label: 'Timezone', value: browser.timezone },
-    { icon: 'ðŸ”Œ', label: 'Connection', value: browser.connectionType },
-    { icon: 'â°', label: 'Local Time', value: browser.localTime },
+    { icon: '<i class="fa-solid fa-network-wired"></i>', label: 'IP Address', value: ip.ip || 'N/A' },
+    { icon: '<i class="fa-solid fa-city"></i>', label: 'City', value: ip.city || 'N/A' },
+    { icon: '<i class="fa-solid fa-map-location-dot"></i>', label: 'Region', value: ip.region || 'N/A' },
+    { icon: '<i class="fa-solid fa-globe"></i>', label: 'Country', value: ip.country_name || 'N/A' },
+    { icon: '<i class="fa-solid fa-tower-broadcast"></i>', label: 'ISP / Organization', value: ip.org || 'N/A' },
+    { icon: '<i class="fa-solid fa-location-crosshairs"></i>', label: 'Coordinates', value: `${ip.latitude || 'N/A'}, ${ip.longitude || 'N/A'}` },
+    { icon: '<i class="fa-solid fa-laptop-code"></i>', label: 'Operating System', value: browser.os },
+    { icon: '<i class="fa-solid fa-window-maximize"></i>', label: 'Browser', value: browser.browser },
+    { icon: '<i class="fa-solid fa-display"></i>', label: 'Screen Resolution', value: browser.screenRes },
+    { icon: '<i class="fa-solid fa-clock"></i>', label: 'Timezone', value: browser.timezone },
+    { icon: '<i class="fa-solid fa-wifi"></i>', label: 'Connection', value: browser.connectionType },
+    { icon: '<i class="fa-regular fa-clock"></i>', label: 'Local Time', value: browser.localTime },
   ];
 
   grid.innerHTML = mainItems.map(item => `
@@ -176,4 +176,3 @@ function renderData(browser, ip) {
     </tr>
   `).join('');
 }
-

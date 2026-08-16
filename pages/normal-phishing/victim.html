@@ -1,11 +1,12 @@
-﻿<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
+<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Phishing Attack Victim Simulation â€” Detailed educational breakdown of harvested credentials and exposed browser fingerprint.">
-  <title>ðŸš¨ Phishing Attack Alert â€” Victim Demonstration</title>
+  <meta name="description" content="Phishing Attack Victim Simulation — Detailed educational breakdown of harvested credentials and exposed browser fingerprint.">
+  <title>🚨 Phishing Attack Alert — Victim Demonstration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../../css/styles.css">
   <style>
     .victim-hero {
@@ -139,13 +140,13 @@
 
     <!-- Hero banner -->
     <section class="victim-hero">
-      <div style="font-size: 56px; margin-bottom: 12px; animation: glitch 0.4s infinite;">ðŸš¨</div>
+      <div style="font-size: 56px; margin-bottom: 12px; animation: glitch 0.4s infinite; color: #ff4757;"><i class="fa-solid fa-triangle-exclamation"></i></div>
       <h1 class="glitch-header">YOU FELL FOR A PHISHING ATTACK!</h1>
       <p style="font-size: 16px; color: var(--text-secondary); max-width: 720px; margin: 0 auto 16px; line-height: 1.7;">
         You just submitted your login credentials on a cloned <span id="brand-victim-name" style="color: #00d4ff; font-weight: 700;">Simulated Brand</span> page.
         In a real-world cyber attack, your account would now be compromised.
       </p>
-      <span class="badge badge-red">âš ï¸ Live Interception Demonstration â€” Safe Academic Lab</span>
+      <span class="badge badge-red"><i class="fa-solid fa-shield-virus" style="margin-right: 4px;"></i> Live Interception Demonstration — Safe Academic Lab</span>
     </section>
 
     <div class="content-body">
@@ -153,7 +154,7 @@
       <!-- Leaked Credentials Box -->
       <div class="leaked-box">
         <h2 style="font-size: 20px; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
-          <span>ðŸ’€</span> Harvested Account Credentials
+          <i class="fa-solid fa-skull-crossbones" style="color: var(--accent-red);"></i> Harvested Account Credentials
         </h2>
         <p style="font-size: 13px; color: var(--text-muted);">The table below shows the exact data that was intercepted from your simulated submission.</p>
 
@@ -173,18 +174,18 @@
             <tr>
               <td class="cred-label">Plaintext Password</td>
               <td class="cred-val danger">
-                <span id="disp-pass">â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢</span>
-                <button class="pass-toggle-btn" id="toggle-pass-btn" onclick="togglePasswordVisibility()">ðŸ‘ï¸ Show Password</button>
+                <span id="disp-pass">••••••••••••</span>
+                <button class="pass-toggle-btn" id="toggle-pass-btn" onclick="togglePasswordVisibility()"><i class="fa-solid fa-eye" style="margin-right: 4px;"></i> Show Password</button>
                 <span class="badge-exfiltrated">STOLEN</span>
               </td>
             </tr>
             <tr id="extra-row" style="display: none;">
               <td class="cred-label">Additional Form Data</td>
-              <td class="cred-val" id="disp-extra">â€”</td>
+              <td class="cred-val" id="disp-extra">—</td>
             </tr>
             <tr>
               <td class="cred-label">Capture Timestamp</td>
-              <td class="cred-val" style="color: var(--text-secondary);" id="disp-time">â€”</td>
+              <td class="cred-val" style="color: var(--text-secondary);" id="disp-time">—</td>
             </tr>
           </tbody>
         </table>
@@ -192,48 +193,48 @@
 
       <!-- Leaked Metadata & Geolocation Grid -->
       <div class="section-header">
-        <h2>ðŸ“ Exposed Environment & Browser Fingerprint</h2>
+        <h2><i class="fa-solid fa-fingerprint" style="color: var(--accent-blue); margin-right: 8px;"></i> Exposed Environment & Browser Fingerprint</h2>
         <p>In addition to your credentials, the malicious server silently recorded the following device and network telemetry.</p>
       </div>
 
       <div class="location-grid" style="margin-bottom: 32px;" id="victim-loc-grid">
         <div class="data-item">
-          <div class="data-icon">ðŸŒ</div>
+          <div class="data-icon"><i class="fa-solid fa-network-wired"></i></div>
           <div>
             <div class="data-label">IP Address</div>
             <div class="data-value" id="v-ip">Scanning...</div>
           </div>
         </div>
         <div class="data-item">
-          <div class="data-icon">ðŸ™ï¸</div>
+          <div class="data-icon"><i class="fa-solid fa-city"></i></div>
           <div>
             <div class="data-label">Location (GeoIP)</div>
             <div class="data-value" id="v-loc">Detecting...</div>
           </div>
         </div>
         <div class="data-item">
-          <div class="data-icon">ðŸ“¡</div>
+          <div class="data-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
           <div>
             <div class="data-label">Network / ISP</div>
             <div class="data-value" id="v-isp">Detecting...</div>
           </div>
         </div>
         <div class="data-item">
-          <div class="data-icon">ðŸ–¥ï¸</div>
+          <div class="data-icon"><i class="fa-solid fa-laptop-code"></i></div>
           <div>
             <div class="data-label">Operating System</div>
             <div class="data-value" id="v-os">Detecting...</div>
           </div>
         </div>
         <div class="data-item">
-          <div class="data-icon">ðŸŒ</div>
+          <div class="data-icon"><i class="fa-solid fa-window-maximize"></i></div>
           <div>
             <div class="data-label">Browser & Engine</div>
             <div class="data-value" id="v-browser">Detecting...</div>
           </div>
         </div>
         <div class="data-item">
-          <div class="data-icon">ðŸ“</div>
+          <div class="data-icon"><i class="fa-solid fa-display"></i></div>
           <div>
             <div class="data-label">Screen Resolution</div>
             <div class="data-value" id="v-res">Detecting...</div>
@@ -245,7 +246,7 @@
 
       <!-- How Attackers Weaponize Stolen Credentials -->
       <section class="section-header">
-        <h2>ðŸ§  What Happens Next in a Real Cyber Attack?</h2>
+        <h2><i class="fa-solid fa-brain" style="color: var(--accent-purple); margin-right: 8px;"></i> What Happens Next in a Real Cyber Attack?</h2>
         <p>Here is the automated killchain cybercriminals execute immediately after harvesting credentials:</p>
       </section>
 
@@ -296,7 +297,7 @@
       <!-- Emergency Remediation Protocol -->
       <section class="card" style="border-left: 3px solid var(--accent-green); margin-bottom: 36px;">
         <div class="card-header">
-          <div class="card-icon green">ðŸ›¡ï¸</div>
+          <div class="card-icon green"><i class="fa-solid fa-shield-halved"></i></div>
           <h3 class="card-title">Emergency Incident Response Checklist</h3>
         </div>
         <p class="card-desc" style="margin-bottom: 16px;">If you ever enter credentials into a suspicious website in real life, perform these steps immediately:</p>
@@ -326,11 +327,11 @@
 
       <!-- Action Navigation Buttons -->
       <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 36px;">
-        <a href="../phishing-select.html" class="btn btn-primary btn-lg">ðŸŽ¯ Test Another Brand Page</a>
-        <a href="../simulation.html" class="btn btn-outline btn-lg">ðŸ“§ Try Email Simulation</a>
-        <a href="../quiz.html" class="btn btn-outline btn-lg">â“ Test Your Knowledge (Quiz)</a>
-        <a href="../location-expose.html" class="btn btn-ghost btn-lg">ðŸ“ Full Data Exposure Demo</a>
-        <a href="../../index.html" class="btn btn-ghost btn-lg">ðŸ  Back to Lab Home</a>
+        <a href="../phishing-select.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-crosshairs" style="margin-right: 6px;"></i> Test Another Brand Page</a>
+        <a href="../simulation.html" class="btn btn-outline btn-lg"><i class="fa-solid fa-envelope" style="margin-right: 6px;"></i> Try Email Simulation</a>
+        <a href="../quiz.html" class="btn btn-outline btn-lg"><i class="fa-solid fa-circle-question" style="margin-right: 6px;"></i> Test Your Knowledge (Quiz)</a>
+        <a href="../location-expose.html" class="btn btn-ghost btn-lg"><i class="fa-solid fa-location-dot" style="margin-right: 6px;"></i> Full Data Exposure Demo</a>
+        <a href="../../index.html" class="btn btn-ghost btn-lg"><i class="fa-solid fa-house" style="margin-right: 6px;"></i> Back to Lab Home</a>
       </div>
 
     </div>
@@ -378,11 +379,11 @@
     const disp = document.getElementById('disp-pass');
     const btn = document.getElementById('toggle-pass-btn');
     if (isPasswordMasked) {
-      disp.textContent = 'â€¢'.repeat(Math.max(rawPassword.length, 8));
-      btn.textContent = 'ðŸ‘ï¸ Show Password';
+      disp.textContent = '•'.repeat(Math.max(rawPassword.length, 8));
+      btn.innerHTML = '<i class="fa-solid fa-eye" style="margin-right: 4px;"></i> Show Password';
     } else {
       disp.textContent = rawPassword;
-      btn.textContent = 'ðŸ™ˆ Hide Password';
+      btn.innerHTML = '<i class="fa-solid fa-eye-slash" style="margin-right: 4px;"></i> Hide Password';
     }
   }
 
@@ -412,7 +413,7 @@
 
     document.getElementById('v-os').textContent = os;
     document.getElementById('v-browser').textContent = browser;
-    document.getElementById('v-res').textContent = `${window.screen.width} Ã— ${window.screen.height} (${window.screen.colorDepth}-bit)`;
+    document.getElementById('v-res').textContent = `${window.screen.width} × ${window.screen.height} (${window.screen.colorDepth}-bit)`;
 
     // Fetch IP and Geo location with multi-provider fallback
     const endpoints = [
@@ -458,4 +459,3 @@
 </script>
 </body>
 </html>
-
