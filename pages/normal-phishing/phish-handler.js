@@ -1,40 +1,50 @@
-﻿/* This simulation is created by Atharv Hogade. Do not misuse it. */
+/* This simulation is created by Atharv Hogade. Do not misuse it. */
 /* ============================================================
    UNIVERSAL PHISHING INTERCEPTOR (Educational Lab)
-   Intercepts form submissions on simulated phishing pages,
-   captures dummy credentials in browser session,
-   and redirects to the educational victim reveal page.
+   Intercepts credentials submitted on simulated phishing clones,
+   stores data in browser sessionStorage, and teleports the user
+   to the educational victim reveal page.
    ============================================================ */
 
 (function() {
-  // Extract brand name from folder path
+  // Extract brand name from folder path or page content
   function detectBrand() {
-    const parts = window.location.pathname.replace(/\\/g, '/').split('/');
-    const npIndex = parts.indexOf('normal-phishing');
-    if (npIndex !== -1 && parts[npIndex + 1]) {
-      const brandSlug = parts[npIndex + 1];
-      return brandSlug.charAt(0).toUpperCase() + brandSlug.slice(1);
-    }
-    // Fallback: check document title or domain
+    try {
+      const parts = window.location.pathname.replace(/\\/g, '/').split('/');
+      const npIndex = parts.indexOf('normal-phishing');
+      if (npIndex !== -1 && parts[npIndex + 1]) {
+        const brandSlug = parts[npIndex + 1].toLowerCase();
+        if (brandSlug && brandSlug !== 'victim.html') {
+          return brandSlug.charAt(0).toUpperCase() + brandSlug.slice(1);
+        }
+      }
+    } catch(e) {}
+
+    // Fallback: check document title
     const title = document.title || 'Brand';
-    return title.split(/[-â€“â€”|:]/)[0].trim() || 'Simulated Service';
+    const cleanTitle = title.split(/[-–—|:]/)[0].trim();
+    if (cleanTitle && cleanTitle.length < 30 && cleanTitle.toLowerCase() !== 'login' && cleanTitle.toLowerCase() !== 'sign in') {
+      return cleanTitle;
+    }
+    return 'Simulated Portal';
   }
 
-  // Find credentials in form or page inputs
+  // Find credentials in form or globally on page
   function extractCredentials(form) {
-    const inputs = form ? form.querySelectorAll('input, select, textarea') : document.querySelectorAll('input');
     let username = '';
     let password = '';
     const extra = {};
 
+    const inputs = form ? Array.from(form.querySelectorAll('input, select, textarea')) : Array.from(document.querySelectorAll('input, select, textarea'));
+
     inputs.forEach(input => {
       const type = (input.type || '').toLowerCase();
-      const name = (input.name || input.id || '').toLowerCase();
+      const name = (input.name || input.id || input.placeholder || '').toLowerCase();
       const val = input.value ? input.value.trim() : '';
 
       if (!val) return;
 
-      if (type === 'password' || name.includes('pass') || name.includes('pwd')) {
+      if (type === 'password' || name.includes('pass') || name.includes('pwd') || name.includes('secret')) {
         if (!password) password = val;
       } else if (
         type === 'email' || 
@@ -44,38 +54,41 @@
         name.includes('login') || 
         name.includes('phone') || 
         name.includes('account') ||
-        name.includes('ident')
+        name.includes('ident') ||
+        name.includes('auth') ||
+        name.includes('session')
       ) {
         if (!username) username = val;
-      } else if (type !== 'hidden' && type !== 'submit' && type !== 'button' && type !== 'checkbox') {
+      } else if (type !== 'hidden' && type !== 'submit' && type !== 'button' && type !== 'checkbox' && type !== 'radio') {
         extra[name || 'field'] = val;
       }
     });
 
-    // Fallbacks if user left fields empty or clicked submit directly
-    if (!username) {
-      // Look globally if form didn't catch it
-      const allInputs = document.querySelectorAll('input');
-      allInputs.forEach(input => {
+    // Global fallback search if form was empty
+    if (!username || !password) {
+      document.querySelectorAll('input').forEach(input => {
         const type = (input.type || '').toLowerCase();
         const val = input.value ? input.value.trim() : '';
-        if (val && !username && (type === 'text' || type === 'email')) username = val;
-        if (val && !password && type === 'password') password = val;
+        if (val) {
+          if (!password && type === 'password') password = val;
+          if (!username && (type === 'text' || type === 'email' || type === 'tel')) username = val;
+        }
       });
     }
 
     return {
-      username: username || 'user@example.com',
-      password: password || 'Password123!',
+      username: username || 'demo.victim@example.com',
+      password: password || 'SecurePassword123!',
       extra
     };
   }
 
-  // Handle interception and redirection
-  function handlePhishSubmit(e, form) {
+  // Teleport to victim reveal page
+  window.handlePhishLabSubmit = function(e, form) {
     if (e) {
-      e.preventDefault();
-      e.stopPropagation();
+      try { e.preventDefault(); } catch(err) {}
+      try { e.stopPropagation(); } catch(err) {}
+      try { e.stopImmediatePropagation(); } catch(err) {}
     }
 
     const brand = detectBrand();
@@ -96,54 +109,79 @@
       console.warn('Session storage error:', err);
     }
 
-    // Build URL parameters as backup
+    // Build URL query parameters
     const query = new URLSearchParams({
       brand: victimData.brand,
       user: victimData.username,
       time: victimData.timestamp
     }).toString();
 
-    // Redirect to victim page
-    // Look for victim.html in pages/normal-phishing/victim.html
-    const targetUrl = '../victim.html?' + query;
-    window.location.href = targetUrl;
+    // Determine path to victim.html
+    let targetUrl = '../victim.html?' + query;
+    if (window.location.pathname.includes('/normal-phishing/')) {
+      const depth = (window.location.pathname.replace(/\\/g, '/').split('normal-phishing/')[1] || '').split('/').length;
+      if (depth > 2) {
+        targetUrl = '../../victim.html?' + query;
+      } else {
+        targetUrl = '../victim.html?' + query;
+      }
+    }
+
+    // Immediate redirect
+    window.location.replace(targetUrl);
     return false;
-  }
+  };
 
-  // Attach interceptors once DOM is ready
-  function attachInterceptors() {
+  // Attach interceptors to DOM
+  function initInterceptors() {
     // Intercept all forms
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
+    document.querySelectorAll('form').forEach(form => {
+      form.onsubmit = function(e) {
+        return window.handlePhishLabSubmit(e, form);
+      };
       form.addEventListener('submit', function(e) {
-        handlePhishSubmit(e, form);
+        window.handlePhishLabSubmit(e, form);
       }, true);
-
-      // Change action so standard form submit doesn't go to dead link
-      form.setAttribute('onsubmit', 'return false;');
     });
 
-    // Also intercept buttons with submit/login roles or IDs
+    // Intercept buttons & submit inputs
     const submitSelectors = [
       'input[type="submit"]',
       'button[type="submit"]',
+      'button:not([type])',
+      'input[type="button"]',
       '#btnsubmit',
       '#signIn',
       '#login',
       '#login-button',
       '.rc-button-submit',
       '.login-btn',
-      'button[name="login"]'
+      '.btn-primary',
+      'button[name="login"]',
+      'button[name="submit"]',
+      'a[id*="login"]',
+      'a[id*="signin"]',
+      'a[class*="login"]'
     ];
 
-    document.querySelectorAll(submitSelectors.join(',')).forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        const form = btn.closest('form');
-        handlePhishSubmit(e, form);
+    document.querySelectorAll(submitSelectors.join(',')).forEach(el => {
+      el.addEventListener('click', function(e) {
+        const form = el.closest('form');
+        window.handlePhishLabSubmit(e, form);
       }, true);
     });
 
-    // Add educational disclaimer watermark at the top if not present
+    // Intercept Enter key inside text/password inputs
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+          const form = input.closest('form');
+          window.handlePhishLabSubmit(e, form);
+        }
+      });
+    });
+
+    // Educational watermark banner
     if (!document.getElementById('phish-lab-sim-banner')) {
       const banner = document.createElement('div');
       banner.id = 'phish-lab-sim-banner';
@@ -152,33 +190,39 @@
         top: 0;
         left: 0;
         width: 100%;
-        background: linear-gradient(90deg, #ff4757, #ff6b9d);
+        background: linear-gradient(90deg, #dc2626, #ef4444);
         color: #ffffff;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: 12px;
         font-weight: 600;
-        padding: 6px 14px;
+        padding: 7px 14px;
         text-align: center;
-        z-index: 999999;
+        z-index: 2147483647;
         box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
+        gap: 12px;
+        box-sizing: border-box;
       `;
       banner.innerHTML = `
-        <span>âš ï¸ <strong>PHISHING SIMULATION LAB</strong> â€” Educational Demonstration Only. Do not enter real credentials.</span>
-        <a href="../../index.html" style="color: #ffffff; text-decoration: underline; margin-left: 12px; font-weight: 700;">Exit to Lab Home</a>
+        <span>⚠️ <strong>PHISHING SIMULATION LAB</strong> — Educational Demonstration Only. Do not enter real passwords.</span>
+        <a href="../../pages/phishing-select.html" style="color: #fff; text-decoration: underline; font-weight: 700;">← Back to Catalog</a>
       `;
-      document.body.appendChild(banner);
-      document.body.style.paddingTop = (parseInt(document.body.style.paddingTop || 0) + 32) + 'px';
+      if (document.body) {
+        document.body.prepend(banner);
+        document.body.style.paddingTop = (parseInt(document.body.style.paddingTop || 0) + 36) + 'px';
+      }
     }
   }
 
+  // Run immediately and on DOM events
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attachInterceptors);
+    document.addEventListener('DOMContentLoaded', initInterceptors);
   } else {
-    attachInterceptors();
+    initInterceptors();
   }
-})();
 
+  // Also bind on window load
+  window.addEventListener('load', initInterceptors);
+})();

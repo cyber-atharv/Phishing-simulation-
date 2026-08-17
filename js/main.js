@@ -54,7 +54,7 @@ function generateSidebar(activePage) {
         `).join('')}
       </nav>
       <div class="sidebar-footer">
-        <p>Phishing Awareness Simulation<br>Created by <strong>Atharv Hogade</strong></p>
+        <p>Phishing Awareness Simulation<br>Frontend by <strong>Uzair Shaikh</strong><br>Refined by <strong>Atharv Hogade</strong></p>
       </div>
     </aside>
   `;
