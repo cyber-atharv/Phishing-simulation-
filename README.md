@@ -23,32 +23,40 @@ An interactive, multi-page **Virtual Laboratory** designed to educate users abou
 
 ```
 Phishing-simulation-/
-├── index.html                     # Landing page — Theory & Introduction
-├── css/styles.css                 # Global design system
+├── index.html                     # Main Frontend — Security Awareness Center Dashboard
+├── css/
+│   ├── style.css                  # PhishGuard Design System
+│   └── styles.css                 # Virtual Lab Subpage Styling
 ├── js/
-│   ├── main.js                    # Shared utilities
-│   ├── simulation.js              # Email inbox logic
-│   ├── location.js                # Location exposure logic
-│   ├── results.js                 # Results dashboard logic
-│   └── quiz.js                    # Quiz logic
+│   ├── main.js                    # Navigation, Session & Shared Utilities
+│   ├── simulation.js              # Email Simulation Logic
+│   ├── location.js                # Live Geolocation & Data Leak Logic
+│   ├── results.js                 # Chart.js Risk Analytics Dashboard
+│   └── quiz.js                    # Scored Assessment Logic
 ├── pages/
-│   ├── consent.html               # Informed consent gate
-│   ├── simulation.html            # Email inbox simulation
-│   ├── phishing-select.html       # Choose phishing type
-│   ├── location-expose.html       # Location/data exposure demo
-│   ├── results.html               # Results dashboard with charts
-│   ├── quiz.html                  # 10-question knowledge quiz
-│   ├── certificate.html           # Downloadable PDF certificate
-│   ├── videos.html                # YouTube awareness videos
-│   ├── references.html            # Research papers & references
-│   ├── normal-phishing/           # 35 brand folders (user-created)
-│   │   ├── microsoft/
+│   ├── consent.html               # Informed Consent Gate
+│   ├── simulation.html            # Dedicated Email Inbox Simulation
+│   ├── phishing-select.html       # 35+ Brand Phishing Launcher Catalog
+│   ├── location-phishing/         # Location GPS Pretexting Demo & Victim Reveal
+│   │   ├── index.html             # Location ChatGPT 4 Demo
+│   │   ├── phish-handler.js       # Location Interceptor
+│   │   └── victim.html            # GPS Interception & Satellite Map Pinpoint
+│   ├── quishing/                  # QR Code Phishing Simulation & Victim Reveal
+│   │   ├── gmail-inbox.html       # Simulated Gmail with MFA QR Code
+│   │   └── victim.html            # Quishing Educational Reveal
+│   ├── normal-phishing/           # 35+ Brand Clone Portals
+│   │   ├── phish-handler.js       # Universal Form Interceptor
+│   │   ├── victim.html            # Credentials Interception & Killchain Reveal
 │   │   ├── google/
+│   │   ├── microsoft/
 │   │   ├── facebook/
-│   │   └── ... (35 total)
-│   └── quishing/
-│       ├── gmail-inbox.html       # Fake Gmail with QR code
-│       └── victim.html            # Quishing victim reveal
+│   │   └── ... (35+ total brands)
+│   ├── location-expose.html       # Silent Browser Data Leakage Demo
+│   ├── results.html               # Visual Performance Analytics
+│   ├── quiz.html                  # 10-Question Knowledge Assessment
+│   ├── certificate.html           # Downloadable PDF Certificate
+│   ├── videos.html                # Curated Awareness Campaign Videos
+│   └── references.html            # 10 Academic Research Papers & IT Act 2000
 └── README.md
 ```
 
