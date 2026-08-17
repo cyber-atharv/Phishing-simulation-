@@ -19,11 +19,13 @@ const BASE = getBasePath();
 // ---- Sidebar HTML Generator ----
 function generateSidebar(activePage) {
   const navItems = [
-    { id: 'intro', icon: '<i class="fa-solid fa-house"></i>', label: 'Lab Introduction', href: `${BASE}index.html` },
+    { id: 'intro', icon: '<i class="fa-solid fa-house"></i>', label: 'Lab Dashboard', href: `${BASE}index.html` },
     { id: 'consent', icon: '<i class="fa-solid fa-clipboard-check"></i>', label: 'Informed Consent', href: `${BASE}pages/consent.html` },
     { id: 'simulation', icon: '<i class="fa-solid fa-envelope"></i>', label: 'Email Simulation', href: `${BASE}pages/simulation.html` },
-    { id: 'phishing-select', icon: '<i class="fa-solid fa-crosshairs"></i>', label: 'Phishing Demo Pages', href: `${BASE}pages/phishing-select.html` },
-    { id: 'location', icon: '<i class="fa-solid fa-location-dot"></i>', label: 'Location Exposure', href: `${BASE}pages/location-expose.html` },
+    { id: 'phishing-select', icon: '<i class="fa-solid fa-crosshairs"></i>', label: '35+ Brand Phishing', href: `${BASE}pages/phishing-select.html` },
+    { id: 'quishing', icon: '<i class="fa-solid fa-qrcode"></i>', label: 'QR Code Quishing', href: `${BASE}pages/quishing/gmail-inbox.html` },
+    { id: 'location-phishing', icon: '<i class="fa-solid fa-map-pin"></i>', label: 'Location Phishing', href: `${BASE}pages/location-phishing/index.html` },
+    { id: 'location', icon: '<i class="fa-solid fa-location-dot"></i>', label: 'Data Leak Exposure', href: `${BASE}pages/location-expose.html` },
     { id: 'results', icon: '<i class="fa-solid fa-chart-column"></i>', label: 'Results Dashboard', href: `${BASE}pages/results.html` },
     { id: 'quiz', icon: '<i class="fa-solid fa-circle-question"></i>', label: 'Knowledge Quiz', href: `${BASE}pages/quiz.html` },
     { id: 'certificate', icon: '<i class="fa-solid fa-award"></i>', label: 'Certificate', href: `${BASE}pages/certificate.html` },

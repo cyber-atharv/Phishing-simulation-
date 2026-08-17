@@ -1,314 +1,1001 @@
-<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
+<!-- This is created by Uzair Shaikh please do not misuse it. -->
+<!-- Refined by Atharv Hogade -->
+<!-- This code for security awareness webpage. -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Phishing Awareness Virtual Lab — Learn about phishing attacks, social engineering techniques, and how to protect yourself. Interactive simulation for cybersecurity education.">
-  <title>Phishing Awareness Lab — Introduction</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PhishGuard — Phishing Awareness Simulation & Cybersecurity Virtual Lab created and refined by Atharv Hogade.">
+<title>PhishGuard | Security Awareness Virtual Lab</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
 
-<canvas id="matrix-canvas"></canvas>
+<!-- SIDEBAR -->
+<aside class="sidebar">
 
-<div id="sidebar-container"></div>
+    <div class="brand">
+        <div class="brand-icon">🛡</div>
+        <h2>Phish<span>Guard</span></h2>
+    </div>
 
-<div class="app-layout">
-  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+    <div class="nav-title">SECURITY CENTER</div>
 
-  <main class="main-content">
+    <div class="nav-item active" onclick="setActive(this); scrollToSection('dashboard')">
+        <span class="nav-icon">▦</span>
+        Dashboard
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-content">
-        <span class="badge badge-blue"><i class="fa-solid fa-shield-halved" style="margin-right: 6px;"></i> Cybersecurity Virtual Lab</span>
-        <h1>Phishing Awareness Simulation</h1>
-        <p>An interactive virtual laboratory designed to educate users about phishing attacks, social engineering techniques, and how to recognize and prevent cyber threats in the real world.</p>
-        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-          <a href="pages/consent.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-rocket" style="margin-right: 8px;"></i> Enter the Lab</a>
-          <a href="#phishing-types" class="btn btn-outline btn-lg"><i class="fa-solid fa-book-open" style="margin-right: 8px;"></i> Learn First</a>
+    <div class="nav-item" onclick="setActive(this); scrollToSection('simulation')">
+        <span class="nav-icon">✉</span>
+        Simulation
+    </div>
+
+    <div class="nav-item" onclick="setActive(this); scrollToSection('lab-modules')">
+        <span class="nav-icon">🔬</span>
+        Virtual Lab Modules
+    </div>
+
+    <div class="nav-item" onclick="setActive(this); scrollToSection('education')">
+        <span class="nav-icon">◈</span>
+        Awareness Debrief
+    </div>
+
+    <div class="nav-item" onclick="setActive(this); scrollToSection('quiz')">
+        <span class="nav-icon">✓</span>
+        Knowledge Test
+    </div>
+
+    <div class="nav-item" onclick="setActive(this); scrollToSection('countermeasures')">
+        <span class="nav-icon">🛡</span>
+        Countermeasures
+    </div>
+
+    <div class="nav-item" onclick="setActive(this); scrollToSection('reports')">
+        <span class="nav-icon">▤</span>
+        Reports & Metrics
+    </div>
+
+    <div class="nav-item" onclick="setActive(this); scrollToSection('training')">
+        <span class="nav-icon">◉</span>
+        Training Progress
+    </div>
+
+    <div class="nav-item" onclick="setActive(this); scrollToSection('scenarios')">
+        <span class="nav-icon">⚡</span>
+        Scenarios Hub
+    </div>
+
+    <div class="nav-title">LAB NAVIGATION</div>
+
+    <a href="pages/phishing-select.html" class="nav-item">
+        <span class="nav-icon">🎯</span>
+        35+ Brand Phishing
+    </a>
+
+    <a href="pages/simulation.html" class="nav-item">
+        <span class="nav-icon">📧</span>
+        Email Inbox Sim
+    </a>
+
+    <a href="pages/quishing/gmail-inbox.html" class="nav-item">
+        <span class="nav-icon">📷</span>
+        QR Code Quishing
+    </a>
+
+    <a href="pages/location-phishing/index.html" class="nav-item">
+        <span class="nav-icon">📍</span>
+        Location Phishing
+    </a>
+
+    <a href="pages/location-expose.html" class="nav-item">
+        <span class="nav-icon">🌐</span>
+        Data Exposure Demo
+    </a>
+
+    <a href="pages/quiz.html" class="nav-item">
+        <span class="nav-icon">❓</span>
+        10-Q Final Quiz
+    </a>
+
+    <a href="pages/certificate.html" class="nav-item">
+        <span class="nav-icon">📜</span>
+        PDF Certificate
+    </a>
+
+    <a href="pages/videos.html" class="nav-item">
+        <span class="nav-icon">🎬</span>
+        Awareness Videos
+    </a>
+
+    <a href="pages/references.html" class="nav-item">
+        <span class="nav-icon">📚</span>
+        Research & IT Act
+    </a>
+
+    <div class="nav-title">PREFERENCES</div>
+
+    <div class="nav-item" onclick="setActive(this); scrollToSection('settings')">
+        <span class="nav-icon">🔧</span>
+        Settings
+    </div>
+
+    <div class="nav-item" onclick="setActive(this); scrollToSection('help')">
+        <span class="nav-icon">?</span>
+        Help & Support
+    </div>
+
+    <div class="sidebar-bottom">
+        <div class="security-status">
+            <span class="status-dot"></span>
+            <strong style="font-size:11px; color:#10b981;">Simulation Secure</strong>
+            <p style="font-size:10px; color:#64748b; margin-top:5px; line-height:1.4;">
+                Created & Refined by<br><strong style="color:#94a3b8;">Atharv Hogade</strong>
+            </p>
         </div>
-      </div>
+    </div>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+<main class="main" id="dashboard">
+
+    <div class="topbar">
+        <div class="page-title">
+            <h1>Security Awareness Center</h1>
+            <p>Phishing Simulation & Human-Risk Assessment Virtual Laboratory</p>
+        </div>
+
+        <div class="top-right">
+            <div class="sim-badge">
+                ● ACADEMIC LAB ENVIRONMENT
+            </div>
+            <div class="avatar" title="Atharv Hogade (Creator & Instructor)">
+                AH
+            </div>
+        </div>
+    </div>
+
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">
+                Cybersecurity Awareness Simulation Program
+            </div>
+            <h2>
+                Would you recognize a real-world phishing attack?
+            </h2>
+            <p>
+                Experience safe, controlled social engineering simulations — including spear phishing, 35+ brand login clones, QR code quishing, and GPS location pretexting.
+            </p>
+            <div class="hero-btn-group">
+                <button class="primary-btn" onclick="beginSimulation()">
+                    Start Email Simulation →
+                </button>
+                <a href="pages/phishing-select.html" class="secondary-btn">
+                    Explore 35+ Brand Phishing Demos
+                </a>
+                <a href="pages/consent.html" class="secondary-btn">
+                    Informed Consent Gate
+                </a>
+            </div>
+        </div>
     </section>
 
-    <!-- Content -->
-    <div class="content-body">
 
-      <!-- Stats -->
-      <div class="stats-row" data-animate>
+    <!-- STATS ROW -->
+    <section class="stats">
         <div class="stat-card">
-          <div class="stat-value">3.4B+</div>
-          <div class="stat-label">Phishing Emails / Day</div>
+            <div class="stat-top">
+                <span>SIMULATIONS</span>
+                <div class="stat-icon">◎</div>
+            </div>
+            <div class="stat-number" id="simCount">0</div>
+            <div class="stat-change">Current session active</div>
         </div>
+
         <div class="stat-card">
-          <div class="stat-value">83%</div>
-          <div class="stat-label">Organizations Attacked</div>
+            <div class="stat-top">
+                <span>LINK CLICKS</span>
+                <div class="stat-icon">↗</div>
+            </div>
+            <div class="stat-number" id="clickCount">0</div>
+            <div class="stat-change">User interaction telemetry</div>
         </div>
+
         <div class="stat-card">
-          <div class="stat-value">$17,700</div>
-          <div class="stat-label">Lost Every Minute</div>
+            <div class="stat-top">
+                <span>LOGIN ATTEMPTS</span>
+                <div class="stat-icon" style="background:rgba(239,68,68,0.1); color:#f87171;">⚠</div>
+            </div>
+            <div class="stat-number" id="loginCount">0</div>
+            <div class="stat-change" style="color:#f87171;">High-risk credentials intercepted</div>
         </div>
+
         <div class="stat-card">
-          <div class="stat-value">36%</div>
-          <div class="stat-label">Breaches via Phishing</div>
+            <div class="stat-top">
+                <span>SECURITY SCORE</span>
+                <div class="stat-icon" style="background:rgba(16,185,129,0.1); color:#10b981;">✓</div>
+            </div>
+            <div class="stat-number" id="securityScore">100%</div>
+            <div class="stat-change" style="color:#10b981;">Awareness posture level</div>
         </div>
-      </div>
+    </section>
 
-      <!-- What is Phishing -->
-      <section data-animate>
-        <div class="section-header">
-          <h2><i class="fa-solid fa-fish-fins" style="color: var(--accent-blue); margin-right: 8px;"></i> What is Phishing?</h2>
-          <p>Phishing is a type of social engineering attack where cybercriminals disguise themselves as trustworthy entities to trick people into revealing sensitive information such as passwords, credit card numbers, or personal data.</p>
-        </div>
 
-        <div class="alert alert-warning">
-          <span class="alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
-          <div>
-            <strong>Important:</strong> This virtual lab is designed purely for educational purposes. All simulations are conducted in a controlled environment with informed consent. No real data is ever collected or transmitted.
-          </div>
-        </div>
-      </section>
-
-      <div class="section-divider"></div>
-
-      <!-- Types of Phishing -->
-      <section id="phishing-types" data-animate>
-        <div class="section-header">
-          <h2><i class="fa-solid fa-magnifying-glass" style="color: var(--accent-purple); margin-right: 8px;"></i> Types of Phishing Attacks</h2>
-          <p>Phishing comes in many forms. Understanding each type is the first step to defending yourself.</p>
+    <!-- VIRTUAL LAB MODULES HUB -->
+    <section class="card" id="lab-modules">
+        <div class="card-header">
+            <div>
+                <div class="card-title">🔬 Complete Virtual Laboratory Modules</div>
+                <div class="card-subtitle">Explore all hands-on cybersecurity attack vectors and educational resources</div>
+            </div>
+            <span class="sim-badge">12 LAB MODULES</span>
         </div>
 
-        <div class="grid-3">
-          <!-- Email Phishing -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon blue"><i class="fa-solid fa-envelope"></i></div>
-              <h3 class="card-title">Email Phishing</h3>
-            </div>
-            <p class="card-desc">The most common type. Attackers send mass emails impersonating banks, tech companies, or government agencies, urging victims to click malicious links or download attachments.</p>
-            <div style="margin-top: 14px;">
-              <span class="badge badge-red">High Frequency</span>
-            </div>
-          </div>
-
-          <!-- Spear Phishing -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon purple"><i class="fa-solid fa-crosshairs"></i></div>
-              <h3 class="card-title">Spear Phishing</h3>
-            </div>
-            <p class="card-desc">Targeted attacks aimed at specific individuals or organizations. Attackers research their victims to craft highly personalized and convincing messages.</p>
-            <div style="margin-top: 14px;">
-              <span class="badge badge-purple">Targeted</span>
-            </div>
-          </div>
-
-          <!-- Whaling -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon orange"><i class="fa-solid fa-crown"></i></div>
-              <h3 class="card-title">Whaling</h3>
-            </div>
-            <p class="card-desc">A form of spear phishing targeting C-level executives (CEO, CFO). These attacks often involve fake legal subpoenas, tax notifications, or high-priority business requests.</p>
-            <div style="margin-top: 14px;">
-              <span class="badge badge-orange">Executive Target</span>
-            </div>
-          </div>
-
-          <!-- Smishing -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon green"><i class="fa-solid fa-mobile-screen-button"></i></div>
-              <h3 class="card-title">Smishing (SMS Phishing)</h3>
-            </div>
-            <p class="card-desc">Phishing via SMS text messages. Victims receive texts claiming to be from banks, delivery services, or government agencies with links to fake websites.</p>
-            <div style="margin-top: 14px;">
-              <span class="badge badge-green">Mobile Threat</span>
-            </div>
-          </div>
-
-          <!-- Vishing -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon red"><i class="fa-solid fa-phone-volume"></i></div>
-              <h3 class="card-title">Vishing (Voice Phishing)</h3>
-            </div>
-            <p class="card-desc">Phone-based phishing where attackers call victims pretending to be tech support, bank officials, or law enforcement to extract sensitive information verbally.</p>
-            <div style="margin-top: 14px;">
-              <span class="badge badge-red">Voice-Based</span>
-            </div>
-          </div>
-
-          <!-- Quishing -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon pink" style="background: rgba(255, 107, 157, 0.15); color: var(--accent-pink);"><i class="fa-solid fa-qrcode"></i></div>
-              <h3 class="card-title">Quishing (QR Phishing)</h3>
-            </div>
-            <p class="card-desc">A newer technique where attackers embed malicious URLs in QR codes. When scanned, victims are redirected to fake login pages or malware download sites.</p>
-            <div style="margin-top: 14px;">
-              <span class="badge badge-blue">Emerging Threat</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-divider"></div>
-
-      <!-- How Phishing Works -->
-      <section data-animate>
-        <div class="section-header">
-          <h2><i class="fa-solid fa-gears" style="color: var(--accent-orange); margin-right: 8px;"></i> How Does Phishing Work?</h2>
-          <p>Understanding the attacker's methodology helps you recognize and avoid falling victim.</p>
-        </div>
-
-        <div class="grid-2">
-          <div class="card">
-            <h3 class="card-title" style="margin-bottom: 20px; font-size: 16px;">The Phishing Attack Lifecycle</h3>
-            <div style="display: flex; flex-direction: column; gap: 16px;">
-              <div style="display: flex; align-items: flex-start; gap: 14px;">
-                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(0,212,255,0.2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent-blue); flex-shrink: 0; font-size: 14px;">1</div>
+        <div class="modules-grid">
+            <a href="pages/phishing-select.html" class="module-card">
                 <div>
-                  <strong style="color: var(--text-primary);">Reconnaissance</strong>
-                  <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Attacker researches the target — gathering emails, job titles, interests from social media and public sources.</p>
+                    <div class="module-top">
+                        <div class="module-icon">🎯</div>
+                        <div>
+                            <h4>35+ Brand Phishing</h4>
+                            <span style="font-size:11px; color:#60a5fa;">Normal Phishing Clones</span>
+                        </div>
+                    </div>
+                    <p>Interactive clones of Google, Microsoft, Facebook, PayPal, Steam, Origin, Discord, and more leading to victim reveals.</p>
                 </div>
-              </div>
-              <div style="display: flex; align-items: flex-start; gap: 14px;">
-                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(168,85,247,0.2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent-purple); flex-shrink: 0; font-size: 14px;">2</div>
+                <span class="module-badge">35 Clones Available</span>
+            </a>
+
+            <a href="pages/quishing/gmail-inbox.html" class="module-card">
                 <div>
-                  <strong style="color: var(--text-primary);">Weaponization</strong>
-                  <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Crafts a convincing email, fake website, or message with urgency triggers and trust indicators.</p>
+                    <div class="module-top">
+                        <div class="module-icon" style="background:rgba(139,92,246,0.15); color:#c084fc;">📷</div>
+                        <div>
+                            <h4>QR Code Quishing</h4>
+                            <span style="font-size:11px; color:#c084fc;">Gmail Inbox Demo</span>
+                        </div>
+                    </div>
+                    <p>Open a simulated Gmail inbox with a realistic MFA QR code email and scan to see how quishing exploits mobile users.</p>
                 </div>
-              </div>
-              <div style="display: flex; align-items: flex-start; gap: 14px;">
-                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,140,66,0.2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent-orange); flex-shrink: 0; font-size: 14px;">3</div>
+                <span class="module-badge" style="background:rgba(139,92,246,0.15); color:#c084fc;">QR Scan Interactive</span>
+            </a>
+
+            <a href="pages/location-phishing/index.html" class="module-card">
                 <div>
-                  <strong style="color: var(--text-primary);">Delivery</strong>
-                  <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Sends the phishing email/SMS/QR code to the victim via email, social media, or messaging apps.</p>
+                    <div class="module-top">
+                        <div class="module-icon" style="background:rgba(239,68,68,0.15); color:#f87171;">📍</div>
+                        <div>
+                            <h4>Location Phishing</h4>
+                            <span style="font-size:11px; color:#f87171;">Geo-Pretexting (Seeker)</span>
+                        </div>
+                    </div>
+                    <p>Experience how attackers use plausible ChatGPT/chat pretexts to harvest high-accuracy device GPS coordinates.</p>
                 </div>
-              </div>
-              <div style="display: flex; align-items: flex-start; gap: 14px;">
-                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,71,87,0.2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--accent-red); flex-shrink: 0; font-size: 14px;">4</div>
+                <span class="module-badge" style="background:rgba(239,68,68,0.15); color:#f87171;">GPS Interception</span>
+            </a>
+
+            <a href="pages/location-expose.html" class="module-card">
                 <div>
-                  <strong style="color: var(--text-primary);">Exploitation</strong>
-                  <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Victim clicks the link, enters credentials, or downloads malware — data is harvested instantly.</p>
+                    <div class="module-top">
+                        <div class="module-icon" style="background:rgba(6,182,212,0.15); color:#22d3ee;">🌐</div>
+                        <div>
+                            <h4>Silent Data Leakage</h4>
+                            <span style="font-size:11px; color:#22d3ee;">Browser Fingerprint</span>
+                        </div>
+                    </div>
+                    <p>Inspect what network and hardware data your browser broadcasts silently upon loading untrusted websites.</p>
                 </div>
-              </div>
-            </div>
-          </div>
+                <span class="module-badge" style="background:rgba(6,182,212,0.15); color:#22d3ee;">Live IP & Telemetry</span>
+            </a>
 
-          <div class="card">
-            <h3 class="card-title" style="margin-bottom: 20px; font-size: 16px;"><i class="fa-solid fa-brain" style="color: var(--accent-purple); margin-right: 6px;"></i> Psychology Behind Phishing</h3>
-            <div style="display: flex; flex-direction: column; gap: 14px;">
-              <div style="padding: 14px 18px; background: rgba(255,71,87,0.06); border-radius: 8px; border-left: 3px solid var(--accent-red);">
-                <strong style="color: var(--accent-red);">Urgency & Fear</strong>
-                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">"Your account will be locked in 24 hours!" — Creating panic to bypass rational thinking.</p>
-              </div>
-              <div style="padding: 14px 18px; background: rgba(0,212,255,0.06); border-radius: 8px; border-left: 3px solid var(--accent-blue);">
-                <strong style="color: var(--accent-blue);">Authority</strong>
-                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">"This is from your bank/IT department" — Impersonating trusted authority figures.</p>
-              </div>
-              <div style="padding: 14px 18px; background: rgba(0,255,136,0.06); border-radius: 8px; border-left: 3px solid var(--accent-green);">
-                <strong style="color: var(--accent-green);">Curiosity</strong>
-                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">"You've won a prize!" or "See who viewed your profile" — Exploiting natural curiosity.</p>
-              </div>
-              <div style="padding: 14px 18px; background: rgba(168,85,247,0.06); border-radius: 8px; border-left: 3px solid var(--accent-purple);">
-                <strong style="color: var(--accent-purple);">Social Proof</strong>
-                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">"5 of your colleagues have already updated" — Leveraging herd mentality.</p>
-              </div>
-            </div>
-          </div>
+            <a href="pages/quiz.html" class="module-card">
+                <div>
+                    <div class="module-top">
+                        <div class="module-icon" style="background:rgba(16,185,129,0.15); color:#34d399;">❓</div>
+                        <div>
+                            <h4>10-Question Quiz</h4>
+                            <span style="font-size:11px; color:#34d399;">Knowledge Assessment</span>
+                        </div>
+                    </div>
+                    <p>Test your cybersecurity knowledge with randomized questions, a live timer, instant explanations, and scoring.</p>
+                </div>
+                <span class="module-badge" style="background:rgba(16,185,129,0.15); color:#34d399;">Scored Assessment</span>
+            </a>
+
+            <a href="pages/certificate.html" class="module-card">
+                <div>
+                    <div class="module-top">
+                        <div class="module-icon" style="background:rgba(245,158,11,0.15); color:#fbbf24;">📜</div>
+                        <div>
+                            <h4>Completion Certificate</h4>
+                            <span style="font-size:11px; color:#fbbf24;">Downloadable PDF</span>
+                        </div>
+                    </div>
+                    <p>Generate an official personalized Phishing Awareness Certificate signed by Lab Instructor Atharv Hogade.</p>
+                </div>
+                <span class="module-badge" style="background:rgba(245,158,11,0.15); color:#fbbf24;">PDF Export</span>
+            </a>
+
+            <a href="pages/videos.html" class="module-card">
+                <div>
+                    <div class="module-top">
+                        <div class="module-icon" style="background:rgba(236,72,153,0.15); color:#f472b6;">🎬</div>
+                        <div>
+                            <h4>Awareness Videos</h4>
+                            <span style="font-size:11px; color:#f472b6;">Campaign Media</span>
+                        </div>
+                    </div>
+                    <p>Watch 8 curated educational videos covering social engineering, spear phishing, real-life corporate heists, and defense.</p>
+                </div>
+                <span class="module-badge" style="background:rgba(236,72,153,0.15); color:#f472b6;">8 Curated Videos</span>
+            </a>
+
+            <a href="pages/references.html" class="module-card">
+                <div>
+                    <div class="module-top">
+                        <div class="module-icon" style="background:rgba(99,102,241,0.15); color:#818cf8;">📚</div>
+                        <div>
+                            <h4>Research Papers & Law</h4>
+                            <span style="font-size:11px; color:#818cf8;">Academic Citations</span>
+                        </div>
+                    </div>
+                    <p>Access 10 peer-reviewed research papers (IEEE, ACM, Springer), CERT-In & NIST guidelines, and the IT Act 2000 legal framework.</p>
+                </div>
+                <span class="module-badge" style="background:rgba(99,102,241,0.15); color:#818cf8;">10 Papers + Law</span>
+            </a>
         </div>
-      </section>
+    </section>
 
-      <div class="section-divider"></div>
 
-      <!-- How to Protect Yourself -->
-      <section data-animate>
-        <div class="section-header">
-          <h2><i class="fa-solid fa-shield-virus" style="color: var(--accent-green); margin-right: 8px;"></i> How to Protect Yourself</h2>
-          <p>Follow these countermeasures to stay safe from phishing attacks.</p>
+    <!-- MAIN INTERACTIVE GRID -->
+    <div class="grid">
+
+        <div>
+            <!-- CONSENT CARD -->
+            <section class="card" id="consent-card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Simulation Authorization</div>
+                        <div class="card-subtitle">Required before starting the in-page exercise</div>
+                    </div>
+                </div>
+
+                <div class="consent">
+                    <label>
+                        <input type="checkbox" id="consent">
+                        <span>
+                            I understand that this is an authorized educational simulation. I will not enter real passwords, credentials, or sensitive personal information.
+                        </span>
+                    </label>
+                </div>
+
+                <button class="primary-btn" style="margin-top:0;" onclick="startSimulation()">
+                    Launch Email Simulation
+                </button>
+            </section>
+
+
+            <!-- SIMULATION EMAIL BOX -->
+            <section class="card" id="simulation">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Incoming Message</div>
+                        <div class="card-subtitle">Simulated corporate security email</div>
+                    </div>
+                    <span class="sim-badge" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.2); color:#f87171;">
+                        PHISHING TEST
+                    </span>
+                </div>
+
+                <div class="email-window">
+                    <div class="email-toolbar">
+                        <span class="window-dot dot-red"></span>
+                        <span class="window-dot dot-yellow"></span>
+                        <span class="window-dot dot-green"></span>
+                    </div>
+
+                    <div class="email-meta">
+                        <div class="email-row">
+                            <strong>FROM</strong>
+                            security-alert@service-auth-verify.com
+                        </div>
+                        <div class="email-row">
+                            <strong>SUBJECT</strong>
+                            ⚠ Urgent: Suspicious Login Detected & Account Lock Warning
+                        </div>
+                        <div class="email-row">
+                            <strong>TIME</strong>
+                            Today, 09:42 AM (Priority High)
+                        </div>
+                    </div>
+
+                    <div class="email-body">
+                        <p><strong>Hello User,</strong></p>
+                        <p>Our automated monitoring system detected an unauthorized sign-in attempt from an unrecognized IP address (Moscow, RU) on your primary account.</p>
+                        <p>To prevent immediate suspension and protect your linked services, you must verify your credentials immediately:</p>
+
+                        <button class="fake-link" onclick="openLogin()">
+                            🔒 Verify Account Security Now →
+                        </button>
+
+                        <p style="margin-top:15px;">
+                            Regards,<br>
+                            <strong>Global Security & Identity Administration</strong>
+                        </p>
+
+                        <div class="email-warning">
+                            ⚠ This message is intentionally designed to demonstrate artificial urgency, mismatched sender domains, and psychological manipulation.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- EDUCATION DEBRIEF -->
+            <section class="card education" id="education">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Simulation Debrief</div>
+                        <div class="card-subtitle">What just happened to your security posture?</div>
+                    </div>
+                    <span style="color:#10b981; font-size:12px; font-weight:700;">
+                        ● TRAINING INTERCEPTION
+                    </span>
+                </div>
+
+                <p style="font-size:13px; color:#94a3b8; margin-bottom:20px; line-height:1.6;">
+                    You interacted with a simulated phishing message and submitted credentials. In a real-world cyber attack, your password would be exfiltrated to the attacker's database for automated credential-stuffing attacks.
+                </p>
+
+                <div class="lesson">
+                    <div class="lesson-item">
+                        <span>⏱</span>
+                        <h4>Artificial Urgency</h4>
+                        <p>Attackers manufacture panic ("Account locked in 24h") to bypass rational scrutiny.</p>
+                    </div>
+
+                    <div class="lesson-item">
+                        <span>✉</span>
+                        <h4>Spoofed Senders</h4>
+                        <p>Always inspect the full domain (e.g., <code>@service-auth-verify.com</code> vs real domain).</p>
+                    </div>
+
+                    <div class="lesson-item">
+                        <span>🔗</span>
+                        <h4>Deceptive Links</h4>
+                        <p>Hover over links before clicking to check the destination URL carefully.</p>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon green"><i class="fa-solid fa-link"></i></div>
-              <h3 class="card-title">Check URLs Carefully</h3>
-            </div>
-            <p class="card-desc">Always hover over links before clicking. Look for misspellings (e.g., <code>g00gle.com</code>, <code>faceb00k.com</code>). Verify the domain matches the official website.</p>
-          </div>
 
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon blue"><i class="fa-solid fa-lock"></i></div>
-              <h3 class="card-title">Enable 2FA / MFA</h3>
-            </div>
-            <p class="card-desc">Two-Factor Authentication adds an extra layer of security. Even if your password is compromised, attackers can't access your account without the second factor.</p>
-          </div>
+        <!-- RIGHT COLUMN -->
+        <div>
 
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon purple"><i class="fa-solid fa-user-check"></i></div>
-              <h3 class="card-title">Verify the Sender</h3>
-            </div>
-            <p class="card-desc">Check the sender's email address carefully. Official emails come from official domains — not <code>support@micr0soft-security.com</code>.</p>
-          </div>
+            <!-- PHISHING INDICATORS (RED FLAGS) -->
+            <section class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Phishing Indicators</div>
+                        <div class="card-subtitle">Threat analysis breakdown</div>
+                    </div>
+                    <span style="color:#ef4444; font-size:11px; font-weight:700;">HIGH RISK</span>
+                </div>
 
-          <div class="card">
-            <div class="card-header">
-              <div class="card-icon red"><i class="fa-solid fa-ban"></i></div>
-              <h3 class="card-title">Never Share Credentials</h3>
-            </div>
-            <p class="card-desc">Legitimate organizations will NEVER ask for your password via email, phone, or SMS. If in doubt, contact the organization directly through official channels.</p>
-          </div>
+                <div class="flag">
+                    <div class="flag-icon">!</div>
+                    <div>
+                        <strong>Artificial Urgency & Coercion</strong>
+                        <p>Pressure tactics designed to trigger impulsive clicking.</p>
+                    </div>
+                </div>
+
+                <div class="flag">
+                    <div class="flag-icon">✉</div>
+                    <div>
+                        <strong>Suspicious Sender Domain</strong>
+                        <p>Unregistered domain impersonating official IT security staff.</p>
+                    </div>
+                </div>
+
+                <div class="flag">
+                    <div class="flag-icon">↗</div>
+                    <div>
+                        <strong>Deceptive Redirection Link</strong>
+                        <p>Directs the user to an unverified third-party authentication form.</p>
+                    </div>
+                </div>
+
+                <div class="flag">
+                    <div class="flag-icon">⚿</div>
+                    <div>
+                        <strong>Direct Credential Harvesting</strong>
+                        <p>Attempts to capture username and plaintext password.</p>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- SECURITY SCORE -->
+            <section class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Awareness Score</div>
+                        <div class="card-subtitle">Real-time session calculation</div>
+                    </div>
+                </div>
+
+                <div style="font-size:38px; font-weight:800; color:var(--text);">
+                    <span id="scoreDisplay">100</span>
+                    <span style="font-size:15px; color:#64748b;">/100</span>
+                </div>
+
+                <div class="progress-box">
+                    <div class="progress-label">
+                        <span>Security posture</span>
+                        <span id="scoreText" style="color:#10b981; font-weight:700;">Excellent</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-fill" id="scoreBar" style="width:100%;"></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- KNOWLEDGE CHECK / QUICK QUIZ -->
+            <section class="card" id="quiz">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Quick Knowledge Check</div>
+                        <div class="card-subtitle">Test your defensive instincts</div>
+                    </div>
+                </div>
+
+                <p style="font-size:13px; margin-bottom:15px; color:var(--text);">
+                    What should you do when an unexpected email claims your account is locked and demands an immediate password confirmation?
+                </p>
+
+                <button class="quiz-option" onclick="quizAnswer(false)">
+                    A. Click the provided link and re-enter your password immediately
+                </button>
+
+                <button class="quiz-option" onclick="quizAnswer(true)">
+                    B. Stop, ignore the link, and verify independently via the official portal or IT helpdesk
+                </button>
+
+                <button class="quiz-option" onclick="quizAnswer(false)">
+                    C. Reply to the email with your old and new password
+                </button>
+
+                <div id="quizResult"></div>
+                
+                <div style="margin-top:16px;">
+                    <a href="pages/quiz.html" class="primary-btn" style="width:100%; font-size:12px; padding:10px 14px; text-align:center; justify-content:center;">
+                        Take Full 10-Question Scored Quiz →
+                    </a>
+                </div>
+            </section>
+
         </div>
-      </section>
-
-      <div class="section-divider"></div>
-
-      <!-- Lab Objectives -->
-      <section data-animate>
-        <div class="section-header">
-          <h2><i class="fa-solid fa-bullseye" style="color: var(--accent-pink); margin-right: 8px;"></i> Lab Objectives</h2>
-          <p>What you will learn and accomplish in this virtual laboratory.</p>
-        </div>
-
-        <div class="grid-3">
-          <div class="card" style="text-align: center;">
-            <div style="font-size: 36px; margin-bottom: 14px; color: var(--accent-blue);"><i class="fa-solid fa-flask"></i></div>
-            <h3 class="card-title" style="font-size: 16px; margin-bottom: 8px;">Simulate</h3>
-            <p class="card-desc">Experience a realistic phishing scenario in a safe, controlled environment to understand how attacks operate.</p>
-          </div>
-          <div class="card" style="text-align: center;">
-            <div style="font-size: 36px; margin-bottom: 14px; color: var(--accent-purple);"><i class="fa-solid fa-chart-line"></i></div>
-            <h3 class="card-title" style="font-size: 16px; margin-bottom: 8px;">Analyze</h3>
-            <p class="card-desc">Measure your own awareness level and identify behavioral patterns that make people vulnerable to phishing.</p>
-          </div>
-          <div class="card" style="text-align: center;">
-            <div style="font-size: 36px; margin-bottom: 14px; color: var(--accent-green);"><i class="fa-solid fa-shield-halved"></i></div>
-            <h3 class="card-title" style="font-size: 16px; margin-bottom: 8px;">Defend</h3>
-            <p class="card-desc">Learn practical countermeasures and best practices to protect yourself and your organization from future attacks.</p>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-divider"></div>
-
-      <!-- CTA -->
-      <section data-animate style="text-align: center; padding: 40px 0;">
-        <h2 style="font-size: 28px; margin-bottom: 12px;">Ready to Begin?</h2>
-        <p style="color: var(--text-secondary); font-size: 16px; margin-bottom: 28px;">Enter the virtual lab and test your phishing awareness skills.</p>
-        <a href="pages/consent.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-rocket" style="margin-right: 8px;"></i> Start the Lab Simulation</a>
-      </section>
 
     </div>
-  </main>
+
+
+    <!-- COUNTERMEASURES SECTION -->
+    <section class="card" id="countermeasures">
+        <div class="card-header">
+            <div>
+                <div class="card-title">🛡️ Security Countermeasures & Best Practices</div>
+                <div class="card-subtitle">Recommended proactive defense strategies</div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <div class="lesson-item">
+                <span>🔍</span>
+                <h4>1. Inspect & Scrutinize</h4>
+                <p>Check sender email headers, exact domain spellings, TLS certificates, and grammar before clicking any attachment or button.</p>
+            </div>
+
+            <div class="lesson-item">
+                <span>🛑</span>
+                <h4>2. Stop & Reflect</h4>
+                <p>Never allow artificial urgency, fear of penalty, or executive authority pressure to dictate immediate password entry.</p>
+            </div>
+
+            <div class="lesson-item">
+                <span>🔐</span>
+                <h4>3. Enforce Multi-Factor (MFA)</h4>
+                <p>Adopt hardware security keys (FIDO2 / WebAuthn) or authenticator apps (Aegis, Google Authenticator) rather than SMS.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- REPORTS & METRICS -->
+    <section class="card" id="reports">
+        <div class="card-header">
+            <div>
+                <div class="card-title">📊 Session Security Reports</div>
+                <div class="card-subtitle">Simulation activity, risk exposure, and awareness telemetry</div>
+            </div>
+            <span class="sim-badge">SESSION REPORT</span>
+        </div>
+
+        <div class="report-grid">
+            <div class="report-item">
+                <div class="report-number" id="reportSimulations" style="color:#60a5fa;">0</div>
+                <p>Simulations completed</p>
+            </div>
+
+            <div class="report-item">
+                <div class="report-number" id="reportClicks" style="color:#fbbf24;">0</div>
+                <p>Suspicious links clicked</p>
+            </div>
+
+            <div class="report-item">
+                <div class="report-number" id="reportLogins" style="color:#f87171;">0</div>
+                <p>Credential harvest attempts</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- TRAINING PROGRESS -->
+    <section class="card" id="training">
+        <div class="card-header">
+            <div>
+                <div class="card-title">◉ Training Progress</div>
+                <div class="card-subtitle">Cybersecurity awareness competency domains</div>
+            </div>
+        </div>
+
+        <div class="progress-box">
+            <div class="progress-label">
+                <span>Email Phishing Awareness</span>
+                <span>85%</span>
+            </div>
+            <div class="progress">
+                <div class="progress-fill" style="width:85%;"></div>
+            </div>
+        </div>
+
+        <div class="progress-box">
+            <div class="progress-label">
+                <span>Social Engineering & Pretexting</span>
+                <span>75%</span>
+            </div>
+            <div class="progress">
+                <div class="progress-fill" style="width:75%; background:linear-gradient(90deg, #8b5cf6, #ec4899);"></div>
+            </div>
+        </div>
+
+        <div class="progress-box">
+            <div class="progress-label">
+                <span>QR Code (Quishing) & Location Defense</span>
+                <span>90%</span>
+            </div>
+            <div class="progress">
+                <div class="progress-fill" style="width:90%; background:linear-gradient(90deg, #10b981, #06b6d4);"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SCENARIOS HUB -->
+    <section class="card" id="scenarios">
+        <div class="card-header">
+            <div>
+                <div class="card-title">⚡ Awareness Scenarios Hub</div>
+                <div class="card-subtitle">Choose a specific attack simulation vector</div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <div class="lesson-item">
+                <span>✉</span>
+                <h4>Email Phishing</h4>
+                <p>Identify suspicious spear-phishing messages and spoofed password resets.</p>
+                <button class="primary-btn" style="margin-top:12px; padding:8px 14px; font-size:12px;" onclick="scrollToSection('simulation')">
+                    Launch Email Sim
+                </button>
+            </div>
+
+            <div class="lesson-item">
+                <span>📷</span>
+                <h4>QR Code Quishing</h4>
+                <p>Scan simulated MFA setup emails to learn how physical-to-digital QR attacks work.</p>
+                <a href="pages/quishing/gmail-inbox.html" class="primary-btn" style="margin-top:12px; padding:8px 14px; font-size:12px; background:linear-gradient(135deg, #8b5cf6, #6366f1);">
+                    Launch Quishing
+                </a>
+            </div>
+
+            <div class="lesson-item">
+                <span>📍</span>
+                <h4>Location Pretexting</h4>
+                <p>Understand how fake chat and matching bots deceive victims into granting GPS access.</p>
+                <a href="pages/location-phishing/index.html" class="primary-btn" style="margin-top:12px; padding:8px 14px; font-size:12px; background:linear-gradient(135deg, #ef4444, #f97316);">
+                    Launch Location Sim
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SETTINGS -->
+    <section class="card" id="settings">
+        <div class="card-header">
+            <div>
+                <div class="card-title">🔧 Simulation Settings</div>
+                <div class="card-subtitle">Configure your virtual training environment</div>
+            </div>
+        </div>
+
+        <div class="setting-row">
+            <div>
+                <strong>Training Feedback Mode</strong>
+                <p>Display real-time educational indicators when interacting with simulation links.</p>
+            </div>
+            <div class="toggle" onclick="toggleSetting(this)"></div>
+        </div>
+
+        <div class="setting-row">
+            <div>
+                <strong>Safe Telemetry Mode</strong>
+                <p>All input credentials and telemetry remain strictly stored in local browser session storage.</p>
+            </div>
+            <div class="toggle" onclick="toggleSetting(this)"></div>
+        </div>
+
+        <div class="setting-row">
+            <div>
+                <strong>Strict Academic Verification</strong>
+                <p>Require informed consent gate before accessing brand phishing demonstrations.</p>
+            </div>
+            <div class="toggle" onclick="toggleSetting(this)"></div>
+        </div>
+    </section>
+
+
+    <!-- HELP & SUPPORT -->
+    <section class="card" id="help">
+        <div class="card-header">
+            <div>
+                <div class="card-title">? Help & Support</div>
+                <div class="card-subtitle">Security awareness guides and incident reporting</div>
+            </div>
+        </div>
+
+        <div class="lesson">
+            <div class="lesson-item">
+                <span>❓</span>
+                <h4>How It Works</h4>
+                <p>This virtual lab simulates various social engineering attack surfaces in a safe, controlled sandbox without transmitting real data.</p>
+            </div>
+
+            <div class="lesson-item">
+                <span>📚</span>
+                <h4>Academic References</h4>
+                <p>Read peer-reviewed research papers and CERT-In legal guidelines covering the IT Act 2000 in the <a href="pages/references.html">References section</a>.</p>
+            </div>
+
+            <div class="lesson-item">
+                <span>🛡</span>
+                <h4>Report Phishing</h4>
+                <p>In real life, report suspicious emails to <code>incident@cert-in.org.in</code> or your corporate security operations team.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p style="font-weight:600; color:#94a3b8; margin-bottom:6px;">
+            PhishGuard Security Awareness Simulation Platform · Virtual Laboratory
+        </p>
+        <p>
+            Created & Refined by <strong>Atharv Hogade</strong> · Academic Educational Simulation Only · No Real Credentials Collected
+        </p>
+        <p style="font-size:11px; margin-top:8px; color:#475569;">
+            Complies with Section 43/66 of the Information Technology Act 2000 & CERT-In Educational Guidelines.
+        </p>
+    </footer>
+
+</main>
+
+
+<!-- LOGIN / CREDENTIAL HARVEST MODAL -->
+<div class="modal" id="loginModal">
+    <div class="modal-box">
+        <div class="modal-logo">
+            Account Security Portal
+        </div>
+        <div class="demo-label">
+            SIMULATED AUTHENTICATION CHECKPOINT
+        </div>
+
+        <form onsubmit="submitLogin(event)">
+            <div class="form-group">
+                <label>Email Address or Username</label>
+                <input type="email" id="modalEmail" placeholder="victim@example.com" autocomplete="off" required>
+            </div>
+
+            <div class="form-group">
+                <label>Account Password</label>
+                <input type="password" id="modalPassword" placeholder="Enter dummy password for simulation" autocomplete="off" required>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Verify Identity & Continue →
+            </button>
+        </form>
+
+        <div class="safe-notice">
+            🔒 <strong>TRAINING ENVIRONMENT:</strong> This demonstration operates locally inside your browser. No real credentials are transmitted or stored.
+        </div>
+    </div>
 </div>
 
-<script src="js/main.js"></script>
-<script>initSidebar('intro');</script>
+
+<script>
+/* VARIABLES */
+let simulations = 0;
+let clicks = 0;
+let loginAttempts = 0;
+let score = 100;
+
+/* START */
+function beginSimulation() {
+    const consent = document.getElementById("consent");
+    if (consent) {
+        consent.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+}
+
+/* CONSENT */
+function startSimulation() {
+    const consent = document.getElementById("consent");
+    if (!consent.checked) {
+        alert("Please confirm the educational simulation consent checkbox before launching.");
+        return;
+    }
+
+    simulations++;
+    document.getElementById("simCount").textContent = simulations;
+    document.getElementById("reportSimulations").textContent = simulations;
+
+    try {
+        sessionStorage.setItem('phishlab_consent', 'true');
+    } catch(e) {}
+
+    const simElem = document.getElementById("simulation");
+    if (simElem) {
+        simElem.scrollIntoView({ behavior: "smooth" });
+    }
+}
+
+/* PHISHING LINK CLICK */
+function openLogin() {
+    clicks++;
+    document.getElementById("clickCount").textContent = clicks;
+    document.getElementById("reportClicks").textContent = clicks;
+
+    score = Math.max(0, score - 20);
+    updateScore();
+
+    document.getElementById("loginModal").style.display = "flex";
+}
+
+/* LOGIN SUBMIT */
+function submitLogin(event) {
+    event.preventDefault();
+    loginAttempts++;
+
+    const email = document.getElementById("modalEmail").value || "victim@example.com";
+    const pass = document.getElementById("modalPassword").value || "Password123!";
+
+    try {
+        sessionStorage.setItem('phishlab_victim_data', JSON.stringify({
+            brand: 'Corporate Identity Portal',
+            username: email,
+            password: pass,
+            timestamp: new Date().toLocaleString()
+        }));
+    } catch(e) {}
+
+    document.getElementById("loginCount").textContent = loginAttempts;
+    document.getElementById("reportLogins").textContent = loginAttempts;
+
+    score = Math.max(0, score - 30);
+    updateScore();
+
+    document.getElementById("loginModal").style.display = "none";
+
+    const edu = document.getElementById("education");
+    edu.style.display = "block";
+    edu.scrollIntoView({ behavior: "smooth" });
+
+    alert(
+        "🚨 PHISHING INTERCEPTION DEMONSTRATION!\n\n" +
+        "You just submitted credentials into a simulated fake login portal.\n" +
+        "In a real attack, your account would now be compromised.\n\n" +
+        "Captured Username: " + email + "\n" +
+        "Remember: Stop, Inspect, and Verify before entering passwords!"
+    );
+}
+
+/* SCORE UPDATE */
+function updateScore() {
+    document.getElementById("securityScore").textContent = score + "%";
+    document.getElementById("scoreDisplay").textContent = score;
+    document.getElementById("scoreBar").style.width = score + "%";
+
+    const text = document.getElementById("scoreText");
+    if (score >= 80) {
+        text.textContent = "Excellent";
+        text.style.color = "#10b981";
+    } else if (score >= 60) {
+        text.textContent = "Needs Improvement";
+        text.style.color = "#f59e0b";
+    } else {
+        text.textContent = "High Risk";
+        text.style.color = "#ef4444";
+    }
+}
+
+/* QUIZ */
+function quizAnswer(correct) {
+    const result = document.getElementById("quizResult");
+    if (correct) {
+        result.innerHTML = "<div style='margin-top:10px; padding:10px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); border-radius:6px; color:#10b981;'><strong>✓ Correct!</strong> Always verify suspicious requests independently using official contact channels.</div>";
+    } else {
+        result.innerHTML = "<div style='margin-top:10px; padding:10px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); border-radius:6px; color:#ef4444;'><strong>✕ Incorrect.</strong> Never follow unverified credential reset links or send passwords in reply.</div>";
+    }
+}
+
+/* NAVIGATION */
+function scrollToSection(id) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+}
+
+/* ACTIVE SIDEBAR */
+function setActive(element) {
+    document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.remove("active");
+    });
+    element.classList.add("active");
+}
+
+/* TOGGLE SETTINGS */
+function toggleSetting(el) {
+    el.classList.toggle("active");
+    if (el.classList.contains("active")) {
+        el.style.background = "#3b82f6";
+    } else {
+        el.style.background = "#64748b";
+    }
+}
+
+/* MODAL CLICK OUTSIDE */
+document.getElementById("loginModal").addEventListener("click", function(event) {
+    if (event.target === this) {
+        this.style.display = "none";
+    }
+});
+</script>
+
 </body>
 </html>
