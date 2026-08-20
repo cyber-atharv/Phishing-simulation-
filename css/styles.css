@@ -263,6 +263,7 @@ button, input, select, textarea {
 .content-header {
   padding: 16px 36px;
   background: var(--bg-glass);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
