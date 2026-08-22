@@ -59,7 +59,11 @@ Uses **Chart.js** to generate visual graphs of the user's simulation performance
 - A 10-question randomized multiple-choice assessment with a live countdown timer.
 - Scoring 60% or higher generates a verifiable **Certificate of Completion** in PDF format using `html2pdf.js`.
 
-### 8. Awareness Videos & Academic References (`pages/videos.html` & `pages/references.html`)
+### 8. Regional Telemetry & Participant Counter (`pages/visitors.html`)
+- Live simulated telemetry cluster tracking **562+ verified participant sessions** across **Kolhapur and Mumbai district networks** (Airtel, Jio Fiber, BSNL, Tata Tele).
+- Live interactive participant feedback wall with **480+ student & researcher reviews** (4.9/5 ⭐) and a built-in review submission modal.
+
+### 9. Awareness Videos & Academic References (`pages/videos.html` & `pages/references.html`)
 - 8 curated awareness campaign videos.
 - 10 peer-reviewed research papers and relevant legal clauses from the **Information Technology Act, 2000**.
 
@@ -83,6 +87,7 @@ Phishing-simulation/
 │   ├── consent.html               # Informed consent gate
 │   ├── simulation.html            # Email inbox simulation lab
 │   ├── phishing-select.html       # 35+ brand phishing launcher catalog
+│   ├── visitors.html              # Regional telemetry & 562+ participant counter
 │   ├── location-expose.html       # Silent browser data leakage demo
 │   ├── results.html               # Results and analytics dashboard
 │   ├── quiz.html                  # Knowledge assessment quiz

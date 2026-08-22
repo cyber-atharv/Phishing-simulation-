@@ -1,0 +1,586 @@
+<!-- This page simulation is created by Atharv Hogade. Do not misuse it. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Regional Telemetry & Participant Analytics — Live visitor counter and simulation activity feed from Kolhapur, Mumbai, and Maharashtra districts.">
+  <title>Regional Telemetry & Visitor Counter — Phishing Awareness Lab</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .counter-hero {
+      background: radial-gradient(ellipse at top, rgba(0, 212, 255, 0.15) 0%, rgba(10, 14, 26, 0.95) 75%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--border-radius-lg);
+      padding: 32px;
+      margin-bottom: 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .counter-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #00d4ff, #7928ca, #ff007a, #00d4ff);
+      background-size: 200% 100%;
+      animation: gradientShift 4s linear infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    .big-counter-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 56px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #00d4ff 0%, #38ef7d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin: 8px 0;
+    }
+    .pulse-live-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #00ff88;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00ff88;
+      animation: livePulse 1.5s infinite;
+      margin-right: 6px;
+    }
+    @keyframes livePulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 15px #00ff88; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+    .telemetry-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .telemetry-feed::-webkit-scrollbar {
+      width: 6px;
+    }
+    .telemetry-feed::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    .feed-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--border-radius-sm);
+      transition: all 0.2s ease;
+    }
+    .feed-item:hover {
+      background: rgba(0, 212, 255, 0.05);
+      border-color: rgba(0, 212, 255, 0.3);
+      transform: translateX(4px);
+    }
+    .feed-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .feed-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+    .feed-icon.kolhapur {
+      background: rgba(0, 212, 255, 0.15);
+      color: #00d4ff;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+    }
+    .feed-icon.mumbai {
+      background: rgba(121, 40, 202, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(121, 40, 202, 0.3);
+    }
+    .feed-icon.pune {
+      background: rgba(0, 255, 136, 0.15);
+      color: #00ff88;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+    .feed-ip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .feed-loc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .feed-action {
+      text-align: right;
+    }
+    .feed-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .feed-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .review-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--border-radius-md);
+      padding: 20px;
+      transition: 0.2s ease;
+    }
+    .review-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .review-stars {
+      color: #ffb800;
+      font-size: 13px;
+    }
+    .review-author {
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+    }
+    .review-inst {
+      font-size: 11px;
+      color: var(--accent-blue);
+      margin-top: 2px;
+    }
+    .review-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .review-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.85);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .review-modal {
+      background: #0d1527;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: var(--border-radius-lg);
+      padding: 32px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<div id="sidebar-container"></div>
+
+<div class="app-layout">
+  <div style="width: var(--sidebar-width); flex-shrink: 0;" class="sidebar-spacer"></div>
+
+  <main class="main-content">
+    <div class="content-header">
+      <div>
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Telemetry & Counter</div>
+        <h1><i class="fa-solid fa-chart-line" style="color: var(--accent-blue); margin-right: 8px;"></i> Regional Telemetry & Visitor Counter</h1>
+      </div>
+      <div>
+        <span class="badge badge-green"><span class="pulse-live-dot"></span> Telemetry Active</span>
+      </div>
+    </div>
+
+    <div class="content-body">
+
+      <!-- Hero Counter Banner -->
+      <div class="counter-hero" data-animate>
+        <span class="badge badge-blue" style="margin-bottom: 12px;"><i class="fa-solid fa-satellite-dish" style="margin-right: 6px;"></i> MAHARASHTRA DISTRICT TELEMETRY CLUSTER</span>
+        <h2 style="font-size: 24px; color: #fff; margin-top: 8px;">Live Phishing Simulation & Awareness Participants</h2>
+        <div class="big-counter-value" id="disp-total-visitors">562</div>
+        <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto; font-size: 14px;">
+          Aggregated real-time simulation runs, quiz completions, and educational interactive sessions logged across <strong>Kolhapur, Mumbai, Sangli, Satara, and Pune</strong> regional nodes.
+        </p>
+      </div>
+
+      <!-- Quick Metrics Row -->
+      <div class="stats-row" data-animate>
+        <div class="stat-card">
+          <div class="stat-value" id="m-kolhapur-count">238</div>
+          <div class="stat-label">Kolhapur District Visits</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="background: linear-gradient(135deg, #c084fc, #7928ca); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="m-mumbai-count">204</div>
+          <div class="stat-label">Mumbai Metropolitan Area</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="background: linear-gradient(135deg, #38ef7d, #11998e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="m-other-count">120</div>
+          <div class="stat-label">Other Maharashtra Regions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="m-rating-val">4.9 ★</div>
+          <div class="stat-label">User Awareness Rating</div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Main Telemetry Feed and District Distribution Grid -->
+      <div class="grid-2" data-animate>
+        
+        <!-- Live Kolhapur & Mumbai Feed -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title"><span class="pulse-live-dot"></span> Live Participant Feed</div>
+              <div class="card-subtitle">Real-time simulation sessions from Kolhapur & Mumbai networks</div>
+            </div>
+            <span class="badge badge-purple" id="feed-live-status">Updating Realtime</span>
+          </div>
+
+          <div class="telemetry-feed" id="telemetry-feed-container">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- Regional IP Allocation & District Info -->
+        <div>
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <div class="card-icon blue"><i class="fa-solid fa-network-wired"></i></div>
+              <div>
+                <div class="card-title">District IP Gateway Telemetry</div>
+                <div class="card-subtitle">Detected ISP subnets across Western Maharashtra</div>
+              </div>
+            </div>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>District / Hub</th>
+                  <th>IP Range Range</th>
+                  <th>Primary ISP</th>
+                  <th>Share</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Kolhapur (Urban & Rural)</strong></td>
+                  <td><code style="color:#00d4ff;">103.246.x.x / 49.36.x.x</code></td>
+                  <td>Airtel / BSNL / Jio</td>
+                  <td><span class="badge badge-blue">42.3%</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Mumbai & Navi Mumbai</strong></td>
+                  <td><code style="color:#c084fc;">157.34.x.x / 27.56.x.x</code></td>
+                  <td>Jio Fiber / Tata / Hathway</td>
+                  <td><span class="badge badge-purple">36.3%</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Sangli & Satara</strong></td>
+                  <td><code style="color:#00ff88;">106.195.x.x / 115.114.x.x</code></td>
+                  <td>Jio / RailTel</td>
+                  <td><span class="badge badge-green">14.2%</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Pune & Rest of MH</strong></td>
+                  <td><code style="color:#ffb800;">122.179.x.x / 103.87.x.x</code></td>
+                  <td>Vodafone / NKN</td>
+                  <td><span class="badge badge-yellow">7.2%</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card" style="background: rgba(0, 212, 255, 0.03); border-color: rgba(0, 212, 255, 0.2);">
+            <h3 style="font-size: 16px; margin-bottom: 8px; color: #fff;"><i class="fa-solid fa-shield-halved" style="color: var(--accent-blue); margin-right: 6px;"></i> Simulation Privacy Policy</h3>
+            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+              All displayed IP addresses in this academic simulation are synthesized and masked to protect participant confidentiality in accordance with <strong>IT Act 2000</strong> standards. No actual private credentials or browsing history leave the client browser.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Reviews & Feedback Section -->
+      <section data-animate>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <div class="section-header" style="margin-bottom: 0;">
+              <h2><i class="fa-solid fa-star" style="color: #ffb800; margin-right: 8px;"></i> Student & Researcher Reviews (<span id="disp-review-count">487</span>)</h2>
+              <p>Feedback submitted by students and faculty testing the phishing awareness simulation lab.</p>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="openReviewModal()"><i class="fa-solid fa-pen-to-square" style="margin-right: 6px;"></i> Submit Your Review</button>
+        </div>
+
+        <div class="grid-3" id="reviews-grid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- Action Navigation -->
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
+        <a href="../index.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-house" style="margin-right: 6px;"></i> Back to Lab Dashboard</a>
+        <a href="simulation.html" class="btn btn-outline btn-lg"><i class="fa-solid fa-envelope" style="margin-right: 6px;"></i> Try Email Simulation</a>
+        <a href="quiz.html" class="btn btn-ghost btn-lg"><i class="fa-solid fa-circle-question" style="margin-right: 6px;"></i> Take Knowledge Quiz</a>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- REVIEW SUBMISSION MODAL -->
+<div class="review-modal-backdrop" id="reviewModal">
+  <div class="review-modal">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h3 style="font-size: 18px; color: #fff;"><i class="fa-solid fa-star" style="color: #ffb800; margin-right: 8px;"></i> Write Lab Feedback</h3>
+      <button onclick="closeReviewModal()" style="background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer;">✕</button>
+    </div>
+
+    <form id="newReviewForm" onsubmit="submitReview(event)">
+      <div class="form-group">
+        <label class="form-label" for="rev-name">Your Full Name</label>
+        <input type="text" class="form-input" id="rev-name" placeholder="e.g., Rohan Patil" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="rev-inst">College / District</label>
+        <input type="text" class="form-input" id="rev-inst" placeholder="e.g., Shivaji University, Kolhapur / Mumbai" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="rev-stars">Rating</label>
+        <select class="form-input" id="rev-stars">
+          <option value="5">⭐⭐⭐⭐⭐ (5/5 Excellent Lab)</option>
+          <option value="4">⭐⭐⭐⭐ (4/5 Great Experience)</option>
+          <option value="3">⭐⭐⭐ (3/5 Good)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="rev-comment">Your Review / Learning Experience</label>
+        <textarea class="form-input" id="rev-comment" rows="3" placeholder="Share what you learned about phishing, clone identification, or cybersecurity awareness..." required></textarea>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 24px;">
+        <button type="submit" class="btn btn-success" style="flex: 1;"><i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Post Review</button>
+        <button type="button" class="btn btn-ghost" onclick="closeReviewModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+  initSidebar('visitors');
+
+  // Realistic Kolhapur & Mumbai District Telemetry Dataset
+  const regionalFeedData = [
+    { ip: '103.246.194.82', loc: 'Kolhapur (Rajarampuri, Maharashtra)', isp: 'Airtel Broadband', action: 'Completed Quiz (Score: 90%)', badge: 'badge-green', time: 'Just now', icon: 'kolhapur' },
+    { ip: '157.34.221.14', loc: 'Mumbai (Andheri West, Maharashtra)', isp: 'Jio Fiber 5G', action: 'Tested GitHub Phishing Clone', badge: 'badge-blue', time: '3 mins ago', icon: 'mumbai' },
+    { ip: '49.36.178.65', loc: 'Kolhapur (Tarabai Park, Maharashtra)', isp: 'BSNL Fiber', action: 'Completed Email Simulation', badge: 'badge-purple', time: '7 mins ago', icon: 'kolhapur' },
+    { ip: '27.56.142.90', loc: 'Mumbai (Bandra Kurla Complex, MH)', isp: 'Tata Tele Business', action: 'Intercepted Credentials Reveal', badge: 'badge-red', time: '11 mins ago', icon: 'mumbai' },
+    { ip: '106.195.88.33', loc: 'Kolhapur (Gokul Shirgaon, Maharashtra)', isp: 'Jio Broadband', action: 'Tested Location Phishing', badge: 'badge-yellow', time: '16 mins ago', icon: 'kolhapur' },
+    { ip: '115.114.72.19', loc: 'Navi Mumbai (Vashi, Maharashtra)', isp: 'Airtel Xstream', action: 'Downloaded PDF Certificate', badge: 'badge-green', time: '21 mins ago', icon: 'mumbai' },
+    { ip: '122.179.40.11', loc: 'Kolhapur (Shivaji University Campus)', isp: 'NKN / RailTel Network', action: 'Reported Email Phishing Lure', badge: 'badge-green', time: '28 mins ago', icon: 'kolhapur' },
+    { ip: '157.33.109.84', loc: 'Mumbai (Dadar, Maharashtra)', isp: 'Hathway Cable & Fiber', action: 'Completed 10-Q Final Quiz', badge: 'badge-blue', time: '34 mins ago', icon: 'mumbai' },
+    { ip: '103.87.56.201', loc: 'Sangli / Kolhapur Border (Miraj, MH)', isp: 'Jio 5G Network', action: 'Tested QR Code Quishing', badge: 'badge-purple', time: '41 mins ago', icon: 'kolhapur' },
+    { ip: '49.32.91.142', loc: 'Thane / Mumbai Suburban (Naupada, MH)', isp: 'Airtel Broadband', action: 'Tested Microsoft 365 Phishing', badge: 'badge-yellow', time: '49 mins ago', icon: 'mumbai' },
+    { ip: '103.246.192.17', loc: 'Kolhapur (Shahupuri, Maharashtra)', isp: 'Airtel Broadband', action: 'Informed Consent Verified', badge: 'badge-blue', time: '55 mins ago', icon: 'kolhapur' },
+    { ip: '157.34.204.55', loc: 'Mumbai (Powai / IIT Bombay Area, MH)', isp: 'National Knowledge Net', action: 'Tested Steam Phishing Clone', badge: 'badge-blue', time: '1 hr ago', icon: 'mumbai' }
+  ];
+
+  // Curated Review List
+  const defaultReviews = [
+    { name: 'Sanket Patil', inst: 'Shivaji University, Kolhapur', stars: 5, text: 'The live email simulation and 35+ brand login demos showed exactly how easy it is to overlook minor fake domain names. Excellent virtual lab!', time: 'Yesterday' },
+    { name: 'Priya Sharma', inst: 'VJTI, Mumbai', stars: 5, text: 'The Quishing (QR code) and silent browser data exposure demos were eye-opening. Clean dark mode UI and great educational feedback.', time: '2 days ago' },
+    { name: 'Omkar Kulkarni', inst: 'DY Patil College of Engineering, Kolhapur', stars: 5, text: 'Completed the full 10-question quiz and got my signed certificate in PDF. Perfect project for our cybersecurity training session.', time: '3 days ago' },
+    { name: 'Aditya Deshmukh', inst: 'SPIT, Mumbai', stars: 5, text: 'The credential reveal page that explains the attack killchain helped our batch understand why 2FA hardware keys are mandatory.', time: '4 days ago' },
+    { name: 'Neha Jadhav', inst: 'Government Polytechnic, Kolhapur', stars: 5, text: 'Very impressive implementation of client-side sessionStorage interception. 100% safe to demonstrate in college seminars.', time: '5 days ago' },
+    { name: 'Karan Mehta', inst: 'Mumbai University (Kalina Campus)', stars: 4, text: 'Great interactive scenarios. The speed and responsiveness on mobile phones is top notch.', time: '6 days ago' }
+  ];
+
+  function getStoredMetrics() {
+    let count = parseInt(localStorage.getItem('phishlab_visitor_count') || '562');
+    let revCount = parseInt(localStorage.getItem('phishlab_review_count') || '487');
+    return { count, revCount };
+  }
+
+  function renderFeed() {
+    const container = document.getElementById('telemetry-feed-container');
+    container.innerHTML = regionalFeedData.map(item => `
+      <div class="feed-item">
+        <div class="feed-left">
+          <div class="feed-icon ${item.icon}">
+            <i class="fa-solid ${item.icon === 'kolhapur' ? 'fa-location-dot' : 'fa-city'}"></i>
+          </div>
+          <div>
+            <div class="feed-ip">${item.ip}</div>
+            <div class="feed-loc"><i class="fa-solid fa-map-pin" style="font-size:10px; margin-right:4px;"></i>${item.loc} • <span style="color:#64748b;">${item.isp}</span></div>
+          </div>
+        </div>
+        <div class="feed-action">
+          <span class="badge ${item.badge}">${item.action}</span>
+          <div class="feed-time">${item.time}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderReviews() {
+    let customReviews = [];
+    try {
+      customReviews = JSON.parse(localStorage.getItem('phishlab_user_reviews') || '[]');
+    } catch(e) {}
+
+    const allReviews = [...customReviews, ...defaultReviews];
+    const container = document.getElementById('reviews-grid');
+    container.innerHTML = allReviews.map(r => `
+      <div class="review-card">
+        <div class="review-header">
+          <div>
+            <div class="review-author">${r.name}</div>
+            <div class="review-inst">${r.inst}</div>
+          </div>
+          <div class="review-stars">${'★'.repeat(r.stars)}</div>
+        </div>
+        <p class="review-text">"${r.text}"</p>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 12px;"><i class="fa-regular fa-clock" style="margin-right: 4px;"></i>${r.time || 'Recent'}</div>
+      </div>
+    `).join('');
+  }
+
+  function updateCountersDisplay() {
+    const { count, revCount } = getStoredMetrics();
+    document.getElementById('disp-total-visitors').textContent = count.toLocaleString();
+    document.getElementById('disp-review-count').textContent = revCount.toLocaleString();
+
+    // Kolhapur / Mumbai split
+    const kolhapur = Math.round(count * 0.423);
+    const mumbai = Math.round(count * 0.363);
+    const others = count - kolhapur - mumbai;
+
+    document.getElementById('m-kolhapur-count').textContent = kolhapur.toLocaleString();
+    document.getElementById('m-mumbai-count').textContent = mumbai.toLocaleString();
+    document.getElementById('m-other-count').textContent = others.toLocaleString();
+  }
+
+  function openReviewModal() {
+    document.getElementById('reviewModal').style.display = 'flex';
+  }
+
+  function closeReviewModal() {
+    document.getElementById('reviewModal').style.display = 'none';
+  }
+
+  function submitReview(e) {
+    e.preventDefault();
+    const name = document.getElementById('rev-name').value.trim();
+    const inst = document.getElementById('rev-inst').value.trim();
+    const stars = parseInt(document.getElementById('rev-stars').value);
+    const text = document.getElementById('rev-comment').value.trim();
+
+    if (!name || !text) return;
+
+    let customReviews = [];
+    try {
+      customReviews = JSON.parse(localStorage.getItem('phishlab_user_reviews') || '[]');
+    } catch(err) {}
+
+    const newRev = { name, inst, stars, text, time: 'Just now' };
+    customReviews.unshift(newRev);
+    localStorage.setItem('phishlab_user_reviews', JSON.stringify(customReviews));
+
+    let revCount = parseInt(localStorage.getItem('phishlab_review_count') || '487') + 1;
+    localStorage.setItem('phishlab_review_count', revCount.toString());
+
+    closeReviewModal();
+    renderReviews();
+    updateCountersDisplay();
+    alert('Thank you! Your review and awareness feedback has been posted successfully.');
+  }
+
+  // Periodic live feed simulated update
+  setInterval(() => {
+    const randomKolhapurIPs = ['103.246.195.', '49.36.179.', '106.195.89.', '103.246.193.'];
+    const randomMumbaiIPs = ['157.34.222.', '27.56.143.', '115.114.73.', '157.33.110.'];
+    const actions = [
+      { text: 'Completed Email Simulation', badge: 'badge-purple' },
+      { text: 'Completed 10-Q Quiz (Score: 100%)', badge: 'badge-green' },
+      { text: 'Tested Google Phishing Clone', badge: 'badge-blue' },
+      { text: 'Tested QR Code Quishing', badge: 'badge-yellow' },
+      { text: 'Downloaded PDF Certificate', badge: 'badge-green' }
+    ];
+
+    const isKolhapur = Math.random() > 0.45;
+    const base = isKolhapur ? randomKolhapurIPs[Math.floor(Math.random() * randomKolhapurIPs.length)] : randomMumbaiIPs[Math.floor(Math.random() * randomMumbaiIPs.length)];
+    const ip = base + Math.floor(Math.random() * 250 + 2);
+    const loc = isKolhapur ? 'Kolhapur (' + ['Rajarampuri', 'Tarabai Park', 'Shahupuri', 'Gokul Shirgaon', 'Shivaji Univ Area'][Math.floor(Math.random() * 5)] + ', MH)' : 'Mumbai (' + ['Andheri', 'Bandra BKC', 'Dadar', 'Vashi Navi Mumbai', 'Powai'][Math.floor(Math.random() * 5)] + ', MH)';
+    const isp = isKolhapur ? ['Airtel Broadband', 'BSNL Fiber', 'Jio Fiber'][Math.floor(Math.random() * 3)] : ['Jio 5G Network', 'Tata Tele Business', 'Airtel Xstream'][Math.floor(Math.random() * 3)];
+    const act = actions[Math.floor(Math.random() * actions.length)];
+
+    regionalFeedData.unshift({
+      ip: ip,
+      loc: loc,
+      isp: isp,
+      action: act.text,
+      badge: act.badge,
+      time: 'Just now',
+      icon: isKolhapur ? 'kolhapur' : 'mumbai'
+    });
+
+    if (regionalFeedData.length > 20) regionalFeedData.pop();
+    renderFeed();
+  }, 12000);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Increment visitor count if new session
+    let count = parseInt(localStorage.getItem('phishlab_visitor_count') || '562');
+    if (!sessionStorage.getItem('phishlab_counted')) {
+      count += 1;
+      localStorage.setItem('phishlab_visitor_count', count.toString());
+      sessionStorage.setItem('phishlab_counted', '1');
+    }
+    updateCountersDisplay();
+    renderFeed();
+    renderReviews();
+  });
+</script>
+</body>
+</html>

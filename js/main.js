@@ -28,7 +28,7 @@ function generateSidebar(activePage) {
     { id: 'location', icon: '<i class="fa-solid fa-location-dot"></i>', label: 'Data Leak Exposure', href: `${BASE}pages/location-expose.html` },
     { id: 'results', icon: '<i class="fa-solid fa-chart-column"></i>', label: 'Results Dashboard', href: `${BASE}pages/results.html` },
     { id: 'quiz', icon: '<i class="fa-solid fa-circle-question"></i>', label: 'Knowledge Quiz', href: `${BASE}pages/quiz.html` },
-    { id: 'certificate', icon: '<i class="fa-solid fa-award"></i>', label: 'Certificate', href: `${BASE}pages/certificate.html` },
+    { id: 'visitors', icon: '<i class="fa-solid fa-chart-line"></i>', label: 'Telemetry & Visitors (562+)', href: `${BASE}pages/visitors.html` },
     { id: 'videos', icon: '<i class="fa-solid fa-clapperboard"></i>', label: 'Awareness Videos', href: `${BASE}pages/videos.html` },
     { id: 'references', icon: '<i class="fa-solid fa-book-bookmark"></i>', label: 'Research Papers', href: `${BASE}pages/references.html` },
   ];
@@ -144,9 +144,25 @@ function requireConsent() {
   return true;
 }
 
+// ---- Global Visitor & Telemetry Counter (Base: 562) ----
+function trackVisitorMetrics() {
+  let count = parseInt(localStorage.getItem('phishlab_visitor_count') || '562');
+  if (!sessionStorage.getItem('phishlab_counted')) {
+    count += 1;
+    localStorage.setItem('phishlab_visitor_count', count.toString());
+    sessionStorage.setItem('phishlab_counted', '1');
+  }
+  return {
+    visitors: count,
+    reviews: parseInt(localStorage.getItem('phishlab_review_count') || '487')
+  };
+}
+
 // ---- Page Load Init ----
 document.addEventListener('DOMContentLoaded', () => {
   initMatrixRain();
+  trackVisitorMetrics();
+
   // Animate elements with data-animate attribute
   const animElements = document.querySelectorAll('[data-animate]');
   const observer = new IntersectionObserver((entries) => {

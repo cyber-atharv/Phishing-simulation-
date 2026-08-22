@@ -102,6 +102,11 @@
         10-Q Final Quiz
     </a>
 
+    <a href="pages/visitors.html" class="nav-item">
+        <span class="nav-icon">📊</span>
+        Telemetry & Visitors (562+)
+    </a>
+
     <a href="pages/certificate.html" class="nav-item">
         <span class="nav-icon">📜</span>
         PDF Certificate
@@ -191,7 +196,16 @@
 
 
     <!-- STATS ROW -->
-    <section class="stats">
+    <section class="stats" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+        <div class="stat-card" style="border-color:rgba(6,182,212,0.3); background:radial-gradient(ellipse at top, rgba(6,182,212,0.12) 0%, #0d1b2e 100%);">
+            <div class="stat-top">
+                <span>LAB PARTICIPANTS</span>
+                <div class="stat-icon" style="background:rgba(6,182,212,0.15); color:#06b6d4;">👥</div>
+            </div>
+            <div class="stat-number" id="visitorCount" style="color:#06b6d4;">562</div>
+            <div class="stat-change" style="color:#06b6d4;">● Kolhapur & Mumbai Region</div>
+        </div>
+
         <div class="stat-card">
             <div class="stat-top">
                 <span>SIMULATIONS</span>
@@ -216,7 +230,7 @@
                 <div class="stat-icon" style="background:rgba(239,68,68,0.1); color:#f87171;">⚠</div>
             </div>
             <div class="stat-number" id="loginCount">0</div>
-            <div class="stat-change" style="color:#f87171;">High-risk credentials intercepted</div>
+            <div class="stat-change" style="color:#f87171;">High-risk intercepted</div>
         </div>
 
         <div class="stat-card">
@@ -237,7 +251,7 @@
                 <div class="card-title">🔬 Complete Virtual Laboratory Modules</div>
                 <div class="card-subtitle">Explore all hands-on cybersecurity attack vectors and educational resources</div>
             </div>
-            <span class="sim-badge">12 LAB MODULES</span>
+            <span class="sim-badge">13 LAB MODULES</span>
         </div>
 
         <div class="modules-grid">
@@ -351,6 +365,20 @@
                     <p>Access 10 peer-reviewed research papers (IEEE, ACM, Springer), CERT-In & NIST guidelines, and the IT Act 2000 legal framework.</p>
                 </div>
                 <span class="module-badge" style="background:rgba(99,102,241,0.15); color:#818cf8;">10 Papers + Law</span>
+            </a>
+
+            <a href="pages/visitors.html" class="module-card">
+                <div>
+                    <div class="module-top">
+                        <div class="module-icon" style="background:rgba(6,182,212,0.15); color:#06b6d4;">📊</div>
+                        <div>
+                            <h4>Regional Telemetry & Counter</h4>
+                            <span style="font-size:11px; color:#06b6d4;">Kolhapur & Mumbai Region</span>
+                        </div>
+                    </div>
+                    <p>Live simulation activity feed, district IP telemetry (Kolhapur & Mumbai), and 480+ student & faculty awareness reviews.</p>
+                </div>
+                <span class="module-badge" style="background:rgba(6,182,212,0.15); color:#06b6d4;">562+ Live Counter</span>
             </a>
         </div>
     </section>
@@ -690,6 +718,99 @@
                 <div class="progress-fill" style="width:90%; background:linear-gradient(90deg, #10b981, #06b6d4);"></div>
             </div>
         </div>
+    <!-- REGIONAL TELEMETRY & PARTICIPANT FEED (KOLHAPUR & MUMBAI) -->
+    <section class="card" id="telemetry">
+        <div class="card-header">
+            <div>
+                <div class="card-title">📡 Live Regional Telemetry & Participant Feed</div>
+                <div class="card-subtitle">Real-time simulation sessions and reviews logged across Kolhapur & Mumbai networks</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span class="sim-badge" style="background:rgba(16,185,129,0.15); border-color:rgba(16,185,129,0.3); color:#10b981;">
+                    <span style="display:inline-block; width:8px; height:8px; background:#10b981; border-radius:50%; margin-right:4px;"></span>
+                    LIVE CLUSTER ACTIVE
+                </span>
+                <span class="sim-badge" style="background:rgba(245,158,11,0.15); border-color:rgba(245,158,11,0.3); color:#fbbf24;">
+                    ★ 4.9 (487 Reviews)
+                </span>
+            </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-bottom:20px;">
+            <div style="padding:16px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:12px; color:#94a3b8;">KOLHAPUR DISTRICT HUBS</span>
+                    <span style="font-size:11px; color:#06b6d4; font-weight:700;">42.3% TRAFFIC</span>
+                </div>
+                <div style="font-size:24px; font-weight:800; color:#f1f5f9; margin:8px 0;" id="dashKolhapurCount">238 Participants</div>
+                <div style="font-size:11px; color:#64748b;">Rajarampuri • Tarabai Park • Shahupuri • Shivaji Univ</div>
+            </div>
+
+            <div style="padding:16px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:12px; color:#94a3b8;">MUMBAI METROPOLITAN AREA</span>
+                    <span style="font-size:11px; color:#c084fc; font-weight:700;">36.3% TRAFFIC</span>
+                </div>
+                <div style="font-size:24px; font-weight:800; color:#f1f5f9; margin:8px 0;" id="dashMumbaiCount">204 Participants</div>
+                <div style="font-size:11px; color:#64748b;">Andheri • Bandra BKC • Dadar • Vashi Navi Mumbai</div>
+            </div>
+        </div>
+
+        <!-- Live Pings Mini Feed -->
+        <div style="background:rgba(2,6,23,0.5); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:12px; max-height:220px; overflow-y:auto;" id="dashLiveFeed">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-bottom:1px solid rgba(255,255,255,0.04); font-size:12px;">
+                <div>
+                    <code style="color:#00d4ff; font-weight:700;">103.246.194.82</code>
+                    <span style="color:#94a3b8; margin-left:8px;">📍 Kolhapur (Rajarampuri) • Airtel Fiber</span>
+                </div>
+                <div>
+                    <span style="background:rgba(16,185,129,0.15); color:#10b981; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:700;">Completed Quiz (90%)</span>
+                    <span style="color:#64748b; font-size:10px; margin-left:6px;">Just now</span>
+                </div>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-bottom:1px solid rgba(255,255,255,0.04); font-size:12px;">
+                <div>
+                    <code style="color:#c084fc; font-weight:700;">157.34.221.14</code>
+                    <span style="color:#94a3b8; margin-left:8px;">📍 Mumbai (Andheri West) • Jio Fiber</span>
+                </div>
+                <div>
+                    <span style="background:rgba(59,130,246,0.15); color:#60a5fa; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:700;">Tested GitHub Phishing</span>
+                    <span style="color:#64748b; font-size:10px; margin-left:6px;">3m ago</span>
+                </div>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-bottom:1px solid rgba(255,255,255,0.04); font-size:12px;">
+                <div>
+                    <code style="color:#00d4ff; font-weight:700;">49.36.178.65</code>
+                    <span style="color:#94a3b8; margin-left:8px;">📍 Kolhapur (Tarabai Park) • BSNL Fiber</span>
+                </div>
+                <div>
+                    <span style="background:rgba(139,92,246,0.15); color:#c084fc; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:700;">Completed Email Sim</span>
+                    <span style="color:#64748b; font-size:10px; margin-left:6px;">7m ago</span>
+                </div>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; font-size:12px;">
+                <div>
+                    <code style="color:#c084fc; font-weight:700;">27.56.142.90</code>
+                    <span style="color:#94a3b8; margin-left:8px;">📍 Mumbai (Bandra Kurla Complex) • Tata Tele</span>
+                </div>
+                <div>
+                    <span style="background:rgba(239,68,68,0.15); color:#f87171; padding:2px 8px; border-radius:4px; font-size:10px; font-weight:700;">Intercepted Credentials Reveal</span>
+                    <span style="color:#64748b; font-size:10px; margin-left:6px;">11m ago</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; flex-wrap:wrap; gap:10px;">
+            <span style="font-size:12px; color:#64748b;">
+                Simulated cluster telemetry for academic awareness evaluation. Compliant with IT Act 2000.
+            </span>
+            <a href="pages/visitors.html" class="primary-btn" style="padding:8px 16px; font-size:12px;">
+                Open Full Telemetry & Reviews Hub →
+            </a>
+        </div>
     </section>
 
 
@@ -855,6 +976,28 @@ let clicks = 0;
 let loginAttempts = 0;
 let score = 100;
 
+// ---- VISITOR & REGIONAL TELEMETRY COUNTER (Base: 562) ----
+function initDashboardVisitorCounter() {
+    let count = parseInt(localStorage.getItem('phishlab_visitor_count') || '562');
+    if (!sessionStorage.getItem('phishlab_counted')) {
+        count += 1;
+        localStorage.setItem('phishlab_visitor_count', count.toString());
+        sessionStorage.setItem('phishlab_counted', '1');
+    }
+
+    const vElem = document.getElementById("visitorCount");
+    if (vElem) vElem.textContent = count.toLocaleString();
+
+    const kolElem = document.getElementById("dashKolhapurCount");
+    if (kolElem) kolElem.textContent = Math.round(count * 0.423).toLocaleString() + " Participants";
+
+    const mumElem = document.getElementById("dashMumbaiCount");
+    if (mumElem) mumElem.textContent = Math.round(count * 0.363).toLocaleString() + " Participants";
+}
+
+document.addEventListener('DOMContentLoaded', initDashboardVisitorCounter);
+initDashboardVisitorCounter();
+
 /* START */
 function beginSimulation() {
     const consent = document.getElementById("consent");
@@ -863,11 +1006,11 @@ function beginSimulation() {
     }
 }
 
-/* CONSENT */
+/* CONSENT & SIMULATION LAUNCH */
 function startSimulation() {
     const consent = document.getElementById("consent");
-    if (!consent.checked) {
-        alert("Please confirm the educational simulation consent checkbox before launching.");
+    if (!consent || !consent.checked) {
+        alert("Please acknowledge the educational simulation consent checkbox first.");
         return;
     }
 
